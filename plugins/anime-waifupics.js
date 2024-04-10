@@ -1,50 +1,70 @@
-import fetch from 'node-fetch';
-
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-  m.react(rwait);
-
-  let type = (command).toLowerCase();
-  let baseUrl = 'https://weeb-api.vercel.app/';
-
-  const fetchImage = async (endpoint) => {
+import fetch from 'node-fetch'
+let handler = async (m, {
+    text,
+    command,
+    usedPrefix,
+    conn
+}) => {
+    var list_input = [
+        "anna",
+        "asuna-yuki",
+        "ayuzawa",
+        "boruto",
+        "chitoge",
+        "emilia",
+        "erza",
+        "hinata",
+        "inori",
+        "kaga-kouko",
+        "kakashi",
+        "kaori-miyazono",
+        "killua",
+        "kotori-minami",
+        "loli",
+        "luffy",
+        "mikasa",
+        "mikosiba",
+        "minato",
+        "mio-akiyama",
+        "mitsuki",
+        "mizore-sirayuki",
+        "nakiri-alice",
+        "naruto",
+        "natsu",
+        "orochimaru",
+        "rimuru",
+        "riyas-gremori",
+        "sagiri",
+        "sakura",
+        "sanji",
+        "sarada",
+        "sento-isuzu",
+        "shana",
+        "shiina",
+        "shinka",
+        "tanjirou",
+        "ussop",
+        "winry",
+        "yukino",
+        "yuzuki",
+        "zoro"
+    ]
+    var salah_input = "*Example:*\n" + usedPrefix + command + " vietnam \n*[ Daftar animes ]*\n\n" + await ArrClean(list_input)
+    if (!list_input.includes(text)) throw salah_input
     try {
-      const response = await fetch(baseUrl + endpoint);
-      if (!response.ok) throw `❎ Error fetching ${type} image`;
-      const imageBuffer = await response.buffer(); // Get the image data as a buffer
-      conn.sendFile(m.chat, imageBuffer, 'img.jpg', `✅ Random ${type}`, m);
-      m.react(dmoji);
-    } catch (error) {
-      console.error(error);
-      m.reply(`حدث خطأ.`);
+        let res = 'https://api.zeeoneofc.my.id/api/anime/' + text + '?apikey=dhmDlD5x'
+        m.reply(wait)
+        conn.sendFile(m.chat, res, 'result', "Result Anime: *" + text.toUpperCase() + "_*instagram.com/ovmar_1*_", m)
+    } catch (e) {
+        throw eror
     }
-  };
-
-  switch (type) {
-    case 'loli':
-      fetchImage('loli');
-      break;
-
-    case 'waifu':
-      fetchImage('waifu');
-      break;
-
-    case 'neko':
-      fetchImage('neko');
-      break;
-
-    case 'zerotwo':
-      fetchImage('zerotwo');
-      break;
-
-    default:
-      
-      break;
-  }
-};
-
-handler.help = ['waifu', 'neko', 'zerotwo', 'loli']
-handler.tags = ['anime']
-handler.command = ['waifu', 'neko', 'zerotwo', 'loli'] 
-
+}
+handler.help = ["animes"]
+handler.tags = ['internet']
+handler.command = ["animes"]
 
 export default handler
+
+function ArrClean(str) {
+    return str.map((v, index) => ++index + ". " + v).join('\r\n')
+}
