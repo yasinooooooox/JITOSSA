@@ -1,0 +1,31 @@
+{
+  "name": "PRINCE-BOT",
+  "description": "Prince MD A WhatsApp User BOT",
+  "logo": "https://telegra.ph/file/d9bcfd1ae673ebd58bd3e.jpg",
+  "keywords": ["java", "bot", "whatsapp-bot", "whatsapp-automation"],
+  "repository": "https://github.com/Omarcharaf1/JITOSSA",
+  
+  "stack": "container",
+  "env": {
+    "SESSION_ID": {
+      "description": "your session id",
+      "required": true,
+      "value": ""
+    }
+    },
+    "addons": [{ "plan": "heroku-postgresql:basic" }],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/bogini/heroku-buildpack-graphicsmagick"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+    }
+  ]
+}
