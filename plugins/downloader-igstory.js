@@ -1,75 +1,61 @@
-import cheerio from 'cheerio';
-import fetch from 'node-fetch';
-import axios from 'axios';
-
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) throw `uhm.. أين اسم المستخدم؟\n\nمثال:\n\n${usedPrefix + command} rasel.ganz`; // ترجمة "uhm.. where's the username?"
-    if (args[0].startsWith('http') || args[0].startsWith('@')) throw `اسم المستخدم غير صحيح\n\nمثال: *${usedPrefix}${command} the.sad.boy01*`; // ترجمة "Invalid username"
-    try {
-        const res = await fetch(`https://hardianto.xyz/api/download/igstory?username=${args[0]}&apikey=hardianto`);
-        var anu = await res.json();
-        var anuku = anu.medias;
-        for (let { url, preview } of anuku) {
-            conn.sendMedia(m.chat, url, null, {
-                mentions: [m.sender],
-                jpegThumbnail: await (await fetch(preview)).arrayBuffer(),
-                caption: `🚀 *الرابط:* ${await (await axios.get(`https://tinyurl.com/api-create.php?url=${url}`)).data}` // ترجمة "Link"
-            });
-        }
-    } catch {
-        try {
-            const res2 = await igstory(args[0]);
-            for (const { downloadUrl, url, preview, type, fileType } of res2) {
-                conn.sendMedia(m.chat, url, null, {
-                    mentions: [m.sender],
-                    jpegThumbnail: await (await fetch(preview)).arrayBuffer(),
-                    caption: `🚀 *الرابط:* ${await (await axios.get(`https://tinyurl.com/api-create.php?url=${url}`)).data}` // ترجمة "Link"
-                });
-            }
-        } catch {
-            throw `لم يتم العثور على ملفات!`; // ترجمة "No media found!"
-        }
-    }
-};
+if (!args[0]) throw `${lenguajeMY['smsAvisoMG']()}𝙄𝙉𝙂𝙍𝙀𝙎𝙀 𝙀𝙇 𝙉𝙊𝙈𝘽𝙍𝙀 𝘿𝙀 𝙐𝙎𝙐𝘼𝙍𝙄𝙊 𝘿𝙀 𝙄𝙉𝙎𝙏𝘼𝙂𝙍𝘼𝙈 𝙋𝘼𝙍𝘼 𝘿𝙀𝙎𝘾𝘼𝙍𝙂𝘼𝙍 𝙇𝘼𝙎 𝙃𝙄𝙎𝙏𝙊𝙍𝙄𝘼𝙎\n𝙀𝙅𝙀𝙈𝙋𝙇𝙊\n*${usedPrefix + command} Wilson_cppjz*\n\n𝙀𝙉𝙏𝙀𝙍 𝙄𝙉𝙎𝙏𝘼𝙂𝙍𝘼𝙈 𝙐𝙎𝙀𝙍𝙉𝘼𝙈𝙀 𝙏𝙊 𝘿𝙊𝙒𝙉𝙇𝙊𝘼𝘿 𝙎𝙏𝙊𝙍𝙄𝙀𝙎\n𝙀𝙓𝘼𝙈𝙋𝙇𝙀\n*${usedPrefix + command} Wilson_cppjz*`
+await m.reply(global.wait)    
+const res = await fetch(`https://api.lolhuman.xyz/api/igstory/${args[0]}?apikey=${lolkeysapi}`)
+var anu = await res.json()
+var anuku = anu.result
+if (anuku == '') return m.reply(`${lenguajeMY['smsAvisoFG']()}𝙐𝙎𝙐𝘼𝙍𝙄𝙊 𝙄𝙉𝙑𝘼́𝙇𝙄𝘿𝙊𝙎 𝙊 𝙎𝙄𝙉 𝙃𝙄𝙎𝙏𝙊𝙍𝙄𝘼𝙎`)  
+for (var i of anuku) {
+let res = await axios.head(i)
+let mime = res.headers['content-type']
+if (/image/.test(mime)) await conn.sendFile(m.chat, i, 'error.jpg', null, m).catch(() => { return m.reply(`${lenguajeMY['smsAvisoFG']()}𝙐𝙎𝙐𝘼𝙍𝙄𝙊 𝙄𝙉𝙑𝘼́𝙇𝙄𝘿𝙊𝙎 𝙊 𝙎𝙄𝙉 𝙃𝙄𝙎𝙏𝙊𝙍𝙄𝘼𝙎`)})
+if (/video/.test(mime)) await conn.sendFile(m.chat, i, 'error.mp4', null, m).catch(() => { return m.reply(`${lenguajeMY['smsAvisoFG']()}𝙐𝙎𝙐𝘼𝙍𝙄𝙊 𝙄𝙉𝙑𝘼́𝙇𝙄𝘿𝙊𝙎 𝙊 𝙎𝙄𝙉 𝙃𝙄𝙎𝙏𝙊𝙍𝙄𝘼𝙎`)})
+conn.reply(m.chat, `${lenguajeMY['smsAvisoIIG']()}💖 *Infórmate sobre las Novedades y recuerda tener la última versión.*\n\n💝 *Find out about what's new and remember to have the latest version.*`, m, {
+contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, description: null, 
+title: author,
+body: 'Super Bot WhatsApp',         
+previewType: 0, thumbnail: fs.readFileSync("./media/menus/Menu3.jpg"),
+sourceUrl: `https://github.com/WilsonOFC/MylingBot-MD`}}})
+}}
+handler.help = ['igstory <username>']
+handler.tags = ['downloader']
+handler.command = ['igstory', 'ighistoria', 'ighistorias' ]
+handler.limit = 3
+handler.exp = 87
+export default handler
 
-handler.help = ['instagramstory'].map(v => v + ' <اسم المستخدم>'); // ترجمة المساعدة
-handler.tags = ['downloader']; // ترجمة العلامات
-handler.command = /^((igs|instagrams)(tory)?(dl)?(downloa?d(er)?)?)$/i; // تعبيرات الأمر
 
-handler.limit = true;
+/*import axios from 'axios'
+import hx from 'hxz-api' 
 
-export default handler;
+let handler = async (m, { conn, args, usedPrefix, command, text}) => {
+if (!text) throw `${lenguajeMY['smsAvisoMG']()}𝙄𝙉𝙂𝙍𝙀𝙎𝙀 𝙀𝙇 𝙉𝙊𝙈𝘽𝙍𝙀 𝘿𝙀 𝙐𝙎𝙐𝘼𝙍𝙄𝙊 𝘿𝙀 𝙄𝙉𝙎𝙏𝘼𝙂𝙍𝘼𝙈 𝙋𝘼𝙍𝘼 𝘿𝙀𝙎𝘾𝘼𝙍𝙂𝘼𝙍 𝙇𝘼𝙎 𝙃𝙄𝙎𝙏𝙊𝙍𝙄𝘼𝙎\n𝙀𝙅𝙀𝙈𝙋𝙇𝙊\n*${usedPrefix + command} Wilson_cppjz*\n\n𝙀𝙉𝙏𝙀𝙍 𝙄𝙉𝙎𝙏𝘼𝙂𝙍𝘼𝙈 𝙐𝙎𝙀𝙍𝙉𝘼𝙈𝙀 𝙏𝙊 𝘿𝙊𝙒𝙉𝙇𝙊𝘼𝘿 𝙎𝙏𝙊𝙍𝙄𝙀𝙎\n𝙀𝙓𝘼𝙈𝙋𝙇𝙀\n*${usedPrefix + command} Wilson_cppjz*`
 
-async function igstory(username) {
-    return new Promise(async (resolve, reject) => {
-        axios.request({
-            url: 'https://www.instagramsave.com/instagram-story-downloader.php',
-            method: 'GET',
-            headers: {
-                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-                "cookie": "PHPSESSID=ugpgvu6fgc4592jh7ht9d18v49; _ga=GA1.2.1126798330.1625045680; _gid=GA1.2.1475525047.1625045680; __gads=ID=92b58ed9ed58d147-221917af11ca0021:T=1625045679:RT=1625045679:S=ALNI_MYnQToDW3kOUClBGEzULNjeyAqOtg"
-            }
-        }).then(({ data }) => {
-            const $ = cheerio.load(data);
-            const token = $('#token').attr('value');
-            let config = {
-                headers: {
-                    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    "sec-ch-ua": '" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
-                    "cookie": "PHPSESSID=ugpgvu6fgc4592jh7ht9d18v49; _ga=GA1.2.1126798330.1625045680; _gid=GA1.2.1475525047.1625045680; __gads=ID=92b58ed9ed58d147-221917af11ca0021:T=1625045679:RT=1625045679:S=ALNI_MYnQToDW3kOUClBGEzULNjeyAqOtg",
-                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-                },
-                data: {
-                    'url': 'https://www.instagram.com/' + username,
-                    'action': 'story',
-                    'token': token
-                }
-            };
-            axios.post('https://www.instagramsave.com/system/action.php', qs.stringify(config.data), {
-                headers: config.headers
-            }).then(({ data }) => {
-                resolve(data.medias);
-            });
-        }).catch(reject);
-    });
+hx.igstory(text).then(async (result) => {
+for (let i of result.medias) {
+if (i.url.includes("mp4")) {            
+conn.sendFile(m.chat, i.url, 'igstory.mp4', wm, m)
+} else {     
+conn.sendFile(m.chat, i.url, '', '', m)
+}}}); 
+  
+let info = `💖 *Infórmate sobre las Novedades y recuerda tener la última versión.*\n\n💝 *Find out about what's new and remember to have the latest version.*
+  `
+ conn.sendButton(m.chat, info, `𝗠𝗬𝗟𝗜𝗡𝗚𝗕𝗢𝗧 - 𝘼𝙎𝙄𝙎𝙏𝙀𝙉𝘾𝙄𝘼\n${asistencia}\n\n`, [
+['𝙈𝙚𝙣𝙪 𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨 🌀', '#descargasmenu'],
+['𝙈𝙚𝙣𝙪 𝘾𝙤𝙢𝙥𝙡𝙚𝙩𝙤 | 𝙁𝙪𝙡𝙡 𝙈𝙚𝙣𝙪 ✨', '.allmenu'],
+['𝙑𝙤𝙡𝙫𝙚𝙧 𝙖𝙡 𝙈𝙚𝙣𝙪́ | 𝘽𝙖𝙘𝙠 𝙩𝙤 𝙈𝙚𝙣𝙪 ☘️', '/menu']], m)
+/*.trim()  
+await conn.sendHydrated(m.chat, info, wm, null, ig, '𝙄𝙣𝙨𝙩𝙖𝙜𝙧𝙖𝙢', null, null, [
+['𝙈𝙚𝙣𝙪 𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨 🌀', '#descargasmenu'],
+['𝙈𝙚𝙣𝙪 𝘾𝙤𝙢𝙥𝙡𝙚𝙩𝙤 | 𝙁𝙪𝙡𝙡 𝙈𝙚𝙣𝙪 ✨', '.allmenu'],
+['𝙑𝙤𝙡𝙫𝙚𝙧 𝙖𝙡 𝙈𝙚𝙣𝙪́ | 𝘽𝙖𝙘𝙠 𝙩𝙤 𝙈𝙚𝙣𝙪 ☘️', '/menu']
+], m,)  
 }
+handler.help = ['igstory <username>']
+handler.tags = ['downloader']
+handler.command = ['igstory', 'ighistoria', 'ighistorias' ]
+handler.limit = 3
+handler.exp = 87
+export default handler
+*/
