@@ -1,55 +1,88 @@
-import {
-    VyroAI
-} from "../../lib/ai/vyro-ai.js";
-import {
-    ImageProcessor
-} from "../../lib/tools/art-enhance.js";
+import FormData from 'form-data'
+import Jimp from 'jimp'
 
-const genAi = new VyroAI({
-    link: false,
-    buffer: true
-});
-const generate = new ImageProcessor({
-    token: '',
-    replicate: "3a4886dd3230e523600d3b555f651dc82aba3a4e"
-});
+var handler = async (m, { conn, usedPrefix, command }) => {
 
-let handler = async (m, {
-    conn,
-    args,
-    usedPrefix,
-    command
-}) => {
-    let q = m.quoted ? m.quoted : m;
-    let mime = (q.msg || q).mimetype || q.mediaType || '';
+    conn.hdr = conn.hdr ? conn.hdr : {}
+    if (m.sender in conn.hdr)
+        return conn.reply(m.chat, `*🏴 هناك طلب قيد التنفيذ بالفعل، يرجى التحلي بالصبر*`, m, fake, )
 
-    if (/image/g.test(mime) && !/webp/g.test(mime)) {
-        try {
-            let media = await q.download();
-            let sauce = await genAi.upscaleImage(media);
-            await conn.sendFile(m.chat, sauce.buffer, null, '', m);
-        } catch (e) {
-            try {
-                let media = await q.download();
-                let sauce = await generate.upscaleImage(media);
-                await conn.sendFile(m.chat, sauce, null, '', m);
-            } catch (e) {
-                try {
-                    let media = await q.download();
-                    let sauce = await generate.artEnhance(media);
-                    await conn.sendFile(m.chat, sauce, null, '_ثم تحسين الجودة_ \n _*instagram.com/ovmar_1*_', m);
-                } catch (e) {
-                    await m.reply("خطأ أثناء تحسين جودة الصورة");
-                }
-            }
+    let q = m.quoted ? m.quoted : m
+    let mime = (q.msg || q).mimetype || q.mediaType || ""
+    if (!mime)
+        return conn.reply(m.chat, `*🎌 يرجى وضع علامة على الصورة*`, m, fake, )
+    if (!/image\/(jpe?g|png|mp4)/.test(mime))
+        return conn.reply(m.chat, `*🚩 نوع ${mime} غير مدعوم*`, m, fake, )
+    else
+        conn.hdr[m.sender] = true
+
+    conn.reply(m.chat, '⏰ يرجى الانتظار...', m, fake, )
+    let img = await q.download?.()
+
+    let error
+    try {
+        const result = await processing(img, "enhance")
+        conn.sendFile(m.chat, result, '', '🧃 *تم تحسين الصورة*\n\n' + cred.toString('utf-8'), m)
+    } catch (er) {
+        error = true
+    } finally {
+        if (error) {
+            return conn.reply(m.chat, `*🚩 حدث خطأ أثناء تحسين الصورة*`, m, fake, )
         }
-    } else {
-        await m.reply(`يرجى إرسال صورة مع تسمية *${usedPrefix + command}* أو علامة على الصورة التي تم إرسالها مسبقًا`);
+        delete conn.hdr[m.sender]
     }
-};
+}
 
-handler.help = ['hd', 'enhance'];
-handler.tags = ['image-edit'];
-handler.command = /^(hd|enhance)$/i;
+handler.help = ['hd']
+handler.tags = ['ai']
+handler.command = /^(hd)$/i
 
-export default handler;
+handler.register = true
+handler.limit = true
+
+export default handler
+
+async function processing(urlPath, method) {
+    return new Promise(async (resolve, reject) => {
+        let Methods = ['enhance', 'recolor', 'dehaze']
+        method = Methods.includes(method) ? method : Methods[0]
+        let buffer,
+            Form = new FormData(),
+            scheme = 'https' + '://' + 'inferenceengine' + '.vyro' + '.ai/' + method
+        Form.append('model_version', 1, {
+            'Content-Transfer-Encoding': 'binary',
+            contentType: 'multipart/form-data; charset=utf-8',
+        })
+        Form.append('image', Buffer.from(urlPath), {
+            filename: 'enhance_image_body.jpg',
+            contentType: 'image/jpeg',
+        })
+        Form.submit(
+            {
+                url: scheme,
+                host: 'inferenceengine' + '.vyro' + '.ai',
+                path: '/' + method,
+                protocol: 'https:',
+                headers: {
+                    'User-Agent': 'okhttp/4.9.3',
+                    Connection: 'Keep-Alive',
+                    'Accept-Encoding': 'gzip',
+                },
+            },
+            function (err, res) {
+                if (err) reject()
+                let data = []
+                res
+                    .on('data', function (chunk, resp) {
+                        data.push(chunk)
+                    })
+                    .on('end', () => {
+                        resolve(Buffer.concat(data))
+                    })
+                res.on('error', (e) => {
+                    reject()
+                })
+            }
+        )
+    })
+}
