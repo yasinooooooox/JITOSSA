@@ -1547,7 +1547,7 @@ global.dfail = (type, m, conn) => {
     restrict: '*[ ℹ️ ] This command was disabled by the bot owner.*',
   }[type];
   const aa = {quoted: m, userJid: conn.user.jid};
-  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '*[ ⚠ ] Warning*', body: 'JITOSSABOT', thumbnail: imagen1, sourceUrl: 'https://instagram.com/noureddine_ouafy'}}}}, aa);
+  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '*[ ⚠ ] Warning*', body: 'JITOSSABOT', thumbnail: imagen1, sourceUrl: 'https://instagram.com/ovmar_1'}}}}, aa);
   if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id});
 };
 
