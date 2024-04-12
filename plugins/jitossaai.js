@@ -1,35 +1,34 @@
 import axios from 'axios';
 
-let autoaiEnabled = {}; // قائمة لتخزين حالة الذكاء الاصطناعي لكل مستخدم
+export const handler = async (m, { conn }) => {
+    conn.autobard = conn.autobard ? conn.autobard : {};
 
-export const handler = async (m, { conn, text }) => {
-  autoaiEnabled[m.sender] = true; // تفعيل وضع الذكاء الاصطناعي تلقائياً
+    // تحقق من وجود الرسالة وأن wالوضع الذكي غير مفعل لهذا المرسل
+    if (!m.isBaileys && m.text && !conn.autobard[m.sender]) {
+        conn.autobard[m.sender] = { pesan: [] }; // تفعيل وضع الذكاء الاصطناعي
+        m.reply("[ ✓ ] تم التحول بنجاح لوضع الذكاء الاصطناعي. يمكنك التحدث مباشرة معي الآن.");
+    }
 
-  if (text && text.trim() === '.autobard off') {
-    autoaiEnabled[m.sender] = false;
-    m.reply("[ ✓ ] تم إلغاء وضع الذكاء الاصطناعي بنجاح. يمكنك الآن استخدام الأوامر بشكل عادي.");
-    return; // للخروج من دالة المعالجة إذا تم إلغاء الوضع
-  }
+    if (!m.text) return;
 
-  if (!m.text) return;
+    // تنفيذ وظيفة الذكاء الاصطناعي إذا كان وضع الذكاء الاصطناعي مفعلًا لهذا المرسل
+    if (conn.autobard[m.sender] && m.text) {
+        let name = conn.getName(m.sender)
+        await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
+        try {
+            const response = await axios.get(`https://api.justifung.tech/api/bard?q=${encodeURIComponent(m.text)}&apikey=Nour`)
+            const responseData = response.data;
+            const hasil = responseData;
+            await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
+            m.reply(hasil.result[0])
+            conn.autobard[m.sender].pesan.push(hasil.result[0])
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            throw error;
+        }
+    }
+}
 
-  let name = conn.getName(m.sender);
-  await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
-
-  try {
-    const response = await axios.get(`https://api.justifung.tech/api/bard?q=${encodeURIComponent(m.text)}&apikey=Nour`)
-    const responseData = response.data;
-    const hasil = responseData;
-    await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
-    m.reply(hasil.result[0]);
-    autoaiEnabled[m.sender] = false; // تعطيل وضع الذكاء الاصطناعي بعد الاستخدام الواحد
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
-  }
-};
-
-handler.command = ['autobard'];
 handler.tags = ["ai"]
 handler.help = ['autobard']
 
