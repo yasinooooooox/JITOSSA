@@ -2,16 +2,16 @@ import axios from 'axios';
 
 let autoaiEnabled = {}; // قائمة لتخزين حالة الذكاء الاصطناعي لكل مستخدم
 
-let handler = async (m, { conn, text }) => {
-  autoaiEnabled[m.sender] = autoaiEnabled[m.sender] ? autoaiEnabled[m.sender] : false; // تحديد حالة الذكاء الاصطناعي لكل مستخدم
-
-  if (!text) {
-    throw `*يمكنك الآن التحدث مباشرة مع الذكاء الاصطناعي بدون استخدام أوامر. سوف يجيبك مباشرة.*\nلتفعيل الوضع الذكي، اكتب:\n.autoai on\nلإلغاء الوضع الذكاء الاصطناعي، اكتب:\n.autoai off`;
-  }
+export const handler = async (m, { conn, text }) => {
+  autoaiEnabled[m.sender] = autoaiEnabled[m.sender] ?? false; // تحديد حالة الذكاء الاصطناعي لكل مستخدم
 
   if (text == "on") {
-    autoaiEnabled[m.sender] = true;
-    m.reply("[ ✓ ] تم تفعيل وضع الذكاء الاصطناعي بنجاح. يمكنك الآن التحدث مباشرة مع الذكاء الاصطناعي.");
+    if (!autoaiEnabled[m.sender]) { // التحقق من أن وضع الذكاء الاصطناعي غير مُفعّل
+      autoaiEnabled[m.sender] = true;
+      m.reply("[ ✓ ] تم تفعيل وضع الذكاء الاصطناعي بنجاح. يمكنك الآن التحدث مباشرة مع الذكاء الاصطناعي.");
+    } else {
+      m.reply("[ ✖️ ] وضع الذكاء الاصطناعي مفعل بالفعل.");
+    }
   } else if (text == "off") {
     autoaiEnabled[m.sender] = false;
     m.reply("[ ✓ ] تم إلغاء وضع الذكاء الاصطناعي بنجاح.");
@@ -26,25 +26,21 @@ handler.before = async (m, { conn }) => {
   let name = conn.getName(m.sender);
   await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
 
-  const messages = [
-    { role: "system", content: `أنا بوت واتساب ${name}` },
-    { role: "user", content: m.text }
-  ];
-
   try {
-    const response = await axios.post("https://deepenglish.com/wp-json/ai-chatbot/v1/chat", { messages });
+    const response = await axios.get(`https://api.justifung.tech/api/bard?q=${encodeURIComponent(m.text)}&apikey=Nour`)
     const responseData = response.data;
     const hasil = responseData;
-    
     await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
-    m.reply(hasil.answer);
+    m.reply(hasil.result[0]);
+    autoaiEnabled[m.sender] = false; // تعطيل وضع الذكاء الاصطناعي بعد الاستخدام الواحد
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
   }
 };
 
-handler.command = ['autoai'];
-handler.tags = ["ai"];
-handler.help = ['autoai'];
+handler.command = ['autobard'];
+handler.tags = ["ai"]
+handler.help = ['autobard']
+
 export default handler;
