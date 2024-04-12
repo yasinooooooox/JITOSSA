@@ -1,49 +1,61 @@
+// Update by Xnuvers007
 
-import fg from 'api-dylux'
-import { youtubedl, youtubedlv2, youtubedlv3 } from '@bochilteam/scraper'
-let limit = 350
-let handler = async (m, { conn, args, isPrems, isOwner, usedPrefix, command }) => {
-	if (!args || !args[0]) throw `✳️ Example :\n${usedPrefix + command} https://youtu.be/YzkTFFwxtXI`
-    if (!args[0].match(/youtu/gi)) throw `❎ Verify that the YouTube link`
-	 let chat = global.db.data.chats[m.chat]
-	 m.react(rwait) 
-	try {
-		let q = args[1] || '360p'
-		let v = args[0]
-		const yt = await youtubedl(v).catch(async () => await youtubedlv2(v)).catch(async () => await youtubedlv3(v))
-		const dl_url = await yt.video[q].download()
-		const title = await yt.title
-		const size = await yt.video[q].fileSizeH 
-		
-       if (size.split('MB')[0] >= limit) return m.reply(` ≡  *GURU YTDL*\n\n▢ *⚖️Size* : ${size}\n▢ *🎞️quality* : ${q}\n\n▢ _The file exceeds the download limit_ *+${limit} MB*`)    
-	  conn.sendFile(m.chat, dl_url, title + '.mp4', `
- ≡  *J I T O S S A*
-  
-▢ *📌Títle* : ${title}
-▢ *📟 Ext* : mp4
-▢ *🎞️Quality* : ${q}
-▢ *⚖️Size* : ${size}
-`.trim(), m, false, { asDocument: chat.useDocument })
-		m.react(done) 
-		
-	} catch {
-		
-		const { title, result, quality, size, duration, thumb, channel } = await fg.ytv(args[0]) 
-		if (size.split('MB')[0] >= limit) return m.reply(` ≡  *GURU YTDL2*\n\n▢ *⚖️Size* : ${size}\n▢ *🎞️Quality* : ${quality}\n\n▢ _The file exceeds the download limit_ *+${limit} MB*`)
-	conn.sendFile(m.chat, result, title + '.mp4', `
- ≡  *J I T O S S A 2*
-  
-▢ *📌Títle* : ${title}
-▢ *📟 Ext* : mp4
-▢ *⚖️size* : ${size}
-`.trim(), m, false, { asDocument: chat.useDocument })
-		m.react(done) 
-	} 
-		 
+import { youtubedlv2, youtubedl } from '@bochilteam/scraper'
+
+const handler = async (m, { conn, args, command }) => {
+  if (!args[0]) throw 'Where`s Url?' // Zod
+  const v = args[0]
+
+  const resolutions = ["144p", "240p", "360p", "480p", "720p", "1080p"]
+  let qu = args[1] && resolutions.includes(args[1]) ? args[1] : "360p"
+  let q = qu.replace('p', '')
+
+  let thumb = {}
+  try {
+    const thumb2 = yt.thumbnails[0].url
+    thumb = { jpegThumbnail: thumb2 }
+  } catch (e) {}
+
+  let yt
+  try {
+    yt = await youtubedl(v)
+  } catch {
+    yt = await youtubedlv2(v)
+  }
+
+  const title = await yt.title
+
+  let size = ''
+  let dlUrl = ''
+  let selectedResolution = ''
+  let selectedQuality = ''
+  for (let i = resolutions.length - 1; i >= 0; i--) {
+    const res = resolutions[i]
+    if (yt.video[res]) {
+      selectedResolution = res
+      selectedQuality = res.replace('p', '')
+      size = await yt.video[res].fileSizeH
+      dlUrl = await yt.video[res].download()
+      break
+    }
+  }
+
+  if (dlUrl) {
+    await m.reply(`Permintaan download video YouTube. Sedang diproses, mohon bersabar...`)
+
+    await conn.sendMessage(m.chat, { video: { url: dlUrl, caption: title, ...thumb } }, { quoted: m })
+
+    await m.reply(`▢ Title: ${title}
+▢ Resolution: ${selectedResolution}
+▢ Size: ${size}
+▢ Video telah berhasil diunduh!`)
+  } else {
+    await m.reply(`Maaf, video tidak tersedia untuk diunduh.`)
+  }
 }
-handler.help = ['ytmp4 <link yt>']
-handler.tags = ['dl'] 
-handler.command = ['ytmp4', 'video']
-handler.diamond = true
+
+handler.command = /^(getvid|ytmp4|youtubemp4)$/i
+handler.help = ["ytmp4 <linkYt>","ytmp4 <linkYT>"]
+handler.tags = ['downloader']
 
 export default handler
