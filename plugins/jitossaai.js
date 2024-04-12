@@ -1,1 +1,71 @@
-function _0x37cc(){const _0x277723=['startsWith','isBaileys','1113xQwouQ','reply','65uMUuLn','data','1366707Yjikcp','sendMessage','pesan','user','1792074nRDAlI','getName','system','tags','post','https://deepenglish.com/wp-json/ai-chatbot/v1/chat','before','help','sender','Ø§Ù†Ø§\x20Ø¨ÙˆØª\x20ÙˆØ§ØªØ³Ø§Ø¨\x20\x20','error','autoai','260793gXKXmW','1082yCjVyM','text','key','19208EGpAyP','87112EEDRql','3832290jdHtzJ','278FiBDFi'];_0x37cc=function(){return _0x277723;};return _0x37cc();}const _0x4dcb48=_0x454e;function _0x454e(_0x23b384,_0x25f9c7){const _0x37cc4b=_0x37cc();return _0x454e=function(_0x454edc,_0x3003bd){_0x454edc=_0x454edc-0x11a;let _0x1e13b2=_0x37cc4b[_0x454edc];return _0x1e13b2;},_0x454e(_0x23b384,_0x25f9c7);}(function(_0x217869,_0x9f37ba){const _0x2c5c3c=_0x454e,_0x12f96c=_0x217869();while(!![]){try{const _0x1d84b8=-parseInt(_0x2c5c3c(0x122))/0x1*(parseInt(_0x2c5c3c(0x128))/0x2)+parseInt(_0x2c5c3c(0x12f))/0x3+parseInt(_0x2c5c3c(0x126))/0x4*(-parseInt(_0x2c5c3c(0x12d))/0x5)+parseInt(_0x2c5c3c(0x133))/0x6+parseInt(_0x2c5c3c(0x12b))/0x7*(-parseInt(_0x2c5c3c(0x125))/0x8)+-parseInt(_0x2c5c3c(0x121))/0x9+parseInt(_0x2c5c3c(0x127))/0xa;if(_0x1d84b8===_0x9f37ba)break;else _0x12f96c['push'](_0x12f96c['shift']());}catch(_0xf82353){_0x12f96c['push'](_0x12f96c['shift']());}}}(_0x37cc,0x4796d));import _0x38398e from'axios';let smartModeEnabled=!![],handler=async(_0x1f1545,{conn:_0x3cd518,text:_0x4069bc})=>{const _0x5e46e4=_0x454e;_0x3cd518[_0x5e46e4(0x120)]=_0x3cd518['autoai']?_0x3cd518[_0x5e46e4(0x120)]:{};if(!_0x4069bc)throw'*ÙŠÙ…ÙƒÙ†Ùƒ\x20Ø§Ù„Ø¢Ù†\x20Ø§Ù„ØªØ­Ø¯Ø«\x20Ù…Ø¹\x20Ø§Ù„Ø°ÙƒØ§Ø¡\x20Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ\x20Ù…Ø¨Ø§Ø´Ø±Ø©\x20Ø¨Ø¯ÙˆÙ†\x20Ø£ÙˆØ§Ù…Ø±.\x20ÙŠÙ…ÙƒÙ†Ùƒ\x20ØªÙØ¹ÙŠÙ„\x20Ø§Ù„ÙˆØ¶Ø¹\x20Ø§Ù„Ø°ÙƒÙŠ\x20Ø¹Ø¨Ø±\x20.autoai\x20on\x20ÙˆØ¥Ù„ØºØ§Ø¡\x20Ø§Ù„ÙˆØ¶Ø¹\x20Ø§Ù„Ø°ÙƒÙŠ\x20Ø¹Ø¨Ø±\x20.autoai\x20off*';smartModeEnabled&&!_0x3cd518[_0x5e46e4(0x120)][_0x1f1545[_0x5e46e4(0x11d)]]&&(_0x3cd518['autoai'][_0x1f1545[_0x5e46e4(0x11d)]]={'pesan':[]},_0x1f1545[_0x5e46e4(0x12c)]('[\x20âœ“\x20]\x20ØªÙ…\x20Ø§Ù„Ø§Ù†ØªÙ‚Ø§Ù„\x20Ø¨Ù†Ø¬Ø§Ø­\x20Ù„Ù„ÙˆØ¶Ø¹\x20Ø§Ù„Ø°ÙƒÙŠ\x20Ù„Ù„Ø¨ÙˆØª\x20Ø¥Ø³Ø£Ù„Ù†ÙŠ\x20Ø£ÙŠ\x20Ø³Ø¤Ø§Ù„\x20ÙˆØ³ÙˆÙ\x20Ø£Ø¬ÙŠØ¨Ùƒ\x20Ù„Ø§\x20ØªØªØ±Ø¯Ø¯\x20ÙŠØ§\x20ØµØ¯ÙŠÙ‚ÙŠ\x20ðŸ˜‰'));};handler[_0x4dcb48(0x11b)]=async(_0x5eafe1,{conn:_0x55a06a})=>{const _0x5af1fb=_0x4dcb48;_0x55a06a[_0x5af1fb(0x120)]=_0x55a06a[_0x5af1fb(0x120)]?_0x55a06a[_0x5af1fb(0x120)]:{};if(_0x5eafe1[_0x5af1fb(0x12a)]&&_0x5eafe1['fromMe'])return;if(!_0x5eafe1[_0x5af1fb(0x123)])return;if(!_0x55a06a['autoai'][_0x5eafe1[_0x5af1fb(0x11d)]])return;if(_0x5eafe1['text']['startsWith']('.')||_0x5eafe1[_0x5af1fb(0x123)][_0x5af1fb(0x129)]('#')||_0x5eafe1['text']['startsWith']('!')||_0x5eafe1[_0x5af1fb(0x123)]['startsWith']('/')||_0x5eafe1[_0x5af1fb(0x123)][_0x5af1fb(0x129)]('\x5c/'))return;if(_0x55a06a['autoai'][_0x5eafe1[_0x5af1fb(0x11d)]]&&_0x5eafe1['text']){let _0x375a20=_0x55a06a[_0x5af1fb(0x134)](_0x5eafe1[_0x5af1fb(0x11d)]);await _0x55a06a[_0x5af1fb(0x130)](_0x5eafe1['chat'],{'react':{'text':'â±ï¸','key':_0x5eafe1[_0x5af1fb(0x124)]}});const _0x3a56bc=[..._0x55a06a[_0x5af1fb(0x120)][_0x5eafe1[_0x5af1fb(0x11d)]][_0x5af1fb(0x131)],{'role':_0x5af1fb(0x135),'content':_0x5af1fb(0x11e)+_0x375a20},{'role':_0x5af1fb(0x132),'content':_0x5eafe1[_0x5af1fb(0x123)]}];try{const _0x5f1f8b=await _0x38398e[_0x5af1fb(0x137)](_0x5af1fb(0x11a),{'messages':_0x3a56bc}),_0x46cb4e=_0x5f1f8b[_0x5af1fb(0x12e)],_0x14a6e3=_0x46cb4e;await _0x55a06a['sendMessage'](_0x5eafe1['chat'],{'react':{'text':'âœ…','key':_0x5eafe1[_0x5af1fb(0x124)]}}),_0x5eafe1[_0x5af1fb(0x12c)](_0x14a6e3['answer']),_0x55a06a[_0x5af1fb(0x120)][_0x5eafe1[_0x5af1fb(0x11d)]][_0x5af1fb(0x131)]=_0x3a56bc;}catch(_0x457a9d){console[_0x5af1fb(0x11f)]('Error\x20fetching\x20data:',_0x457a9d);throw _0x457a9d;}}},handler['command']=[_0x4dcb48(0x120)],handler[_0x4dcb48(0x136)]=['ai'],handler[_0x4dcb48(0x11c)]=[_0x4dcb48(0x120)];export default handler;
+import axios from 'axios';
+
+let handler = async (m, { conn, text }) => {
+  conn.autoai = conn.autoai ? conn.autoai : {};
+
+  if (!text) {
+    throw `*يمكنك الآن التحدث مع الذكاء الاصطناعي مباشرة بدون أوامر. يمكنك تفعيل الوضع الذكي عبر .autoai on وإلغاء الوضع الذكي عبر .autoai off*`;
+  }
+
+  if (text == "on") {
+    conn.autoai[m.sender] = { pesan: [] };
+    m.reply("[ ✓ ] تم الانتقال بنجاح للوضع الذكي للبوت إسألني أي سؤال وسوف أجيبك لا تتردد يا صديقي 😉");
+  } else if (text == "off") {
+    delete conn.autoai[m.sender];
+    m.reply("[ ✓ ] تم بنجاح الرجوع للوضع العادي للبوت");
+  } else {
+    // الإرسال للخادم الخارجي
+    let name = conn.getName(m.sender);
+    await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
+    const messages = [
+      ...conn.autoai[m.sender].pesan,
+      { role: "system", content: `انا بوت واتساب  ${name}` },
+      { role: "user", content: text }
+    ];
+
+    try {
+      const response = await axios.post("https://deepenglish.com/wp-json/ai-chatbot/v1/chat", {
+        messages
+      });
+
+      const responseData = response.data;
+      const hasil = responseData;
+      await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
+      m.reply(hasil.answer);
+      conn.autoai[m.sender].pesan = messages;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+  }
+}
+
+handler.before = async (m, { conn }) => {
+  conn.autoai = conn.autoai ? conn.autoai : {};
+  if (m.isBaileys && m.fromMe) return;
+  if (!m.text) return;
+
+  if (!conn.autoai[m.sender]) return;
+
+  if (
+    m.text.startsWith(".") ||
+    m.text.startsWith("#") ||
+    m.text.startsWith("!") ||
+    m.text.startsWith("/") ||
+    m.text.startsWith("\\/")
+  ) return;
+
+  // التحقق من وقت آخر طلب للمستخدم ومنع الطلبات المتكررة
+  let now = Date.now();
+  if (conn.lastRequestTime && now - conn.lastRequestTime < 5000) { // الحد الزمني: 5 ثواني
+    m.reply("برجاء الانتظار قليلاً قبل إرسال طلب آخر.");
+    return;
+  }
+
+  conn.lastRequestTime = now; // تحديث وقت آخر طلب للمستخدم
+}
+
+handler.command = ['autoai'];
+handler.tags = ["ai"];
+handler.help = ['autoai'];
+export default handler;
