@@ -39,7 +39,7 @@ conn.autoai = conn.autoai ? conn.autoai : {};
  { role: "user", content: m.text }
  ];
  try {
- const response = await axios.post("https://api.justifung.tech/api/bard?q=${m.text}&apikey=Nour", {
+ const response = await axios.post("https://deepenglish.com/wp-json/ai-chatbot/v1/chat", {
  messages
  });
 
