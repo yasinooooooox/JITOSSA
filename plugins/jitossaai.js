@@ -3,18 +3,14 @@ import axios from 'axios';
 let autoaiEnabled = {}; // قائمة لتخزين حالة الذكاء الاصطناعي لكل مستخدم
 
 export const handler = async (m, { conn, text }) => {
-  if (text && text.trim() === '.autobard on') {
-    autoaiEnabled[m.sender] = true;
-    m.reply("[ ✓ ] تم تفعيل وضع الذكاء الاصطناعي بنجاح. يمكنك الآن التحدث مباشرة مع الذكاء الاصطناعي.");
-    return; // للخروج من دالة المعالجة إذا تم تفعيل الوضع
-  } else if (text && text.trim() === '.autobard off') {
+  autoaiEnabled[m.sender] = true; // تفعيل وضع الذكاء الاصطناعي تلقائياً
+
+  if (text && text.trim() === '.autobard off') {
     autoaiEnabled[m.sender] = false;
     m.reply("[ ✓ ] تم إلغاء وضع الذكاء الاصطناعي بنجاح. يمكنك الآن استخدام الأوامر بشكل عادي.");
     return; // للخروج من دالة المعالجة إذا تم إلغاء الوضع
   }
 
-  if (!autoaiEnabled[m.sender]) return; // التحقق من إذا كان وضع الذكاء الاصطناعي مُفعّلاً أم لا
-  if (m.isBaileys && m.fromMe) return;
   if (!m.text) return;
 
   let name = conn.getName(m.sender);
