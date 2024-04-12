@@ -16,7 +16,7 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
 
   try {
     const result = await fg.fbdl(args[0]);
-    const tex = `▢ *فيديو فيسبوك الخاصك بك*\n \n instagram.com/ovmar_1`
+    const tex = `▢ _*FACEBOOK*_\n \n instagram.com/ovmar_1`
 
     const response = await fetch(result.videoUrl)
     const arrayBuffer = await response.arrayBuffer()
