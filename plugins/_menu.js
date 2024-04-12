@@ -26,7 +26,7 @@ const defaultMenu = {
 *JITOSSA MD*
 
 ┌  ➦ w9t lbot : %uptime
-│  ➦ lyoum :  %weton
+│  ➦ lyoum :  %week
 │  ➦ lw9t : %time
 │  ➦ tari5 : %date
 │  ➦ Version : %version
