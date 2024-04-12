@@ -3,7 +3,7 @@ import axios from 'axios';
 let autoaiEnabled = {}; // قائمة لتخزين حالة الذكاء الاصطناعي لكل مستخدم
 
 let handler = async (m, { conn, text }) => {
-  autoaiEnabled[m.sender] = autoaiEnabled[m.sender] ?? false; // تحديد حالة الذكاء الاصطناعي لكل مستخدم
+  autoaiEnabled[m.sender] = autoaiEnabled[m.sender] ? autoaiEnabled[m.sender] : false; // تحديد حالة الذكاء الاصطناعي لكل مستخدم
 
   if (!text) {
     throw `*يمكنك الآن التحدث مباشرة مع الذكاء الاصطناعي بدون استخدام أوامر. سوف يجيبك مباشرة.*\nلتفعيل الوضع الذكي، اكتب:\n.autoai on\nلإلغاء الوضع الذكاء الاصطناعي، اكتب:\n.autoai off`;
