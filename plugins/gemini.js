@@ -1,28 +1,63 @@
-import {GoogleGenerativeAI} from '@google/generative-ai'
-import displayLoadingScreen from '../lib/loading.js'
-const genAI = new GoogleGenerativeAI('AIzaSyBWozNQdyPr6q5D7U1Izfl3BArjnNfwGuA');
+import {
+    fetch
+} from 'undici';
+import {
+    Gemini
+} from "../../lib/ai/gemini.js"
+const gemini = new Gemini('__Secure-1PSID', 'g.a000gQhbTE4WvC7mwVL4CcWSxbt1Bde7Ady6qpt6951pafinWART4EEKmcskZMFX08uuSKwbvAACgYKAVYSAQASFQHGX2Mi1KAIQT0oz9dXZXKy0ioMBBoVAUF8yKpem3c3iJtHRDMQF3nSHOxU0076');
 
+export async function before(m) {
+    try {
+        if (m.isBaileys && m.fromMe) return true;
+        if (!m.isGroup || !m.msg || !m.message || m.key.remoteJid !== m.chat || global.db.data.users[m.sender].banned || global.db.data.chats[m.chat].isBanned) return false;
 
-let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-  try {
-    if (!text) throw `مرحبا أنا مساعد جوجل كيف أقوم بمساعدتك. ...`
-    m.react('🪩')
-    await displayLoadingScreen(conn, m.chat)
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const {
+            users,
+            chats
+        } = global.db.data;
+        const {
+            text,
+            quoted
+        } = m;
 
-    const prompt = text
+        if (m.mtype === 'protocolMessage' || m.mtype === 'pollUpdateMessage' || m.mtype === 'reactionMessage' || m.mtype === 'stickerMessage') return;
+        if (!quoted || !quoted.isBaileys || !chats[m.chat].gemini) return true;
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const textt = response.text();
-    m.reply(textt)
-  } catch (error) {
-    console.error(حدث خطأ);
-    m.reply('Oops! Something went wrong. , we are trying had to fix it asap');
-  }
+        const msg = encodeURIComponent(text);
+        const candidates = await GoogleBard(msg);
+        if (candidates) {
+            if (candidates) m.reply(candidates);
+        } else {
+            const {
+                result
+            } = await AemtGemini(msg);
+            if (result) m.reply(result);
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }
-handler.help = ['gemini <text>']
-handler.tags = ['ai']
-handler.command = ['gemini', 'gm'];
 
-export default handler
+async function AemtGemini(query) {
+    const headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+    };
+
+    const bardRes = await fetch(`https://aemt.me/gemini?text=${query}`, {
+        method: "get",
+        headers
+    });
+    const bardText = await bardRes.json();
+    return bardText;
+};
+
+async function GoogleBard(query) {
+    try {
+        const responseText = await gemini.question(query);
+        return responseText.content;
+    } catch (error) {
+        console.error("حدث خطأ حاول لاحقا ", error.message);
+        throw error;
+    }
+};
