@@ -1,21 +1,36 @@
-import { tiktok } from '../lib/tiktok.js'
+import { tiktokdl } from '@bochilteam/scraper';
+import fg from 'api-dylux';
 
-let handler = async(m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) return m.reply(`Masukan URL!\n\nContoh:\n${usedPrefix + command} https://vt.tiktok.com/ZS8oHC5Ka/`)
-    if (!/^http(s)?:\/\/(www|v(t|m)).tiktok.com\/[-a-zA-Z0-9@:%._+~#=]/i.test(args[0])) return m.reply('Invalid urls')
-    await m.reply(wait)
-    let { nickname, duration, description, play, music } = await tiktok(args[0])
-    let caption = `
-Nickname : ${nickname}
-Duration : ${duration}
+let handler = async (m, { conn, text, args, usedPrefix, command }) => {
+  
+ if (!args[0] && m.quoted && m.quoted.text) {
+  args[0] = m.quoted.text;
+}
+if (!args[0] && !m.quoted) throw `Give the link of the video Tiktok or quote a tiktok link`;
+ if (!args[0].match(/tiktok/gi)) throw `Verify that the link is from TikTok`;
+ 
+ 
+  let txt = 'Here your Requested video';
 
-${description}
-`.trim()
-    let video = await conn.sendFile(m.chat, play, false, caption, m)
-    await conn.sendFile(m.chat, music, false, false, video, false, { mimetype: 'audio/mpeg' })
- }
-handler.help = ['tiktok']
-handler.tags = ['downloader']
-handler.command = /^(tiktok|tiktok(mp3|mp4|video|audio)|tt|tt(mp3|mp4|video|audio))$/i
-handler.limit = true
-export default handler
+  try {
+    const { author: { nickname }, video, description } = await tiktokdl(args[0]);
+    const url = video.no_watermark2 || video.no_watermark || 'https://tikcdn.net' + video.no_watermark_raw || video.no_watermark_hd;
+    
+    if (!url) throw global.error;
+    
+    conn.sendFile(m.chat, url, 'tiktok.mp4', '', m);
+  } catch (err) {
+    try {
+      let p = await fg.tiktok(args[0]);
+      conn.sendFile(m.chat, p.play, 'tiktok.mp4', txt, m);
+    } catch {
+      m.reply('*An unexpected error occurred*');
+    }
+  }
+};
+
+handler.help = ['tiktok'].map((v) => v + ' <url>');
+handler.tags = ['downloader'];
+handler.command = /^t(t|iktok(d(own(load(er)?)?|l))?|td(own(load(er)?)?|l))$/i;
+
+export default handler;
