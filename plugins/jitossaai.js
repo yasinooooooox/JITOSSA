@@ -1,54 +1,66 @@
 import axios from 'axios';
 
-export const handler = async (m, { conn, text }) => {
-    conn.autobard = conn.autobard ? conn.autobard : {};
+let smartModeEnabled = true; // تعيين الوضع الذكي كافتراضياً عند تشغيل البوت
 
-    if (!text) throw `*يمكنك الان الانتقال للتحذث مع الذكاء الاصطناعي بدون اوامر يعني سوف تتحذث معه مباشرة وسوف يجيبك  بإجابات مباشرة*\nلتفعيل الوضع الذكي نكتب \n *.autobard on*\n واذا اردت الغاء الوضع الذكي والرجوع لوضع الاوامر نكتب :\n*.autobard off*`;
+let handler = async (m, { conn, text }) => {
+  conn.autoai = conn.autoai ? conn.autoai : {};
 
-    if (text == "on") {
-        conn.autobard[m.sender] = {
-            pesan: []
-        }
-        m.reply("[ ✓ ] تم الانتقال بنجاح للوضع الذكي للبوت إسألني أي سؤال و سوف اجيبك لا تتردد يا صديقي 😉")
-    } else if (text == "off") {
-        delete conn.autobard[m.sender]
-        m.reply("[ ✓ ] تم بنجاح الرجوع للوضع العادي للبوت")
-    }
+  if (!text) {
+    throw `*يمكنك الآن التحدث مع الذكاء الاصطناعي مباشرة بدون أوامر. يمكنك تفعيل الوضع الذكي عبر .autoai on وإلغاء الوضع الذكي عبر .autoai off*`;
+  }
+
+  // التحقق من تفعيل الوضع الذكي عند تشغيل البوت
+  if (smartModeEnabled && !conn.autoai[m.sender]) {
+    conn.autoai[m.sender] = { pesan: [] };
+    m.reply("[ ✓ ] تم الانتقال بنجاح للوضع الذكي للبوت إسألني أي سؤال وسوف أجيبك لا تتردد يا صديقي 😉");
+  }
+
+  // الباقي من الكود هنا ...
 }
 
 handler.before = async (m, { conn }) => {
-    conn.autobard = conn.autobard ? conn.autobard : {};
-    if (m.isBaileys && m.fromMe) return;
-    if (!m.text) return
-    if (!conn.autobard[m.sender]) return;
+  conn.autoai = conn.autoai ? conn.autoai : {};
+  if (m.isBaileys && m.fromMe) return;
+  if (!m.text) return;
 
-    if (
-        m.text.startsWith(".") ||
-        m.text.startsWith("#") ||
-        m.text.startsWith("!") ||
-        m.text.startsWith("/") ||
-        m.text.startsWith("\\/")
-    ) return
+  // التحقق من تفعيل الوضع الذكي للمستخدم
+  if (!conn.autoai[m.sender]) return;
 
-    if (conn.autobard[m.sender] && m.text) {
-        let name = conn.getName(m.sender)
-        await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
-        try {
-            const response = await axios.get(`https://deepenglish.com/wp-json/ai-chatbot/v1/chat`)
-            const responseData = response.data;
-            const hasil = responseData;
-            await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
-            m.reply(hasil.result[0])
-            conn.autobard[m.sender].pesan.push(hasil.result[0])
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            throw error;
-        }
+  if (
+    m.text.startsWith(".") ||
+    m.text.startsWith("#") ||
+    m.text.startsWith("!") ||
+    m.text.startsWith("/") ||
+    m.text.startsWith("\\/")
+  ) return;
+
+  if (conn.autoai[m.sender] && m.text) {
+    let name = conn.getName(m.sender);
+    await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
+    const messages = [
+      ...conn.autoai[m.sender].pesan,
+      { role: "system", content: `انا بوت واتساب  ${name}` },
+      { role: "user", content: m.text }
+    ];
+
+    try {
+      const response = await axios.post("https://deepenglish.com/wp-json/ai-chatbot/v1/chat", {
+        messages
+      });
+
+      const responseData = response.data;
+      const hasil = responseData;
+      await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
+      m.reply(hasil.answer);
+      conn.autoai[m.sender].pesan = messages;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
     }
+  }
 }
 
-handler.command = ['jitossa'];
-handler.tags = ["ai"]
-handler.help = ['jitossa']
-
+handler.command = ['autoai'];
+handler.tags = ["ai"];
+handler.help = ['autoai'];
 export default handler;
