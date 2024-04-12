@@ -14,7 +14,7 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
     const promptText = args.slice(1).join(' ');
 
     try {
-        let mess = await m.reply(waitt);
+        let mess = await m.reply(waittt);
         m.react('🖌');
 
         const endpoint = `https://aemt.me/${apiVersion}/text2img?text=${encodeURIComponent(promptText)}`;
@@ -24,7 +24,7 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
             const imageBuffer = await response.arrayBuffer();
 
             //await m.reply({ key: mess.key, text: '> Here generated image...' });
-            await conn.sendFile(m.chat, Buffer.from(imageBuffer), 'toon_image.png', `تبعني ياصديقي 😆\n _*instagram.com/ovmar_1*_`, m);
+            await conn.sendFile(m.chat, Buffer.from(imageBuffer), 'toon_image.png', `تابعني ياصديقي 😆\n _*instagram.com/ovmar_1*_`, m);
             await m.react('😊');
         } else {
             throw '> خطأ في توليد الصورة حاول لاحقا 🙁';
