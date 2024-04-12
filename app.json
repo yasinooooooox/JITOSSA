@@ -1,23 +1,18 @@
-
-  "name": "JITOSSA",
-  "description": "Whatsapp bot. recode by Omar Charaf",
-  "keywords": [
-    "whatsapp bot",
-    "nodejs"
-  ],
+{
+  "name": "JITOSSA", 
+  "description": "BY Omar Charaf",
   "repository": "https://github.com/Omarcharaf1/JITOSSA",
-    "buildpacks": [
+  "logo": "https://telegra.ph/file/c0706685f5e267acd3dc5.jpg",
+  "keywords": ["java", "bot", "whatsapp-bot", "whatsapp-automation"],
+  "buildpacks": [
     {
       "url": "heroku/nodejs"
-    },
-    {
-      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git"
     },
     {
       "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
     },
     {
-      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-    }
-  ]
+      "url": "https://github.com/bogini/heroku-buildpack-graphicsmagick"
+    }    
+ ]
 }
