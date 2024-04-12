@@ -1,27 +1,27 @@
-const fetch = require('node-fetch');
-const uploader = require('../lib/uploadImage');
+import fetch from 'node-fetch'
+import uploader from '../lib/uploadImage.js'
 
-let handler = async (m, { conn, text, command, usedPrefix }) => {
-  let q = m.quoted ? m.quoted : m
-  let mime = (q.msg || q).mimetype || q.mediaType || '' 
-  if (/image/g.test(mime) && !/webp/g.test(mime)) {
-    let buffer = await q.download()
-    await m.reply(wait)    
-    try {
-      let media = await uploader(buffer)
-      let json = await (await fetch(`https://api.betabotz.eu.org/api/search/bard-img?url=${media}&text=${text}&apikey=${lann}`)).json()  
-      conn.sendMessage(m.chat, { text: json.result }, { quoted: m })
-    } catch (err) {
-      throw `${eror}`
-    }
-  } else {
-    throw `Reply image with command ${usedPrefix + command} pertanyaan`
-  }
+var handler = async (m, { conn, text, command, usedPrefix }) => {
+
+    let q = m.quoted ? m.quoted : m
+    let mime = (q.msg || q).mimetype || q.mediaType || ''
+    if (/image/g.test(mime) && !/webp/g.test(mime)) {
+        let buffer = await q.download()
+
+        conn.sendPresenceUpdate('composing', m.chat)
+
+        let media = await (uploader)(buffer)
+        let json = await (await fetch(`https://aemt.me/bardimg?url=${media}&text=${text}`)).json()
+
+        conn.sendMessage(m.chat, { text: json.result }, { quoted: m })
+
+    } else return conn.reply(m.chat, `*🎌 أرسل صورة مع الأمر والنص الذي ترغب في البحث عنه*\n\nمثال، !bardimg احصل على معلومات عن ما يظهر في الصورة`, m, fake, )
+
 }
-
 handler.help = ['bardimg']
-handler.tags = ['drawing']
+handler.tags = ['ai']
 handler.command = /^(bardimg|bardimage)$/i
-handler.limit = true;
 
-module.exports = handler
+handler.limit = true
+
+export default handler
