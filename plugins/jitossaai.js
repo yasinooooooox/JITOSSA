@@ -1,27 +1,33 @@
 import axios from 'axios';
 
-export const handler = async (m, { conn }) => {
+export const handler = async (m, { conn, text }) => {
     conn.autobard = conn.autobard ? conn.autobard : {};
 
-    // تحقق من عدم وجود رسالة فارغة وأن وضع الذكاء الاصطناعي غير مفعل لهذا المرسل
-    if (!m.isBaileys && m.text && !conn.autobard[m.sender]) {
-        conn.autobard[m.sender] = { pesan: [] }; // تفعيل وضع الذكاء الاصطناعي
-        m.reply("[ ✓ ] تم التحول بنجاح لوضع الذكاء الاصطناعي. يمكنك التحدث مباشرة معي الآن.");
-    }
+    if (!text) throw `*يمكنك الآن التحدث مباشرة مع الذكاء الاصطناعي بدون استخدام الأوامر. يعني ستتحدث معه مباشرة وسيقوم بالرد عليك مباشرة*\nلتفعيل الوضع الذكي، اكتب:\n*autobard on*\nوإذا أردت العودة إلى الوضع العادي واستخدام الأوامر، اكتب:\n*autobard off*`;
 
+    if (text == "on") {
+        conn.autobard.on = true; // تفعيل الوضع الذكي للجميع
+        m.reply("[ ✓ ] تم التحويل بنجاح إلى الوضع الذكي للبوت. اسأل أي سؤال وسيقوم بالرد عليك مباشرة 😉")
+    } else if (text == "off") {
+        conn.autobard.on = false; // إلغاء تفعيل الوضع الذكي للجميع
+        m.reply("[ ✓ ] تم إلغاء تفعيل الوضع الذكي للبوت.")
+    }
+}
+
+handler.before = async (m, { conn }) => {
+    conn.autobard = conn.autobard ? conn.autobard : {};
+    if (m.isBaileys && m.fromMe) return;
     if (!m.text) return;
 
-    // تنفيذ وظيفة الذكاء الاصطناعي إذا كان وضع الذكاء الاصطناعي مفعلًا لهذا المرسل
-    if (conn.autobard[m.sender] && m.text) {
+    if (conn.autobard.on) { // تحقق من تفعيل الوضع الذكي
         let name = conn.getName(m.sender)
         await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
         try {
-            const response = await axios.get(`https://api.justifung.tech/api/bard?q=${encodeURIComponent(m.text)}&apikey=Nour`)
+            const response = await axios.get(`https://api.justifung.tech/api/bard?q=${m.text}&apikey=Nour`)
             const responseData = response.data;
             const hasil = responseData;
             await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
             m.reply(hasil.result[0])
-            conn.autobard[m.sender].pesan.push(hasil.result[0])
         } catch (error) {
             console.error("Error fetching data:", error);
             throw error;
@@ -29,6 +35,7 @@ export const handler = async (m, { conn }) => {
     }
 }
 
+handler.command = ['autobard'];
 handler.tags = ["ai"]
 handler.help = ['autobard']
 
