@@ -1,54 +1,38 @@
-import uploadImage from '../lib/uploadImage.js'
-import deepai from 'deepai'
-import fetch from 'node-fetch'
-import FormData from 'form-data'
+// Credits By https://github.com/Xnuvers007
+import fs from 'fs';
+import fetch from 'node-fetch';
+import FormData from 'form-data';
+import deepai from 'deepai';
 
-deepai.setApiKey('04f02780-e0bd-44c1-afa2-14cf5a78948c')
+// deepai.setApiKey('31c3da72-e27e-474c-b2f4-a1b685722611');
+deepai.setApiKey('quickstart-QUdJIGlzIGNvbWluZy4uLi4K');
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-    let q = m.quoted ? m.quoted : m
-    let mime = (q.msg || q).mimetype || q.mediaType || ''
-    if (/image/g.test(mime) && !/webp/g.test(mime)) {
-    	try {
-			let img = await q.download?.()
-			let out = await uploadImage(img)
-			var resp = await deepai.callStandardApi("waifu2x", {
-                        image: out,
-                    })
-                    let w2x1 = resp['output_url']
-           var resep = await deepai.callStandardApi("waifu2x", {
-                        image: w2x1,
-                    })
-                    // console.log(resp);
-                    let w2x2 = resep['output_url']
-           var resup = await   deepai.callStandardApi("torch-srgan", {
-            image: w2x2,
-            })
-            await conn.sendFile(m.chat, resup['output_url'], 'simpcard.png', 'simp', m)
-    	} catch {
-    		await m.reply('Sedang membuat...')
-  let q = m.quoted ? m.quoted : m
-  let mime = (q.msg || q).mimetype || ''
-  if (!mime) throw 'Fotonya Mana?'
-  if (!/image\/(jpe?g|png)/.test(mime)) throw `Tipe ${mime} tidak didukung!`
-  let img = await q.download()
-  let body = new FormData
-  body.append('image', img, 'image')
-  let res = await fetch('http://max-image-resolution-enhancer.codait-prod-41208c73af8fca213512856c7a09db52-0000.us-east.containers.appdomain.cloud/model/predict', {
+let handler = async (m) => {
+  let q = m.quoted ? m.quoted : m;
+  let mime = (q.msg || q).mimetype || '';
+  if (!mime) throw 'ʀᴇᴘʟʏ ɢᴀᴍʙᴀʀɴʏᴀ ᴋᴀᴋ (～￣▽￣)～';
+  await m.reply(global.wait);
+  if (!/image\/(jpe?g|png)/.test(mime)) throw `Mime ${mime} tidak support`;
+  let img = mime.split('/')[1];
+  img = Date.now() + '.' + img;
+  fs.writeFileSync(`./${img}`, await q.download());
+  let form = new FormData();
+  form.append('image', fs.createReadStream(`./${img}`));
+  let resp = await fetch('https://api.deepai.org/api/torch-srgan', {
     method: 'POST',
-    body
-  })
-  if (res.status !== 200) throw await res.json()
-  await conn.sendFile(m.chat, await res.buffer(), 'hd.jpg', 'Nihh,, Hade kan?', m)
-    	}
-    } else {
-    	m.reply(`Kirim gambar dengan caption *${usedPrefix + command}* atau tag gambar yang sudah dikirim`)
-    }
-}
-handler.help = ['hd', 'enhance']
-handler.tags = ['tools']
-handler.command = /^(hd|enhance)$/i
+    headers: {
+      // 'api-key': '31c3da72-e27e-474c-b2f4-a1b685722611',
+      'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K',
+    },
+    body: form,
+  });
+  let data = await resp.json();
+  await conn.sendFile(m.chat, data.output_url, 'hd.jpg', 'ɪɴɪ ᴋᴀᴋ ʜᴀꜱɪʟɴʏᴀヾ(≧▽≦*)ᴏ', m);
+  fs.unlinkSync(`./${img}`);
+};
 
-handler.limit = true
+handler.help = ['hd <caption|reply media>'];
+handler.tags = ['tools'];
+handler.command = /^(hd|jernih)$/i;
 
-export default handler
+export default handler;
