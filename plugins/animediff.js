@@ -1,25 +1,15 @@
-import fetch from "node-fetch"
-
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-         let wm = global.me
-
-        if (!text) throw `توليد صور أنمى  texts\n\n مثال usage\n${ usedPrefix + command } 1girl, blush, megane, school uniform`
-        await m.reply('*Processing image*')
-        await conn.relayMessage(m.chat, { reactionMessage: { key: m.key, text: '⌛'  }}, { messageId: m.key.id })
-        try {
-        let url = `https://api.xyroinee.xyz/api/ai/animediffusion?q=${text}&apikey=${global.xyro}`
-        await conn.sendFile(m.chat, await(await fetch(url)).buffer(), 'image.jpg', wm, m)
-        m.react(done)
-      } catch (e) {
-        console.log(e)
-        m.reply(eror)
-      }
-
-    }
-
-
-handler.help = ['animediff <text>']
-handler.tags = ['drawing']
-handler.command = /^(animediff)$/i
-
+if (!text) return m.reply(`توليد الصورة الكرتونية قم بإنشاء الكثير من الصور عبر عقلك \n مثال: *${usedPrefix + command}* 1girl, solo, ponytail, blush.`)
+await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
+    try {
+let data = (`https://api.yanzbotz.my.id/api/text2img/neima?prompt=${text}`)
+conn.sendFile(m.chat, data,"apa", '_متابعة في حسابي الإنستجرام ❤️_\n www.instagram.com/ovmar_1', m)
+	} catch (e) {
+		m.reply(error);
+	}
+};
+handler.help = ["animediff"]
+handler.tags = ["drawing"]
+handler.command = ["animediff"]
+handler.register = true
 export default handler
