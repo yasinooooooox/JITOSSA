@@ -23,11 +23,11 @@ handler.before = async (m, { conn }) => {
         let name = conn.getName(m.sender)
         await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
         try {
-            const response = await axios.get(`https://deepenglish.com/wp-json/ai-chatbot/v1/chat`)
+            const response = await axios.get(`https://api.justifung.tech/api/bard?q=${encodeURIComponent(m.text)}&apikey=Nour`)
             const responseData = response.data;
-            const hasil = responseData;
+            const hasil = responseData.result[0].text;
             await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
-            m.reply(hasil.result[0])
+            m.reply(hasil)
         } catch (error) {
             console.error("Error fetching data:", error);
             throw error;
