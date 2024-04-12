@@ -134,7 +134,7 @@ let handler = async (m, {
 handler.help = ["play"].map(v => v + " <pencarian>")
 handler.tags = ["downloader"]
 handler.command = /^(play|ytplay|ytmp3|playmp3|playmp4|ytplaymp4)$/i
-handler.limit = true
+handler.limit = false
 export default handler
 
 function formatNumber(num) {
