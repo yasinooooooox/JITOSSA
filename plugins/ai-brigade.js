@@ -1,22 +1,15 @@
-import {
-    BotBrigade
-} from '../../lib/ai/brigade.js';
+import { BotBrigade } from '../../lib/ai/brigade.js';
 import chalk from 'chalk';
 
-const handler = async (m, {
-    conn,
-    command,
-    usedPrefix,
-    text
-}) => {
+const handler = async (m, { conn, command, usedPrefix, text }) => {
     conn.brigadeIds = conn.brigadeIds || {};
 
     if (!text) {
         return m.reply(`
-            Input query. Example: ${usedPrefix + command} hello
-            Usage:
-            ${usedPrefix + command} <message> - Send message using saved external ID.
-            ${usedPrefix + command} <external_id> - Set external ID for .brigade command.
+            أدخل استعلامًا. مثال: ${usedPrefix + command} مرحباً
+            الاستخدام:
+            ${usedPrefix + command} <message> - إرسال رسالة باستخدام معرف خارجي محفوظ.
+            ${usedPrefix + command} <external_id> - تعيين معرف خارجي لأمر .brigade.
         `.trim());
     }
 
@@ -26,29 +19,29 @@ const handler = async (m, {
         let message = '';
 
         if (command === 'brigade') {
-            message = conn.brigadeIds[m.chat] ? ((await apiClient.ReqChat(conn.brigadeIds[m.chat], text)).response ?? 'No reply from AI.') : 'No external ID set. Use .brigadeset command to set external ID. ❗';
+            message = conn.brigadeIds[m.chat] ? ((await apiClient.ReqChat(conn.brigadeIds[m.chat], text)).response ?? 'لا توجد ردود من الذكاء الاصطناعي.') : 'لم يتم تعيين معرف خارجي. استخدم أمر .brigadeset لتعيين معرف خارجي. ❗';
         } else if (command === 'brigadeset') {
             if (!text) {
-                message = `Please provide an external ID to set. Example: ${usedPrefix}brigadeset your_external_id`;
+                message = `يرجى تقديم معرف خارجي للتعيين. مثال: ${usedPrefix}brigadeset your_external_id`;
             } else {
-                const brigadeList = ["Anies-Imin", "Prabowo-Gibran", "Ganjar-Mahfud"];
+                const brigadeList = ["أنيس-إمين", "برابوو-جيبران", "غنجر-محفوظ"];
                 const brigadeOptions = brigadeList.map((brigade, index) => `${index + 1}. ${brigade}`).join('\n');
                 const index = parseInt(text.trim()) - 1;
                 if (index >= 0 && index < brigadeList.length) {
                     conn.brigadeIds[m.chat] = brigadeList[index];
-                    message = 'External ID set successfully! ✅';
+                    message = 'تم تعيين المعرف الخارجي بنجاح! ✅';
                 } else {
-                    message = `Invalid index. Please select a valid index from the list:\n${brigadeOptions}`;
+                    message = `فهرس غير صالح. يرجى اختيار فهرس صالح من القائمة:\n${brigadeOptions}`;
                 }
             }
         } else {
-            message = 'Invalid command. ❌';
+            message = 'أمر غير صالح. ❌';
         }
 
         await m.reply(message);
     } catch (error) {
-        console.error(chalk.red('Error:', error.message));
-        await m.reply(`Error: ${error.message} ❌`);
+        console.error(chalk.red('خطأ:', error.message));
+        await m.reply(`خطأ: ${error.message} ❌`);
     }
 };
 
