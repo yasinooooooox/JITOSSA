@@ -1,26 +1,26 @@
 import axios from 'axios';
 
 export const handler = async (m, { conn, text }) => {
-    conn.akira = conn.akira ? conn.akira : {};
+    conn.autobard = conn.autobard ? conn.autobard : {};
 
-    if (!text) throw `*للتحدث مباشرة مع بوبيزة الذكية وبدون أوامر نكتب*\n\n*.bobiza on* \n\n*بالنسبة إذا أردت إلغاء وضع بوبيزة الذكية والرجوع للبوت بشكله الطبيعي فعليك كتابة هكذا*\n\n*.bobiza off*`;
+    if (!text) throw `*يمكنك الان الانتقال للتحذث مع الذكاء الاصطناعي بدون اوامر يعني سوف تتحذث معه مباشرة وسوف يجيبك  بإجابات مباشرة*\nلتفعيل الوضع الذكي نكتب \n *.autobard on*\n واذا اردت الغاء الوضع الذكي والرجوع لوضع الاوامر نكتب :\n*.autobard off*`;
 
     if (text == "on") {
-        conn.akira[m.chat] = {
+        conn.autobard[m.sender] = {
             pesan: []
         }
-        m.reply("🟢 *تم تفعيل وضع بوبيزة الذكية إسأل بوبيزة أي سؤال*")
+        m.reply("[ ✓ ] تم الانتقال بنجاح للوضع الذكي للبوت إسألني أي سؤال و سوف اجيبك لا تتردد يا صديقي 😉")
     } else if (text == "off") {
-        delete conn.akira[m.chat]
-        m.reply("🔴 *تم إلــغاء وضع بوبيزة الذكية اكتب menu. لتنبتق لك جميع الأوامر*")
+        delete conn.autobard[m.sender]
+        m.reply("[ ✓ ] تم بنجاح الرجوع للوضع العادي للبوت")
     }
 }
 
 handler.before = async (m, { conn }) => {
-    conn.akira = conn.akira ? conn.akira : {};
+    conn.autobard = conn.autobard ? conn.autobard : {};
     if (m.isBaileys && m.fromMe) return;
     if (!m.text) return
-    if (!conn.akira[m.chat]) return;
+    if (!conn.autobard[m.sender]) return;
 
     if (
         m.text.startsWith(".") ||
@@ -30,24 +30,16 @@ handler.before = async (m, { conn }) => {
         m.text.startsWith("\\/")
     ) return
 
-    if (conn.akira[m.chat] && m.text) {
+    if (conn.autobard[m.sender] && m.text) {
         let name = conn.getName(m.sender)
         await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
-        const messages = [
-            ...conn.akira[m.chat].pesan,
-            { role: "system", content: `Your name is Bobiza, 20 years old, you are his assistant who can answer all questions, use slang when answering, use emojis when you want to answer questions, you have a carefree but feminine nature like a woman, you have a boyfriend named Noureddine , my beloved, if you have any questions related to the coding you answered rejection, the name of your interlocutor is *${name}*"` },
-            { role: "user", content: m.text }
-        ];
         try {
-            const response = await axios.post("https://deepenglish.com/wp-json/ai-chatbot/v1/chat", {
-                messages
-            });
-
+            const response = await axios.get(`https://api.justifung.tech/api/bard?q=${m.text}&apikey=Nour`)
             const responseData = response.data;
             const hasil = responseData;
             await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
-            m.reply(hasil.answer)
-            conn.akira[m.chat].pesan = messages
+            m.reply(hasil.result[0])
+            conn.autobard[m.sender].pesan.push(hasil.result[0])
         } catch (error) {
             console.error("Error fetching data:", error);
             throw error;
@@ -55,8 +47,8 @@ handler.before = async (m, { conn }) => {
     }
 }
 
-handler.command = ['bobiza'];
+handler.command = ['jitossa'];
 handler.tags = ["ai"]
-handler.help = ['bobiza']
+handler.help = ['jitossa']
 
 export default handler;
