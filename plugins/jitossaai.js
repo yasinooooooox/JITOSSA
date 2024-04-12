@@ -34,7 +34,7 @@ handler.before = async (m, { conn }) => {
         let name = conn.getName(m.sender)
         await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
         try {
-            const response = await axios.get(`https://api.justifung.tech/api/bard?q=${m.text}&apikey=Nour`)
+            const response = await axios.get(`https://deepenglish.com/wp-json/ai-chatbot/v1/chat`)
             const responseData = response.data;
             const hasil = responseData;
             await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
