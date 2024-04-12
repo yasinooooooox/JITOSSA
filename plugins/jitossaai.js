@@ -3,7 +3,7 @@ import axios from 'axios';
 export const handler = async (m, { conn }) => {
     conn.autobard = conn.autobard ? conn.autobard : {};
 
-    // تحقق من وجود الرسالة وأن wالوضع الذكي غير مفعل لهذا المرسل
+    // تحقق من عدم وجود رسالة فارغة وأن وضع الذكاء الاصطناعي غير مفعل لهذا المرسل
     if (!m.isBaileys && m.text && !conn.autobard[m.sender]) {
         conn.autobard[m.sender] = { pesan: [] }; // تفعيل وضع الذكاء الاصطناعي
         m.reply("[ ✓ ] تم التحول بنجاح لوضع الذكاء الاصطناعي. يمكنك التحدث مباشرة معي الآن.");
