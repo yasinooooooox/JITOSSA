@@ -1,21 +1,45 @@
-import { tiktokdl, tiktokdlv2, tiktokdlv3 } from '@bochilteam/scraper'
-import fetch from 'node-fetch'
+import fg from 'api-dylux'
+import { tiktokdl } from '@bochilteam/scraper'
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) throw `Use example ${usedPrefix}${command} https://www.tiktok.com/@omagadsus/video/7025456384175017243`
-    const { author: { nickname }, video, description } = await tiktokdl(args[0])
-        .catch(async _ => await tiktokdlv2(args[0]))
-        .catch(async _ => await tiktokdlv3(args[0]))
-    const url = video.no_watermark2 || video.no_watermark || 'https://tikcdn.net' + video.no_watermark_raw || video.no_watermark_hd
-    if (!url) throw 'Can\'t download video!'
-    conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ɴᴏ ᴡᴍ ${htka}`, `➔ ɴɪᴄᴋɴᴀᴍᴇ ${nickname}${description ? `\n➔ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ:\n${description}` : ''}`, await (await fetch(url)).buffer(),
-        url, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
-        ['ᴅᴏɴᴀꜱɪ', `.donasi`],
-        ['ᴀᴜᴅɪᴏ', `.tiktokaudio ${args}`],
-        [null, null]], m)
+var handler = async (m, { conn, text, args, usedPrefix, command}) => {
+
+if (!args[0]) throw `⚠️ _Ingrese Un Enlace De Tiktok_\n\n❕ *Ejemplo:*\n${usedPrefix + command} https://vm.tiktok.com/ZMjbonqPu/`
+if (!args[0].match(/tiktok/gi)) throw `*⚠️ 𝖵𝖾𝗋𝗂𝖿𝗂𝗊𝗎𝖾 𝖰𝗎𝖾 𝖤𝗅 𝖫𝗂𝗇𝗄 𝖲𝖾𝖺 𝖢𝗈𝗋𝗋𝖾𝖼𝗍𝗈*`
+
+
+const { key } = await conn.sendMessage(m.chat, {text: `${wait}`}, {quoted: m})
+await delay(1000 * 1)
+await conn.sendMessage(m.chat, {text: `${waitt}`, edit: key})
+await delay(1000 * 1);
+await conn.sendMessage(m.chat, {text: `${waittt}`, edit: key})
+await delay(1000 * 1)
+await conn.sendMessage(m.chat, {text: `${waitttt}`, edit: key})
+
+try {
+let p = await fg.tiktok(args[0])
+let te = `𝆺𝅥𝅮 🔥 _Nombre:_ ${p.nickname}
+𝆺𝅥𝅮 👤 _Usuario:_ ${p.unique_id}
+𝆺𝅥𝅮 ⏰ _Duración:_ ${p.duration}
+𝆺𝅥𝅮 📄 _Descripción:_ ${p.description}`
+conn.sendFile(m.chat, p.play, 'tiktok.mp4', te, m)
+} catch {
+try {
+const { author: { nickname }, video, description } = await tiktokdl(args[0])
+const url = video.no_watermark2 || video.no_watermark || 'https://tikcdn.net' + video.no_watermark_raw || video.no_watermark_hd
+if (!url) throw '*⚠️ ERROR AL DESACARGAR EL VÍDEO*'
+conn.sendFile(m.chat, url, 'fb.mp4', `• 🧃 *Nombre:* ${nickname}\n• 📄 *Descripción:* ${description}`, m)
+m.react(done)
+} catch {
+m.reply(`*⚠️ ERROR AL DESCARGAR EL VÍDEO*`)
+}}
+
 }
-handler.help = ['tiktok', 'tiktok', 'tiktokdl'].map(v => v + ' <url>')
-handler.tags = ['downloader']
-handler.command = /^(tik(tok)?(tok)?(dl)?)$/i
+handler.help = ['tiktok']
+handler.tags = ['descargas']
+handler.command = /^(tiktok|tt|ttdl|tiktokdl|tiktoknowm)$/i
+handler.register = true
+handler.diamond = true
 
 export default handler
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
