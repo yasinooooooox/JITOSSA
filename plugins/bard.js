@@ -1,21 +1,17 @@
-import fetch from 'node-fetch';
-let handler = async (m, {
- text, 
- usedPrefix, 
- command
- }) => {
-if (!text) throw `الرجاء إدخال السؤال!\n\n*مثال:* من هو رئيس المغرب؟`
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) throw `*• مثال:* ${usedPrefix + command} مرحبًا`
+m.reply(wait) // الرد برسالة انتظار
+
 try {
-  await m.reply(wait)
-  let apii = await fetch(`https://api.betabotz.org/api/search/bing-chat?text=${text}&apikey=${global.lann}`)
-  let res = await apii.json()
-  await m.reply(res.message)
-} catch (err) {
-  console.error(err)
-  throw "حدث خطأ أثناء الرد على السؤال"
+let gpt = await (await fetch(`https://itzpire.site/ai/bard-ai?q={text}`)).json() // إجراء استعلام إلى Bard AI
+m.reply("*[ sɪsᴋᴀ - ᴀɪ ]* " + '\n' + gpt.result) // إرسال الرد من Bard AI
+ } catch(e) {
+ throw "`*Gpt لم يستجب*`" // رمي خطأ في حالة عدم استجابة Bard AI
 }
 }
-handler.command = handler.help = ['bard','bardai'];
-handler.tags = ['ai'];
-handler.premium = false;
-export default handler;
+
+handler.help = ["bard"].map(a => a + " *[السؤال]*") // المساعدة للأمر
+handler.tags = ["ai"] // الوسوم المرتبطة بالأمر
+handler.command = ["bard"] // الأمر المستخدم لتنشيط الدالة
+
+module.exports = handler // تصدير الدالة handler
