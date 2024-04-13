@@ -63,8 +63,8 @@ conn.alicia = conn.alicia ? conn.alicia : {};
  }
 }
 
-handler.command = ['alicia'];
+handler.command = ['jitossa'];
 handler.tags = ["ai"]
-handler.help = ['alicia'].map(a => a + " *[on/off]*");
+handler.help = ['jitossa'].map(a => a + " *[on/off]*");
 
 module.exports = handler
