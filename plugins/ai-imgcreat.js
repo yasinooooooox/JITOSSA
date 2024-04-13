@@ -18,9 +18,9 @@ var handler = async (m, { conn, text, command, usedPrefix }) => {
     } else return conn.reply(m.chat, `*🎌 أرسل صورة مع الأمر والنص الذي ترغب في البحث عنه*\n\nمثال، !bardimg احصل على معلومات عن ما يظهر في الصورة`, m, fake, )
 
 }
-handler.help = ['bardimg']
-handler.tags = ['ai']
-handler.command = /^(bardimg|bardimage)$/i
+handler.help = ['bardimg2']
+handler.tags = ['drawing']
+handler.command = /^(bardimg2|bardimage2)$/i
 
 handler.limit = true
 
