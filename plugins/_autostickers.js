@@ -1,36 +1,62 @@
-import { sticker } from '../lib/sticker.js'
-
+const { sticker } = require('../lib/sticker')
+const WSF = require('wa-sticker-formatter')
 let handler = m => m
 
-handler.all = async function (m) {
-let chat = db.data.chats[m.chat]
-let user = db.data.users[m.sender]
-
-if (chat.autosticker && m.isGroup) {
-let q = m
-let stiker = true
-let mime = (q.msg || q).mimetype || q.mediaType || ''
-if (/webp/g.test(mime)) return
-if (/image/g.test(mime)) {
-let img = await q.download?.()
-if (!img) return
-stiker = await sticker(img, false, packname, author)
-} else if (/video/g.test(mime)) {
-if (/video/g.test(mime)) if ((q.msg || q).seconds > 8) return await conn.reply(m.chat, '🎌 *El video no puede durar mas de 7 segundos*', m, fake, )
-let img = await q.download()
-if (!img) return
-stiker = await sticker(img, false, packname, author)
-} else if (m.text.split(/\n| /i)[0]) {
-if (isUrl(m.text)) stiker = await sticker(false, m.text.split(/\n| /i)[0], packname, author)
-else return
+handler.before = async function (m) {
+    let chat = global.db.data.chats[m.chat]
+    let user = global.db.data.users[m.sender]
+    if (chat.stiker && !user.banned && !chat.isBanned && !m.fromMe && !m.isBaileys) {
+        // try {
+        let q = m
+        let stiker = false
+        let wsf = false
+        let mime = (q.msg || q).mimetype || ''
+        if (/webp/.test(mime)) return
+        if (/image/.test(mime)) {
+            let img = await q.download()
+            if (!img) return
+            wsf = new WSF.Sticker(img, {
+                pack: global.packname,
+                author: global.author,
+                crop: false,
+            })
+        } else if (/video/.test(mime)) {
+            if ((q.msg || q).seconds > 11) return m.reply('Maksimal 10 detik!')
+            let img = await q.download()
+            if (!img) return
+            wsf = new WSF.Sticker(img, {
+                pack: global.packname,
+                author: global.author,
+                crop: false,
+            })
+        } else if (m.text.split` `[0]) {
+            if (isUrl(m.text.split` `[0])) stiker = await sticker(false, m.text.split` `[0], global.packname, global.author)
+            else return
+        }
+        if (wsf) {
+            await wsf.build()
+            const sticBuffer = await wsf.get()
+            if (sticBuffer) await this.sendMessage(m.chat, { sticker: sticBuffer }, {
+                quoted: m,
+                mimetype: 'image/webp',
+                ephemeralExpiration: 86400
+            })
+        }
+        conn.sendPresenceUpdate("composing", m.chat)
+        if (stiker) await this.sendMessage(m.chat, { sticker: stiker }, {
+                quoted: m,
+                mimetype: 'image/webp',
+                ephemeralExpiration: 86400
+            })
+        // } finally {
+        //     if (stiker) {
+        //     }
+        // }
+    }
+    return true
 }
-if (stiker) {
-await this.sendFile(m.chat, stiker, null, { asSticker: true })
-}}
-return !0
-
-}
-export default handler
+module.exports = handler
 
 const isUrl = (text) => {
-return text.match(new RegExp(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)(jpe?g|gif|png|mp4)/, 'gi'))}
+    return text.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)(jpe?g|gif|png)/, 'gi'))
+}
