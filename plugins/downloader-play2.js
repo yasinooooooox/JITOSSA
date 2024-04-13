@@ -18,7 +18,7 @@ var handler = async (m, { conn, command, text, usedPrefix }) => {
   let wm = 'R'; // علامة المائية
 
   // إعداد الرسالة لإرسال معلومات الفيديو
-  let captvid = `╭──── 〔 Y O U T U B E 〕 ─⬣
+  let captvid = `╭──── 〔 JITOSSA SONG 〕 ─⬣
   ⬡ العنوان: ${title}
   ⬡ المدة: ${timestamp}
   ⬡ المشاهدات: ${views}
