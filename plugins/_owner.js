@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 let handler = async (m, { conn, usedPrefix, text, args, command }) => {
-    let teks = "ها هو مالكي >\\<";
+    let teks = "* *التواصل مع مطور البوت*\n\n *إنستجرام*\nwww.instagram.com/ovmar_1\n\n *واتساب*\n wa.me/212670941551\n\n *تيليجرام*\n t.me/Jinkx7 \n\n _®OMAR CHARAF_";
     await conn.sendMessage(
         m.chat,
         {
