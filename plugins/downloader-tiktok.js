@@ -1,21 +1,49 @@
-import { tiktok } from '../lib/tiktok.js'
+let { tiktok2 } = require('../lib/scrape.js'); // استيراد دالة tiktok2 من ملف scrape.js
 
-let handler = async(m, { conn, args, usedPrefix, command }) => {
-    if (!args[0]) return m.reply(`Masukan URL!\n\nContoh:\n${usedPrefix + command} https://vt.tiktok.com/ZS8oHC5Ka/`)
-    if (!/^http(s)?:\/\/(www|v(t|m)).tiktok.com\/[-a-zA-Z0-9@:%._+~#=]/i.test(args[0])) return m.reply('Invalid urls')
-    await m.reply('_In Progress Please Wait..._')
-    let { nickname, duration, description, play, music } = await tiktok(args[0])
-    let caption = `
-Nickname : ${nickname}
-Duration : ${duration}
+let handler = async (m, { conn, text, args, usedPrefix, command }) => {
+  if (!text) { // إذا لم يتم تحديد رابط TikTok
+    conn.sendPresenceUpdate("composing", m.chat); // إرسال إشعار "يكتب" للمستخدم
+    return conn.reply(m.chat, `• *مثال:* ${usedPrefix + command} https://vm.tiktok.com/xxxxx`, m); // إرسال رسالة مع توضيح المثال
+  }
+  if (!text.match(/tiktok/gi)) { // إذا لم يكن الرابط من TikTok
+    return conn.reply(m.chat, 'تأكد من أن الرابط هو من TikTok', m); // إرسال رسالة تحذير بشأن رابط غير صالح
+  }
+  conn.sendMessage(m.chat, { // إرسال رسالة "يكتب" مع الرمز الزمني
+    react: {
+      text: '🕒',
+      key: m.key,
+    }
+  });
+  try {
+    let old = new Date(); // حفظ الزمن الحالي
+    let p = await tiktok2(`${text}`); // تنزيل مقطع الفيديو من TikTok
+    let kemii = `乂  *T I K T O K*\n\n`; // إعداد الرسالة
+    kemii += `┌  ◦ *العنوان* : ${p.title}\n`; // إضافة عنوان المقطع
+    kemii += `└  ◦ *الوقت* : ${((new Date - old) * 1)} ms\n\n`; // حساب الوقت المستغرق للتنزيل
+    kemii += `ᴋɪᴋᴜ - ᴡᴀʙᴏᴛ ᴍᴀᴅᴇ ʙʏ ᴛᴀᴋᴀꜱʜɪ ᴋᴇᴍɪɪ`; // إضافة معلومات إضافية
+    await conn.sendFile(m.chat, p.no_watermark, 'tiktok.mp4', kemii, m); // إرسال مقطع الفيديو
+    conn.sendMessage(m.chat, { // إرسال رسالة "تم" مع الرمز الزمني
+      react: {
+        text: '✅',
+        key: m.key,
+      }
+    });
+   } catch (e) { // في حالة حدوث خطأ أثناء التنفيذ
+    console.log(e); // إظهار الخطأ في وحدة التحكم
+    conn.sendMessage(m.chat, { // إرسال رسالة "فشل" مع الرمز الزمني
+      react: {
+        text: '🍉',
+        key: m.key,
+      }
+    });
+  }
 
-${description}
-`.trim()
-    let video = await conn.sendFile(m.chat, play, false, caption, m)
-    await conn.sendFile(m.chat, music, false, false, video, false, { mimetype: 'audio/mpeg' })
- }
-handler.help = ['tiktok']
-handler.tags = ['downloader']
-handler.command = /^(tiktok|tiktok(mp3|mp4|video|audio)|tt|tt(mp3|mp4|video|audio))$/i
-handler.limit = true
-export default handler
+};
+
+handler.help = ['tiktok'].map(v => v + ' *<رابط>*'); // المساعدة للأمر
+handler.tags = ['downloader']; // الوسوم المرتبطة بالأمر
+handler.command = /^(tiktok|tt|tiktokdl|tiktoknowm)$/i; // الأمر لتنشيط الدالة
+handler.limit = false; // تعطيل الحد الأقصى للاستخدام
+handler.group = false; // تعيين الأمر للمحادثات الخاصة
+
+module.exports = handler; // تصدير الدالة handler
