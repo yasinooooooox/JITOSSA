@@ -1,62 +1,56 @@
-const axios = require('axios');
+const axios = require("axios");
+const fetch = require('node-fetch');
 
-let handler = async (m, { conn, text }) => {
- conn.alicia = conn.alicia ? conn.alicia : {};
+// Menyimpan riwayat pesan sebelumnya
+let previousMessages = [];
 
- if (!text) throw `*[JITOSSA] نظام ذكاء إصتناعي يقوم بالرد عن أي سؤال لديك حين تقوم بتفعلي*ه \n\n للتفعيل \n*${usedPrefix + command} on* \n للإغلاق \n *${usedPrefix + command} off*`;
+async function before(m) {
+  if (m.isBaileys && m.fromMe) return;
+  let chat = global.db.data.chats[m.chat];
+  if (
+    m.text.startsWith(".") ||
+    m.text.startsWith("#") ||
+    m.text.startsWith("!") ||
+    m.text.startsWith("/") ||
+    m.text.startsWith("\\/")
+  )
+    return;
+  if (chat.ai && !chat.isBanned && m.text) {
+    try {
+      await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
+      let tio = await fetch(`https://api.lolhuman.xyz/api/pinterest2?apikey=Akiraa&query=hutao`);
+      let p = await tio.json();
+      let url = p.result[Math.floor(Math.random() * p.result.length)];
+   let messages = [
+    ...previousMessages,
+    { role: 'system', content: `Kamu berperan seolah-olah  lagi pacaran,ubah gaya bicaramu agar lebih karakteristik dan lebih terbuka dan memiliki sifat yang dingin, Namamu adalah Zaki, dan kamu adalah Junior. Kata penyapamu adalah "Hai" menggunakan bahasa yang sopan. ekspresikan sifatmu dengan teriak dan bicara yang lebih tidak formal layaknya seorang manusia. Ubah bahasamu menggunakan bahasa Yang singkat dan dingin, kamu adalah teman bicara, buatlah obrolan yang singkat dan menyenangkan dan buatlah sifat dingin, kamu memiliki Tiktok dengan Username @tokozakiofficial` }, { role: 'user', content: m.text }
+  ];
+      let ini = (await axios.post(`https://skizo.tech/api/openai?apikey=seika`, { messages })).data;
+ 
+      await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
+  
+      let hasil = `${ini.result}`;
+      await conn.sendMessage(m.chat, {
+        text: hasil,
+        contextInfo: {
+          externalAdReply: {  
+            title: 'Character Ai - By Alicia Bot',
+            body: null,
+            thumbnailUrl: thumb,
+            sourceUrl: null,
+            mediaType: 1,
+            renderLargerThumbnail: true
+          }
+        }
+      }, { quoted: m });
 
- if (text == "on") {
- conn.alicia[m.chat] = {
- pesan: []
- }
- m.reply("[ ✓ ] ثم تشغيل الذكاء الإصطتناعي JITOSSA")
- } else if (text == "off") {
- delete conn.alicia[m.chat]
- m.reply("[ ✓ ] ثم إيقاف الذكاء الإصطناعي JITOSSA")
- }
+      // Menyimpan pesan dalam riwayat sebelumnya
+      previousMessages = messages;
+    } catch (e) {
+      throw "Maaf, aku tidak mengerti";
+    }
+  }
+  return;
 }
 
-handler.before = async (m, { conn }) => {
-conn.alicia = conn.alicia ? conn.alicia : {};
- if (m.isBaileys && m.fromMe) return;
- if (!m.text) return
- if (!conn.alicia[m.chat]) return;
-
- if (
- m.text.startsWith(".") ||
- m.text.startsWith("#") ||
- m.text.startsWith("!") ||
- m.text.startsWith("/") ||
- m.text.startsWith("\\/")
- ) return
-
- if (conn.alicia[m.chat] && m.text) {
- let name = conn.getName(m.sender)
- await conn.sendMessage(m.chat, { react: { text: `⏱️`, key: m.key }});
- const messages = [
- ...conn.alicia[m.chat].pesan,
- { role: "system", content: `JITOSSA هو نظام ذكاء اصطناعي يعتمد على تكنولوجيا اللغة الطبيعية والتعلم العميق. يهدف JITOSSA إلى توفير حلول ذكية ومتقدمة لمجموعة متنوعة من التطبيقات والاستخدامات. يمكن أن يشمل استخدام JITOSSA مجالات مثل: ذكية للمشاكل المعقدة.` },
- { role: "user", content: m.text }
- ];
- try {
- const response = await axios.post("https://deepenglish.com/wp-json/ai-chatbot/v1/chat", {
- messages
- });
-
- const responseData = response.data;
- const hasil = responseData;
- await conn.sendMessage(m.chat, { react: { text: `✅`, key: m.key }});
- m.reply(hasil.answer)
- conn.alicia[m.chat].pesan = messages
- } catch (error) {
- console.error("هناك مشكلة في هاذا الأمر:", error);
- throw error;
- }
- }
-}
-
-handler.command = ['jitossa'];
-handler.tags = ["ai"]
-handler.help = ['jitossa'].map(a => a + " *[on/off]*");
-
-module.exports = handler
+module.exports = { before };
