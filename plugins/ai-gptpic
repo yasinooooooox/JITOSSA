@@ -1,0 +1,57 @@
+import fetch from "node-fetch"; // استيراد مكتبة fetch لإجراء طلبات HTTP
+
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+    let text;
+    if (args.length >= 1) {
+        text = args.slice(0).join(" ");
+    } else if (m.quoted && m.quoted.text) {
+        text = m.quoted.text;
+    } else throw "الرجاء إدخال نص للحصول على الصورة التى تحتاجها \n\n مثال الإستخدام \n ${usedPrefix + command} man";
+
+    await m.reply(wait);
+
+    try {
+        let data = await generateImage(text);
+        if (data && data.imgs.length > 0) {
+            for (let i = 0; i < data.imgs.length; i++) {
+                await conn.sendFile(m.chat, data.imgs[i], '', `▢ *تابعني على إنستجرام* \n\n _*instagram.com/ovmar_1*_`, m, false, {
+                    mentions: [m.sender]
+                });
+            }
+        }
+    } catch (e) {
+        await m.reply("حدث خطأ");
+    }
+}
+
+handler.help = ["gptpic"]; // وصف الأمر
+handler.tags = ["drawing"]; // الوسوم المرتبطة بالأمر
+handler.command = /^(gptpic)$/i; // الأوامر التي يتم استخدامها لاستدعاء الأمر
+
+export default handler; // تصدير الأمر
+
+/* New Line */
+async function generateImage(captionInput) {
+    const data = {
+        captionInput,
+        captionModel: "default"
+    };
+
+    const url = 'https://chat-gpt.pictures/api/generateImage'; // رابط الخدمة
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json(); // تحويل الرد إلى JSON
+        return result; // إرجاع النتيجة
+    } catch (error) {
+        console.error("Error:", error); // إظهار رسالة الخطأ في حالة حدوث خطأ
+        throw error; // رمي الخطأ للتعامل معه خارج الدالة
+    }
+}
