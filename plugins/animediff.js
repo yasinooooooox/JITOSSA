@@ -1,24 +1,24 @@
-const fetch = require('node-fetch');
 
-const handler = async (m, { text }) => {
-  if (!text) return conn.reply(m.chat, '*Example*: .animediff a girl', m);
-  
-  conn.sendMessage(m.chat, {
-    react: {
-      text: '🕒',
-      key: m.key,
+import fetch from "node-fetch"
+
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+        let wm = global.me
+        if (!text) throw `*هاذا الأمر يقوم بتوليد صور أنمي*\n\nمثال للإستخدام\n${ usedPrefix + command } 1girl, blush, megane, school uniform`
+        await m.reply(waittt)
+        await conn.relayMessage(m.chat, { reactionMessage: { key: m.key, text: '⌛'  }}, { messageId: m.key.id })
+        try {
+        let ff = await fetch(`https://api.neoxr.eu/api/waifudiff?q=${text}`)
+        let anu = await ff.json()
+        await conn.sendFile(m.chat, anu.data.url, 'JITOSSA.jpg', '▢ *🥰 تابعني على إنستجرام*\n\n _*instagram.com/ovmar_1*_', m)
+        m.react('🎐')
+      } catch (e) {
+        console.log(e)
+        m.reply(eror)
+      }
     }
-  });
 
-  let url = `https://itzpire.site/ai/animediff?prompt=${encodeURIComponent(text)}&model=animeGen`;
-  let image = (await (await fetch(url)).buffer()).toString('base64');
-  conn.sendFile(m.chat, `data:image/jpeg;base64,${image}`, 'freefire.jpg',  `*Prompt:* ${text}`, m);
-};
+handler.help = ['animediff <text>']
+handler.tags = ['ai']
+handler.command = /^(animediff)$/i
 
-handler.help = ['animediff *qᴜᴇʀʏ*'];
-handler.tags = ["ai"];
-handler.command = /^animediff$/i;
-handler.register = true;
-handler.limit = true;
-
-module.exports = handler;
+export default handler
