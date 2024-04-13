@@ -1,15 +1,39 @@
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-if (!text) return m.reply(`توليد الصورة الكرتونية قم بإنشاء الكثير من الصور عبر عقلك \n مثال: *${usedPrefix + command}* 1girl, solo, ponytail, blush.`)
-await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
+import fetch from "node-fetch";
+
+let handler = async (m, { conn, usedPrefix, text, command }) => {
+    if (!text) return m.reply("_*الرجاء إدخال النص.*_\n\n مثال الإستخدام\n ${usedPrefix + command} women with cat,");
+    
+    conn.animedif = conn.animedif ? conn.animedif : {};
+
+    if (m.sender in conn.animedif)
+        throw "هناك عملية قيد المعالجة، يرجى الانتظار >//<";
+    else
+        conn.animedif[m.sender] = true;
+
     try {
-let data = (`https://api.yanzbotz.my.id/api/text2img/neima?prompt=${text}`)
-conn.sendFile(m.chat, data,"apa", '_متابعة في حسابي الإنستجرام ❤️_\n www.instagram.com/ovmar_1', m)
-	} catch (e) {
-		m.reply(error);
-	}
+        m.reply(waittt);
+        
+        const res = await fetch(
+            global.API("rose", "/image/anime/diffusion", { prompt: text }, "apikey")
+        );
+
+        if (!res.ok) throw "خطأ في الخادم :(";
+
+        const Data = await res.arrayBuffer();
+
+        conn.sendMessage(m.chat, { image : { url : Data }, caption : `النص: ${text}` }, m)
+    } catch (error) {
+        m.reply("خطأ في الخادم :(");
+    } finally {
+        if (conn.animedif[m.sender]) {
+            delete conn.animedif[m.sender];
+        }
+    }
 };
-handler.help = ["animediff"]
-handler.tags = ["drawing"]
-handler.command = ["animediff"]
-handler.register = true
-export default handler
+
+handler.help = ["animedif", "chara"];
+handler.tags = ["ai"];
+handler.command = ["animedif", "chara"];
+handler.premium = true;
+
+export default handler;
