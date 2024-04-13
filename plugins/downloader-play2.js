@@ -1,55 +1,81 @@
-import fs from 'fs';
-import fetch from 'node-fetch';
+import ytdl from 'ytdl-core'; // استيراد ytdl-core لتنزيل مقاطع الفيديو من YouTube
+import yts from 'yt-search'; // استيراد yt-search للبحث عن مقاطع الفيديو على YouTube
+import fs from 'fs'; // استيراد fs لعمليات نظام الملفات
+import { pipeline } from 'stream'; // استيراد pipeline من وحدة stream لمعالجة التدفق
+import { promisify } from 'util'; // استيراد promisify من وحدة util لتحويل الدوال المعتمدة على الرد إلى دوال تعتمد على الوعد
 
-let handler = async (m, { command, conn, text }) => {
-    if (!text) throw `[❗INFO❗] أدخل اسم الأغنية التي تريد البحث عنها\n\n*—◉ مثال:\n#play.1 Good Feeling - Flo Rida*`; // إعلام المستخدم بإدخال اسم الأغنية بالإنجليزية
+const streamPipeline = promisify(pipeline); // تحويل الدالة pipeline إلى وعد لمعالجة التدفق
 
-    try {
-        if (command == 'play.1') { // إذا كان الأمر 'play.1'
-            conn.reply(m.chat, `*_⏳ انتظر.._⏳*`, m, { // إعلام المستخدم بالانتظار بالإنجليزية
-                contextInfo: {
-                    externalAdReply: {
-                        mediaUrl: sig, // يفترض أن تكون sig معرفة في مكان ما
-                        mediaType: 1,
-                        description: null,
-                        title: 'AUDIO',
-                        body: global.wm,
-                        previewType: 0,
-                        thumbnail: fs.readFileSync("./thumbnail.jpg"),
-                        sourceUrl: sgh // يفترض أن تكون sgh معرفة في مكان ما
-                    }
-                }
-            });
-            let res = await fetch(`https://api.dhamzxploit.my.id/api/ytplaymp3?text=${text}`);
-            let json = await res.json();
-            conn.sendFile(m.chat, json.result.url, 'error.mp3', wm, m, null, adReply); // يفترض أن تكون wm و adReply معرفتين في مكان ما
-        }
+var handler = async (m, { conn, command, text, usedPrefix }) => {
+  if (!text) throw `استخدم المثال ${usedPrefix}${command} naruto blue bird`; // إذا لم يتم تحديد الاستعلام، رمي خطأ
 
-        if (command == 'play.2') { // إذا كان الأمر 'play.2'
-            conn.reply(m.chat, `*_⏳ انتظر..⏳_*`, m, { // إعلام المستخدم بالانتظار بالإنجليزية
-                contextInfo: {
-                    externalAdReply: {
-                        mediaUrl: sig, // يفترض أن تكون sig معرفة في مكان ما
-                        mediaType: 1,
-                        description: null,
-                        title: 'VIDEO',
-                        body: global.wm,
-                        previewType: 0,
-                        thumbnail: fs.readFileSync("./thumbnail.jpg"),
-                        sourceUrl: `https://github.com/AyGemuy`
-                    }
-                }
-            });
-            let res = await fetch(`https://api.dhamzxploit.my.id/api/ytplaymp4?text=${text}`);
-            let json = await res.json();
-            conn.sendFile(m.chat, json.result.url, '', `*R E S U L T*`, m);
-        }
-    } catch (e) {
-        m.reply('*[❗INFO❗] خطأ، لا يمكن العثور على الأغنية*'); // إخطار المستخدم بوجود خطأ
-        console.log(e);
+  let search = await yts(text); // البحث عن الفيديو باستخدام الاستعلام المعطى
+  let vid = search.videos[0]; // الحصول على أول نتيجة للفيديو
+  if (!search) throw 'الفيديو غير موجود، جرب عنوانًا آخر'; // إذا لم يتم العثور على نتائج، رمي خطأ
+
+  // استخراج معلومات الفيديو
+  let { title, thumbnail, timestamp, views, ago, url } = vid;
+  let wm = 'R'; // علامة المائية
+
+  // إعداد الرسالة لإرسال معلومات الفيديو
+  let captvid = `╭──── 〔 Y O U T U B E 〕 ─⬣
+  ⬡ العنوان: ${title}
+  ⬡ المدة: ${timestamp}
+  ⬡ المشاهدات: ${views}
+  ⬡ التحميل: ${ago}
+  ⬡ الرابط: ${url}
+╰────────⬣`;
+
+  // إرسال الصورة المصغرة ومعلومات الفيديو كرسالة
+  conn.sendMessage(m.chat, { image: { url: thumbnail }, caption: captvid, viewOnce: false, footer: author }, { quoted: m });
+
+  // تنزيل الصوت من الفيديو
+  const audioStream = ytdl(url, {
+    filter: 'audioonly', // تحديد تنزيل الصوت فقط
+    quality: 'highestaudio', // جودة الصوت المراد تنزيله
+  });
+
+  // إنشاء تدفق كتابي لحفظ ملف الصوت
+  const writableStream = fs.createWriteStream(`./tmp/${title}.mp3`);
+
+  // بدء عملية التنزيل
+  await streamPipeline(audioStream, writableStream);
+  
+  // إعداد الرسالة لإرسال ملف الصوت
+  let doc = {
+    audio: {
+      url: `./tmp/${title}.mp3` // رابط ملف الصوت
+    },
+    mimetype: 'audio/mp4', // نوع الملف
+    fileName: `${title}`, // اسم الملف
+    contextInfo: {
+      externalAdReply: {
+        showAdAttribution: true,
+        mediaType: 2,
+        mediaUrl: url,
+        title: title,
+        body: wm,
+        sourceUrl: url,
+        thumbnail: await (await conn.getFile(thumbnail)).data
+      }
     }
-}
-handler.help = ['play.1', 'play.2'].map(v => v + ' <text>'); // تعليمات الأمر باللغة الإنجليزية
-handler.tags = ['downloader']; // وسم المنزلق للتنزيل
-handler.command = ['play.1', 'play.2']; // الأوامر المقبولة
-export default handler;
+  };
+
+  // إرسال ملف الصوت
+  await conn.sendMessage(m.chat, doc, { quoted: m });
+
+  // حذف ملف الصوت المؤقت بعد الإرسال
+  fs.unlink(`./tmp/${title}.mp3`, (err) => {
+    if (err) {
+      console.error(`فشل في حذف ملف الصوت: ${err}`);
+    } else {
+      console.log(`تم حذف ملف الصوت: ./tmp/${title}.mp3`);
+    }
+  });
+};
+
+handler.help = ['play2'].map((v) => v + ' <query>'); // رسالة المساعدة
+handler.tags = ['downloader']; // الوسوم المرتبطة بالدالة
+handler.command = /^(play2|song2|lagu2|music2)$/i; // الأمر لتنشيط الدالة
+
+export default handler; // تصدير الدالة handler
