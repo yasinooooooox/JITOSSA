@@ -1,39 +1,24 @@
-import fetch from "node-fetch";
+const fetch = require('node-fetch');
 
-let handler = async (m, { conn, usedPrefix, text, command }) => {
-    if (!text) return m.reply("_*الرجاء إدخال النص.*_\n\n مثال الإستخدام\n ${usedPrefix + command} women with cat,");
-    
-    conn.animedif = conn.animedif ? conn.animedif : {};
-
-    if (m.sender in conn.animedif)
-        throw "هناك عملية قيد المعالجة، يرجى الانتظار >//<";
-    else
-        conn.animedif[m.sender] = true;
-
-    try {
-        m.reply(waittt);
-        
-        const res = await fetch(
-            global.API("rose", "/image/anime/diffusion", { prompt: text }, "apikey")
-        );
-
-        if (!res.ok) throw "خطأ في الخادم :(";
-
-        const Data = await res.arrayBuffer();
-
-        conn.sendMessage(m.chat, { image : { url : Data }, caption : `النص: ${text}` }, m)
-    } catch (error) {
-        m.reply("خطأ في الخادم :(");
-    } finally {
-        if (conn.animedif[m.sender]) {
-            delete conn.animedif[m.sender];
-        }
+const handler = async (m, { text }) => {
+  if (!text) return conn.reply(m.chat, '*Example*: .animediff a girl', m);
+  
+  conn.sendMessage(m.chat, {
+    react: {
+      text: '🕒',
+      key: m.key,
     }
+  });
+
+  let url = `https://itzpire.site/ai/animediff?prompt=${encodeURIComponent(text)}&model=animeGen`;
+  let image = (await (await fetch(url)).buffer()).toString('base64');
+  conn.sendFile(m.chat, `data:image/jpeg;base64,${image}`, 'freefire.jpg',  `*Prompt:* ${text}`, m);
 };
 
-handler.help = ["animedif", "chara"];
+handler.help = ['animediff *qᴜᴇʀʏ*'];
 handler.tags = ["ai"];
-handler.command = ["animedif", "chara"];
-handler.premium = true;
+handler.command = /^animediff$/i;
+handler.register = true;
+handler.limit = true;
 
-export default handler;
+module.exports = handler;
