@@ -1,22 +1,17 @@
-let fetch = require('node-fetch')
-
-let handler = async (m, { conn, text, command }) => {
-  conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key }})
-  let kemii = await fetch(`https://skizo.tech/api/tttrending?region=ID&apikey=${global.xzn}`)
-  let res = await kemii.json()
-  let salsa = `乂  *TIKTOK - TRENDING*
- 
-	◦  *Title :* ${res.title}
-	◦  *Views :* ${res.play_count}
-	◦  *Author :* ${res.author.nickname}
-	
-ᴋɪᴋᴜ - ᴡᴀʙᴏᴛ ᴍᴀᴅᴇ ʙʏ ᴛᴀᴋᴀꜱʜɪ ᴋᴇᴍɪɪ`
-  conn.sendFile(m.chat, res.play, 'tiktokt.mp4', salsa, m)
+const { tiktokdl, tiktokdlv2 } = require('@bochilteam/scraper')
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+    if (!args[0]) throw `Use example ${usedPrefix}${command} https://www.tiktok.com/@omagadsus/video/7025456384175017243`
+    const { author: { nickname }, video, description } = await tiktokdl(args[0]).catch(async _ => await tiktokdlv2(args[0]))
+    const url = video.no_watermark || video.no_watermark_hd || video.with_watermark || video.no_watermark_raw
+    if (!url) throw 'Can\'t download video!'
+    conn.sendFile(m.chat, url, 'tiktok.mp4', `
+🔗 *Url:* ${url}
+🧏 *Nickname:* ${nickname}${description ? `🖹 *Description:* ${description}` : ''}
+`.trim(), m)
 }
-handler.help = ['tiktoktrending']
+handler.help = ['tiktok'].map(v => v + ' <url>')
 handler.tags = ['downloader']
 
-handler.command = /^tiktokt|tiktoktrending|tttrending$/i
-handler.premium = false
+handler.command = /^(tik(tok)?(dl)?)$/i
 
 module.exports = handler
