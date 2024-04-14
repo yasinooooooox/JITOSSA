@@ -9,7 +9,7 @@ let handler = async (m, {
     let text
     if (m.quoted && m.quoted.text) {
         text = m.quoted.text
-    } else return m.reply("Reply code yang mau di transform.\n*Example:*\n" + usedPrefix + command + " py js")
+    } else return m.reply("رد على الكود الذي ترغب في تحويله.\n*مثال:*\n" + usedPrefix + command + " py js")
     await m.reply(wait)
     try {
         let res = await TranslateCode(text)
@@ -19,7 +19,7 @@ let handler = async (m, {
     }
 }
 handler.help = ["transcode"]
-handler.tags = ["internet"]
+handler.tags = ["tools"]
 handler.command = /^(transcode)$/i
 
 export default handler
@@ -29,12 +29,12 @@ async function TranslateCode(code, fromlang, tolang) {
     try {
         const response = await fetch(`https://api.yanzbotz.my.id/api/ai/codetranslator?code=${code}&fromlang=${fromlang}&tolang=${tolang}`);
         if (!response.ok) {
-            throw new Error('Network response was not OK');
+            throw new Error('استجابة الشبكة لم تكن جيدة');
         }
         const data = await response.json();
         return data.result;
     } catch (error) {
-        console.error('Error:', error);
+        console.error('خطأ:', error);
         throw error;
     }
 }
