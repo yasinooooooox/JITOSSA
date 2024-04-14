@@ -11,7 +11,7 @@ var handler = async (m, { conn, usedPrefix }) => {
 }
 
 handler.tags = ['info']; // وسم يدل على نوعية الأمر
-handler.help = ['script']; // وصف الأمر
+handler.help = ['owner']; // وصف الأمر
 handler.command = ['sc', 'script', 'codigo', 'git', 'github']; // الأوامر التي يتم استخدامها لاستدعاء الأمر
 
 handler.register = true; // تفعيل تسجيل الأمر ليظهر في قائمة المساعد
