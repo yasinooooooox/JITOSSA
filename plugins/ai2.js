@@ -6,9 +6,9 @@ let handler = async (m, { conn, usedPrefix, command, text }) => {
   let data = await anu.json()
   m.reply(data.result)
   }
-handler.help = ['openai']
+handler.help = ['openai2']
 handler.tags = ['ai']
-handler.command = /^(ai|openai|gpt)$/i
-handler.limit = true
+handler.command = /^(ai2|openai2|gpt2)$/i
+handler.limit = false
 
 export default handler
