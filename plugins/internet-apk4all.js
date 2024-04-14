@@ -20,7 +20,7 @@ let handler = async (m, {
     if (lister.includes(feature)) {
 
         if (feature == "search") {
-            if (!inputs) return m.reply("Input query link\nExample: .apk4all search|vpn")
+            if (!inputs) return m.reply("تنزيل التطبيقات\n مثال الإستعمال: .apk4all search|vpn")
             await m.reply(wait)
             try {
                 let res = await searchApk4all(inputs)
