@@ -30,7 +30,7 @@ let handler = async (m, {
     }
 }
 handler.help = ["wallpapers"]
-handler.tags = ["internet"]
+handler.tags = ["search"]
 handler.command = /^wallpapers$/i
 
 export default handler
