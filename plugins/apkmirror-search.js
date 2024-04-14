@@ -7,7 +7,7 @@ let handler = async (m, {
     text
 }) => {
     await m.reply(wait)
-    if (!text) return m.reply("input query apkmirror?")
+    if (!text) return m.reply("اسم التطبيق الذي تريد البحث عنه")
     try {
         let res = await SearchApk(text)
         let list = res.map((item, index) => `
