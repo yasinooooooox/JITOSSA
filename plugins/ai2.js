@@ -1,11 +1,14 @@
-import fetch from 'node-fetch'
-let handler = async (m, { text,  usedPrefix,  command }) => {
-    if (!text) throw `Mau Nanya Apa???`
-let zeltoria = await fetch(`https://api.botcahx.live/api/search/openai-chat?text=${text}&apikey=AXreaUg6`)
-let hasil = await zeltoria.json()
- m.reply(`${hasil.message}`.trim())
-    }  
-handler.help = ['ai2', 'openai2']
+import fetch from "node-fetch";
+
+let handler = async (m, { conn, usedPrefix, command, text }) => {
+  if (!text) throw 'Example: .ai how are you'
+  let anu = await fetch(`https://aemt.me/openai?text=${text}`)
+  let data = await anu.json()
+  m.reply(data.result)
+  }
+handler.help = ['openai']
 handler.tags = ['ai']
-handler.command = /^(ai2|yae2|openai2)$/i
+handler.command = /^(ai|openai|gpt)$/i
+handler.limit = true
+
 export default handler
