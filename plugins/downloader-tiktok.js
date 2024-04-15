@@ -1,25 +1,26 @@
+
 import axios from 'axios';
 import cheerio from 'cheerio';
 
 var handler = async (m, { conn, args }) => {
   if (!args[0]) {
-    throw '*التنزيل من تيكتوك حاول أن ترسل رابط الفيديو مع الأمر* \n\n ${usedPrefix + command} https://vm.tiktok.com/ZMMQyMejw/';
+    throw 'أين الرابط الخاص بالفيديو Tiktok';
   }
 
   try {
-    await conn.replym(wait);
+    await conn.reply(m.chat, 'جاري تنزيل الفيديو من سيرفراتنا \n _تابعني على إنستجرام 🥰_ \n www.instagram.com/ovmar_1', m);
 
     const { thumbnail, video, audio } = await tiktokdl(args[0]);
     const url = video;
 
     if (!url) {
-      throw 'لايمكن تنزيل هاذا الفيديو أسفة 🙁';
+      throw 'لايمكن تحميل الفيديو أسفة 😄';
     }
 
     await conn.sendMessage(m.chat, { video: { url: url } }, m);
-    await conn.reply(m.chat, '*ثم تلبية طلبك لماذا لاتتابعني على إنستجرام* \n _*instagram.com/ovmar_1*_', m);
+    await conn.reply(m.chat, '_تابعني على إنستجرام 🥰_ \n www.instagram.com/ovmar_1', m);
   } catch (error) {
-    conn.reply(m.chat, `أسفة حاول لاحقا 🙁 : ${error}`, m);
+    conn.reply(m.chat, `Error : ${error}`, m);
   }
 };
 
@@ -31,7 +32,7 @@ export default handler;
 
 async function tiktokdl(url) {
   if (!/tiktok/.test(url)) {
-    throw 'Invalid TikTok URL!';
+    throw 'الرابط غير صحيح حاول برابط جديد 😆';
   }
 
   const gettoken = await axios.get('https://tikdown.org/id');
