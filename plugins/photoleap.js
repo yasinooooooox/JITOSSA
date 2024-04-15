@@ -6,7 +6,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
         text = args.slice(0).join(" ")
     } else if (m.quoted && m.quoted.text) {
         text = m.quoted.text
-    } else throw "الرجاء إدخال النص لتوليد الصورة التي تريد \\n - ${usedPrefix + command} WOMEN WITH CAT"
+    } else throw "الرجاء إدخال النص لتوليد الصورة التي تريد \n\nمثال الإستخدام\n.photoleao WOMEN WITH CAT"
 
     await m.reply(wait)
 
