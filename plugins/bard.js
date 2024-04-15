@@ -1,17 +1,28 @@
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw `*• مثال:* ${usedPrefix + command} مرحبًا`
-m.reply(wait) // الرد برسالة انتظار
+import fetch from 'node-fetch'
+
+var handler = async (m, { text,  usedPrefix, command }) => {
+
+if (!text) throw `انا   bard
+مساعدك الذكي اطرح اي سؤال وسوف اجيبك مثال:
+*.bard* ما هي الجنة  `
 
 try {
-let gpt = await (await fetch(`https://itzpire.site/ai/bard-ai?q={text}`)).json() // إجراء استعلام إلى Bard AI
-m.reply("*[ sɪsᴋᴀ - ᴀɪ ]* " + '\n' + gpt.result) // إرسال الرد من Bard AI
- } catch(e) {
- throw "`*Gpt لم يستجب*`" // رمي خطأ في حالة عدم استجابة Bard AI
-}
+
+await m.reply(waitt)
+var apii = await fetch(`https://aemt.me/bard?text=${text}`)
+var res = await apii.json()
+await m.reply(res.result)
+
+} catch (error) {
+console.error(error)
+throw '*وقع خطأ حاول لاحقا*'
 }
 
-handler.help = ["bard"].map(a => a + " *[السؤال]*") // المساعدة للأمر
-handler.tags = ["ai"] // الوسوم المرتبطة بالأمر
-handler.command = ["bard"] // الأمر المستخدم لتنشيط الدالة
+}
+handler.command = ['bard']
+handler.help = ['bard']
+handler.tags = ['ai']
 
-module.exports = handler // تصدير الدالة handler
+handler.premium = false
+
+export default handler
