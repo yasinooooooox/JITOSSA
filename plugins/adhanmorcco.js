@@ -1,4 +1,4 @@
-export async function before(m) {
+/*export async function before(m) {
     // إعدادات الأوتوماتيكية للصلاة
     this.autosholat = this.autosholat ? this.autosholat : {}
     // تحديد الشخص المذكور في الرسالة
@@ -50,4 +50,4 @@ export async function before(m) {
         }
     }
 }
-export const disabled = false
+export const disabled = false*/
