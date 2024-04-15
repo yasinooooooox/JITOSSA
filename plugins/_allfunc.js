@@ -6,7 +6,7 @@ ini wm gw cok jan di hapus
 */
 
 
-import axios from 'axios'
+/*import axios from 'axios'
 let handler = m => m
 handler.all = async function (m) {
 
