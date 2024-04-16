@@ -35,7 +35,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 				let q = m.quoted ? m.quoted : m;
 				let mime = (q.msg || q).mimetype || q.mediaType || "";
 				if (!mime)
-					throw `photo?`;
+					throw `*زيادة جودة الصورة من عادية الى HD*\n\n مثال الإستخدام \n .hdr + رد على الصورة بهاذا الامر`;
 				if (!/image\/(jpe?g|png)/.test(mime))
 					throw `Mime ${mime} tidak support`;
 				else conn.recolor[m.sender] = true;
@@ -44,7 +44,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 				let error;
 				try {
 					const This = await processing(img, "recolor");
-					conn.sendFile(m.chat, This, "", "*تابع صانع البوت فى إنستجرام ❤️* \n https://www.instagram.com/ovmar_1", m);
+					conn.sendFile(m.chat, This, "", "*تابع صانع البوت فى إنستجرام ❤️* \n www.instagram.com/ovmar_1", m);
 				} catch (er) {
 					error = true;
 				} finally {
@@ -70,7 +70,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 				let error;
 				try {
 					const This = await processing(img, "enhance");
-					conn.sendFile(m.chat, This, "", "*تابع صانع البوت فى إنستجرام ❤️* \n https://www.instagram.com/ovmar_1", m);
+					conn.sendFile(m.chat, This, "", "*تابع صانع البوت فى إنستجرام ❤️* \n www.instagram.com/ovmar_1", m);
 				} catch (er) {
 					error = true;
 				} finally {
