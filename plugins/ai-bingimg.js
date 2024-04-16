@@ -16,7 +16,7 @@ const handler = async (m, {
     } else if (m.quoted && m.quoted.text) {
         text = m.quoted.text;
     } else {
-        throw 'Input teks atau reply teks!';
+        throw '*هاذا الأمر يقوم بتوليد من موقع bing الشهير يتميز بتوليد الصور الجبارة وشبيهة بالحقيقة* \n\n *مثال الإستخدام*\ .bingimg cat with women';
     }
 
     await m.reply(wait);
@@ -44,12 +44,12 @@ const handler = async (m, {
                         }
                     );
                 } catch (error) {
-                    console.error(`Error sending file: ${error.message}`);
-                    await m.reply(`Failed to send image *(${i + 1}/${totalCount})*`);
+                    console.error(`خطأ في إرسال الملف: ${error.message}`);
+                    await m.reply(`خطأ في إرسال الصورة*(${i + 1}/${totalCount})*`);
                 }
             }
         } else {
-            await m.reply('No images found after filtering.');
+            await m.reply('تعذر العثور على ماتريده حاولا لاحقا.');
         }
     } catch (error) {
         try {
@@ -66,12 +66,12 @@ const handler = async (m, {
                     }
                 );
             } catch (error) {
-                console.error(`Error sending file: ${error.message}`);
-                await m.reply(`Failed to send image`);
+                console.error(`خطأ في إرسال الملف: ${error.message}`);
+                await m.reply(`خطأ في توليد الصورة`);
             }
         } catch (error) {
-            console.error(`Error in handler: ${error.message}`);
-            await m.reply('An error occurred while processing the request.');
+            console.error(`حدث خطأ: ${error.message}`);
+            await m.reply('خطأ في تحميل الطلب وتوليده حاول لاحقا 🤵🏻.');
         }
     }
 };
