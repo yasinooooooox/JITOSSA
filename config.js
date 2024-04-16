@@ -8,45 +8,43 @@ import axios from 'axios';
 import moment from 'moment-timezone';
 
 global.botnumber = ""
+global.confirmCode = ""
 
 global.owner = [
-  ['212670941551', 'OMAR ', true],
-  //['212670941551','JITOSSA', true],
- // ['212770579205'],
- // ['212670941551']
+  ['212670941551', 'Omar !', true],
+  ['3197010526407', 'Omar 1', true],
 ];
 
 global.suittag = ['212670941551'];
-global.prems = ['212770579205'];
+global.prems = ['212670941551'];
 
-global.packname = 'Jitossa bot';
-global.author = 'Jitossa';
-global.wm = 'Jitossa';
-global.titulowm = 'Jitossa';
-global.titulowm2 = `Jitossa`
-global.igfg = 'Jitossa';
-global.wait = '_|🧚🏼‍♀️| إنتظر قليلا جارى تلبية طلبك..._\n\n تابع صانع البوت فى إنستجرام ❤️ \n https://www.instagram.com/ovmar_1';
-global.waitt = '_جارى الرد عن سؤالك ..._';
-global.waittt = '_جاري توليد الصورة الخاصة بك ..._';
+global.packname = 'JITOOSA';
+global.author = 'by';
+global.wm = 'JITOSSA';
+global.titulowm = 'JITOSSA';
+global.titulowm2 = `OMAR`
+global.igfg = 'JITISSA';
+global.wait = '> _*جارى إرسال الطلب*_ _🏃🏻‍♀️..._\n\n---------\n*▢ تابعني على إنستجرام 🧚* \n www.instagram.com/ovmar_1';
 
-//global moda
 global.mods = [];
 
 //* *******Tiempo***************
 global.d = new Date(new Date + 3600000);
-global.locale = 'en';
+global.locale = 'es';
 global.dia = d.toLocaleDateString(locale, {weekday: 'long'});
-global.fecha = d.toLocaleDateString('en', {day: 'numeric', month: 'numeric', year: 'numeric'});
-global.mes = d.toLocaleDateString('en', {month: 'long'});
-global.año = d.toLocaleDateString('en', {year: 'numeric'});
+global.fecha = d.toLocaleDateString('es', {day: 'numeric', month: 'numeric', year: 'numeric'});
+global.mes = d.toLocaleDateString('es', {month: 'long'});
+global.año = d.toLocaleDateString('es', {year: 'numeric'});
 global.tiempo = d.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true});
 //* ****************************
-global.wm2 = `${dia} ${fecha}\JITOSSA`;
+global.wm2 = `${dia} ${fecha}\nJITOSSA`;
 global.gt = 'JITOSSA';
-global.mysticbot = 'JITOSSA BOT';
-global.md = 'https://instagram.com/ovmar_1';
-global.mysticbot = 'https://chat.whatsapp.com/K6V9If35p3HAWfUjtEECVt';
-global.nomorown = '212770579205';
+global.mysticbot = 'JITOSSA';
+global.md = 'https://github.com/Omarcharaf1/JITOSSA';
+global.mysticbot = 'https://github.com/omarcharaf1/JITOSSA';
+global.waitt = '|🧞‍♀️| *سوف يتم الإجابة على سؤالك*';
+global.waittt = '|🧚‍♀️| *جاري توليد الصورة الخاصة بك*';
+global.nomorown = '212670941551';
 global.pdoc = ['application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-excel', 'application/msword', 'application/pdf', 'text/rtf'];
 global.cmenut = '❖––––––『';
 global.cmenub = '┊✦ ';
@@ -61,8 +59,8 @@ global.htki = '*⭑•̩̩͙⊱•••• ☪*';
 global.htka = '*☪ ••••̩̩͙⊰•⭑*';
 global.comienzo = '• • ◕◕════';
 global.fin = '════◕◕ • •';
-global.botdate = `*[ 📅 ] Fecha:*  ${moment.tz('America/Mexico_City').format('DD/MM/YY')}`;
-global.bottime = `*[ ⏳ ] Hora:* ${moment.tz('America/Mexico_City').format('HH:mm:ss')}`;
+global.botdate = `*[ 📅 ] Fecha:*  ${moment.tz('Africa/Casablanca').format('DD/MM/YY')}`;
+global.bottime = `*[ ⏳ ] Hora:* ${moment.tz('Africa/Casablanca').format('HH:mm:ss')}`;
 global.fgif = {key: {participant: '0@s.whatsapp.net'}, message: {'videoMessage': {'title': wm, 'h': `Hmm`, 'seconds': '999999999', 'gifPlayback': 'true', 'caption': bottime, 'jpegThumbnail': fs.readFileSync('./Menu.png')}}};
 global.multiplier = 99;
 global.flaaa = [
