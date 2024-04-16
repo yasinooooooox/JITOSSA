@@ -13,7 +13,7 @@ let handler = async (m, {
     args,
     usedPrefix
 }) => {
-    if (!text) throw `تحميل الأغاني \n\n مثال \n *${usedPrefix + command}* LONELY`
+    if (!text) throw `*تحميل الأغاني من منصة يوتوب*\n\n*مثال الإستخدام*\n .play call out my name`
     const combinedRegex = /^(play|ytplay|ytmp3|playmp3|playmp4|ytplaymp4)$/i;
     const isMP3 = combinedRegex.test(command);
 
