@@ -7,8 +7,8 @@ let handler = async (m, { conn, args }) => {
 	let res = await mediafiredl(args[0])
 	let mimetype = await lookup(res.url)
 	delete res.url2
-	m.reply(Object.keys(res).map(v => `*• ${v.capitalize()}:* ${res[v]}`).join('\n') + '\n\n_Sending file..._')
-	conn.sendMessage(m.chat, { document: { url: res.url }, fileName: res.filename, mimetype }, { quoted: m })
+	m.reply(Object.keys(res).map(v => `*• ${v.capitalize()}:* ${res[v]}`).join('\n') + '\n\n_جاري إرسال الملف..._')
+	conn.sendMessage(m.chat, { document: { رابط: res.url }, اسم الملف: res.filename, mimetype }, { quoted: m })
 }
 handler.help = handler.alias = ['mediafire']
 handler.tags = ['downloader']
