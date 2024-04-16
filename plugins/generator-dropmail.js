@@ -16,7 +16,7 @@ let handler = async (m, {
     ]
 
     let [feature, inputs, inputs_, inputs__, inputs___] = text.split(" ")
-    if (!lister.includes(feature)) return m.reply("*Example:*\n" + usedPrefix + command + " create\n\n*Pilih type yg ada*\n" + lister.map((v, index) => "  ○ " + v).join("\n"))
+    if (!lister.includes(feature)) return m.reply("*الأمر يقوم باإستخرام إيميل وهمي مجانا لك*\n\n*مثال الإستخدام*\n ${usedPrefix + command} إنشاء" + lister.map((v, index) => "  ○ " + v).join("\n"))
 
     if (lister.includes(feature)) {
 
@@ -26,7 +26,7 @@ let handler = async (m, {
                 let eml = await random_mail()
                 let timeDiff = new Date(eml[2]) - new Date()
                 conn.dropmail[id] = [
-                    await m.reply("*الإيميل:*\n" + eml[0] + "\n\n" + "*رقم التعريف:*\n" + eml[1] + "\n\n*تاريخ الإنتهاء:*\n" + msToTime(timeDiff) + "\n\n_تححق من *" + usedPrefix + command + " الرسائل*_\n\n *للحصول على رسائلك الجديدة*"),
+                    await m.reply("*الإيميل:*\n" + eml[0] + "\n\n" + "*رقم التعريف:*\n" + eml[1] + "\n\n*تاريخ الإنتهاء:*\n" + msToTime(timeDiff) + "\n\n_تحقق من *" + usedPrefix + command + " الرسائل*_\n\n *للحصول على رسائلك الجديدة*"),
                     eml[0],
                     eml[1],
                     eml[2]
