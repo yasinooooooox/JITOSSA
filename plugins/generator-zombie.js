@@ -17,7 +17,7 @@ let handler = async (m, {
     let q = m.quoted ? m.quoted : m;
     let mime = (q.msg || q).mimetype || '';
     if (!mime) {
-        throw 'رد على الصورة ؟';
+        throw '*رد على الصورة التي تريدها تحويلها إلىزومبي*\n\n *مثال الإستخدام* \n.jadizombie + رد على الصورها بهاذا الأمر';
     }
     let media = await q.download();
 
