@@ -2,7 +2,7 @@ import { lookup } from 'mime-types'
 import { mediafiredl } from '@bochilteam/scraper'
 
 let handler = async (m, { conn, args }) => {
-	if (!args[0]) throw '*خاص بالتحميل من موقع ميديافير المعروف*\n\n قم بكتابة هاذا الأمر .mediafire رابط الملف ' 
+	if (!args[0]) throw '*خاص بالتحميل من موقع ميديافير المعروف*\n\n*مثال الإستخدام*\n.mediafire <رابط الملف>' 
 	if (!/https?:\/\/(www\.)?mediafire\.com/.test(args[0])) throw 'Invalid URL' 
 	let res = await mediafiredl(args[0])
 	let mimetype = await lookup(res.url)
