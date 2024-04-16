@@ -20,7 +20,7 @@ var handler = async (m, { args, conn, usedPrefix, command }) => {
   let res;
   try {
     res = await snapsave(args[0]);
-    conn.reply(m.chat, "جاري تحميل الفيديو... على خادم snapsave", m);
+    conn.reply(m.chat, wait, m);
   } catch (error1) {
     try {
       res = await instagramdl(args[0]);
