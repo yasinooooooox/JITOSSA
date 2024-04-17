@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, args, text, usedPrefix, command, sender }) => {
-    if (!args[0]) throw 'Ex: ' + usedPrefix + command + ' <عنوان URL لـ HappyMod>';
+    if (!args[0]) throw '*مثال الإستخدام*\n\n *قم بإرسال رابط happymod مع نفس الأمر* \n\n hapy رابط التطبيق';
     let res = await apk(text, sender);
 
     await conn.sendMessage(m.chat, {
