@@ -1,16 +1,22 @@
-let handler = async (m, { conn, text }) => {
-    if (!text) throw 'من ترغب في حظره؟'
-    let who
-    if (m.isGroup) who = m.mentionedJid[0]
+//import db from '../lib/database.js'
+
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+   let who
+    if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
     else who = m.chat
-    if (!who) throw 'الرجاء وضع علامة؟'
+    let user = global.db.data.users[who]
+    if (!who) throw `*من ترغبه في حظره @user*`
     let users = global.db.data.users
     users[who].banned = true
-    conn.reply(m.chat, '*تم حظرك من إستخدام JITOSSA*', m)
+    conn.reply(m.chat, `
+*ثم حظر المستخدم من البوت*
+
+───────────
+@${who.split`@`[0]}  ♨*لايمكنك إستعمال البوت أو الأوامر* `, m, { mentions: [who] })
 }
-handler.help = ['ban']
+handler.help = ['ban @user']
 handler.tags = ['owner']
-handler.command = /^ban(user)?$/i
+handler.command = /^ban$/i
 handler.rowner = true
 
 export default handler
