@@ -31,7 +31,7 @@ const handler = async (m, {
             }),
         });
 
-        m.reply('انتظر من فضلك......\n'+wait);
+        m.reply(wait);
 
         const html = await response.text();
         const $ = cheerio.load(html);
@@ -118,6 +118,6 @@ const handler = async (m, {
 
 handler.help = ['facebook3'];
 handler.tags = ['downloader'];
-handler.command = /^facebook3$/i;
+handler.command = /^(facebook3|fb3|fbdl3)$/i;
 
 export default handler;
