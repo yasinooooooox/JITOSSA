@@ -30,7 +30,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
 handler.help = ['gemini'];
 handler.tags = ['ai'];
-handler.limit = 2;
+handler.limit = false;
 handler.register = false;
 
 handler.command = /^(gemini)$/i;
