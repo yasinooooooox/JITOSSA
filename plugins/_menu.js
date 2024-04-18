@@ -4,21 +4,22 @@ import fetch from 'node-fetch'
 import { xpRange } from '../lib/levelling.js'
 //import { plugins } from '../lib/plugins.js'
 let tags = {
-  'downloader':'‎ قسم التحميلات',
-  'applications':'‎ قسم التطبيقات‎',
-  'ai':'‎ الذكاء الاصطناعي‎ قسم',
-  'morocco':'  ‎قسم للمغاربة',
-  'drawing':'‎ توليد الصور‎ قسم' ,
-  'anime':'‎ قسم عن  الأنيم',
-  'islam':'‎ الدين هو الاسلام‎',
-  'owner':'‎ قسم مطور البوت',
-  'search':'‎ قسم البحث',
-  'group':' قسم المجموعات',
-  'audio-changer':'‎ تعديل الصوتيات‎',
-  'sticker':'‎ قسم الملصقات',
-  'image-edit':'‎ تعديل الصور',
-  'uploader':'‎‎ رفع الملفات‎',
-  'tools':' قسم الأداوات',
+  'downloader':'‎قسم التحميلات',
+  'applications':'‎قسم التطبيقات‎',
+  'ai':'‎الذكاء الاصطناعي‎ قسم',
+  'morocco':'قسم للمغاربة',
+  'drawing':'‎توليد الصور‎ قسم' ,
+  'anime':'‎قسم عن  الأنيم',
+  'islam':'‎الدين هو الاسلام‎',
+  'owner':'‎قسم مطور البوت',
+  'search':'‎قسم البحث',
+  'group':'قسم المجموعات',
+  'audio-changer':'‎تعديل الصوتيات‎',
+  'sticker':'‎قسم الملصقات',
+  'image-edit':'‎تعديل الصور',
+  'maker':'قسم اللوغو',
+  'uploader':'‎‎رفع الملفات‎',
+  'tools':'قسم الأداوات',
 }
 const defaultMenu = {
     before: `
