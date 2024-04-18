@@ -44,12 +44,12 @@
 # SETUP 
 
 1. Fork The JITOSSA Repository 
-<a href="https://github.com/Omarcharaf/JITOSSA/fork">
+<a href="https://github.com/Omarcharaf1/JITOSSA/fork">
 <img title="Jitossa bot"  src="https://img.shields.io/badge/FORK JITOSSA-h?color=orange&style=for-the-badge&logo=stackshare"></a>
 
 2. GET creds.json
 
-   <a href='https://jitossa-bobiza1.onrender.com/' target="_blank"><img alt='PAIRE CODE HERE' src='https://img.shields.io/badge/Session_id-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=black'/></a>
+   <a href='https://replit.com/@aomarcharaf20/JITOSSA-CODE' target="_blank"><img alt='PAIRE CODE HERE' src='https://img.shields.io/badge/Session_id-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=black'/></a>
 
  
 
