@@ -11,7 +11,7 @@ global.botnumber = ""
 global.confirmCode = ""
 
 global.owner = [
-  ['212670941551', 'Omar !', true],
+  ['212670941551', 'Omar !', true];
 ];
 
 global.suittag = ['212670941551'];
