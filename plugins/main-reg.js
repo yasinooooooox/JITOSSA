@@ -59,7 +59,7 @@ ${serialNumber}
 }
 
 handler.help = ['reg'].map(v => v + ' <اسم.عمر>')
-handler.tags = ['main']
+handler.tags = ['owner']
 
 handler.command = ['verify', 'reg', 'register', 'registrar']
 
