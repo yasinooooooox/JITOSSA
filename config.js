@@ -25,6 +25,7 @@ global.titulowm = 'JITOSSA';
 global.titulowm2 = `OMAR`
 global.igfg = 'JITISSA';
 global.wait = '> _*جارى إرسال الطلب*_ _🏃🏻‍♀️..._\n\n---------\n*▢ تابعني على إنستجرام 🧚* \n www.instagram.com/ovmar_1';
+global.rwait = '🙋🏻‍♀️';
 
 global.mods = [];
 
