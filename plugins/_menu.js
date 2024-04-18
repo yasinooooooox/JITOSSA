@@ -25,11 +25,11 @@ const defaultMenu = {
     before: `
 *JITOSSA MD*
 
-┌  ➦ w9t lbot : %uptime
-│  ➦ lyoum :  %week
-│  ➦ lw9t : %time
-│  ➦ tari5 : %date
-│  ➦ Version : %version
+┌  ➦ _w9t lbot : %uptime_
+│  ➦ _lyoum :  %week_
+│  ➦ _lw9t : %time_
+│  ➦ _tari5 : %date_
+│  ➦ _total user : %totalreg_
 └  ➦ Prefix Used : *[ %p ]*
 
 %readmore
