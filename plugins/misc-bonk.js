@@ -11,6 +11,6 @@ let handler = async (m, { conn, text }) => {
 		}).getBufferAsync('image/png')
 	conn.sendMessage(m.chat, { image: bonk }, { quoted: m })
 }
-handler.command = /^(bonk)$/i
-
+handler.help = handler.command = ['bonk']
+handler.tags = ['maker']
 export default handler
