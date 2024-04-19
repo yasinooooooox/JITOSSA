@@ -37,7 +37,7 @@ handler.help = ['tiktok'].map((v) => v + ' <رابط>')
 handler.tags = ['downloader']
 handler.command = /^t(t|iktok(d(own(load(er)?)?|l))?|td(own(load(er)?)?|l))$/i
 handler.register = false
-handler.limit = true
+handler.limit = false
 
 export default handler
 
