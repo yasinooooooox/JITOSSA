@@ -25,7 +25,7 @@ var handler = async (m, { conn, args }) => {
 
         const videoURL = tiktokData.video.noWatermark;
 
-        await conn.sendFile(m.chat, videoURL, 'tiktok.mp4', '', m);
+        await conn.sendFile(m.chat, videoURL, 'tiktok.mp4', 'تابع صاحب البوت هنا \n *_www.instagram.com/ovmar_1_*', m);
     } catch (error) {
         throw `خطأ: ${error}`;
     } finally {
