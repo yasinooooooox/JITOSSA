@@ -44,7 +44,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 				let error;
 				try {
 					const This = await processing(img, "recolor");
-					conn.sendFile(m.chat, This, "", "*تابع صانع البوت فى إنستجرام ❤️* \n www.instagram.com/ovmar_1", m);
+					conn.sendFile(m.chat, This, "", "*تابع صانع البوت فى إنستجرام ❤️* \n *_www.instagram.com/ovmar_1_*", m);
 				} catch (er) {
 					error = true;
 				} finally {
