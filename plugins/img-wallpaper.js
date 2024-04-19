@@ -32,7 +32,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       // Use 'buffer()' to get the image data as a buffer
       const buffer = await imageResponse.buffer();
 
-      conn.sendFile(m.chat, buffer, 'wallpaper.jpg', `*تابع صانع البوت فى إنستجرام ❤️* \n https://www.instagram.com/ovmar_1`, m);
+      conn.sendFile(m.chat, buffer, 'wallpaper.jpg', `*تابع صانع البوت فى إنستجرام ❤️* \n *_www.instagram.com/ovmar_1_*`, m);
     }
   } catch ('حدث خطأ..') {
     throw `Error: ${erro}`;
