@@ -12,7 +12,7 @@ case 'waifu':
     if (!res.ok) throw await res.text()
     let json = await res.json()
     if (!json.url) throw 'Error!'
-   conn.sendFile(m.chat, json.url, null, '*تابع صانع البوت فى إنستجرام ❤️* \n https://www.instagram.com/ovmar_1', '', m)
+   conn.sendFile(m.chat, json.url, null, '*تابع صانع البوت فى إنستجرام ❤️* \n *_www.instagram.com/ovmar_1_*', '', m)
 break
 
 case 'neko':
@@ -20,7 +20,7 @@ case 'neko':
   if (!_neko.ok) throw await _neko.text()
   let neko = await _neko.json()
   if (!neko.url) throw global.error
-  conn.sendFile(m.chat, neko.url, null, '*تابع صانع البوت فى إنستجرام ❤️* \n https://www.instagram.com/ovmar_1', '', m)
+  conn.sendFile(m.chat, neko.url, null, '*تابع صانع البوت فى إنستجرام ❤️* \n *_www.instagram.com/ovmar_1_*', '', m)
 break 
 
 case 'megumin':
@@ -28,7 +28,7 @@ case 'megumin':
   if (!_megumin.ok) throw await _megumin.text()
   let megumin = await _megumin.json()
   if (!megumin.url) throw global.error
-  conn.sendFile(m.chat, megumin.url, null, '*تابع صانع البوت فى إنستجرام ❤️* \n https://www.instagram.com/ovmar_1', '', m)
+  conn.sendFile(m.chat, megumin.url, null, '*تابع صانع البوت فى إنستجرام ❤️* \n *_www.instagram.com/ovmar_1_*', '', m)
 break
 
 default:
