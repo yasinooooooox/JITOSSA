@@ -7,7 +7,7 @@ let mime = q.mediaType ||''
 if (!/sticker/.test(mime)) throw notStickerMessage
 let media = await q.download()
 let out = await webp2png(media).catch(_ => null) || Buffer.alloc(0)
-await conn.sendFile(m.chat, out,  'error.png' , '*تابع صانع البوت فى إنستجرام ❤️* \n https://www.instagram.com/ovmar_1', m)
+await conn.sendFile(m.chat, out,  'error.png' , '*تابع صانع البوت فى إنستجرام ❤️* \n *_www.instagram.com/ovmar_1_*', m)
 }
 handler.help = [ 'toimg' ]
 handler.tags = [ 'sticker' ]
