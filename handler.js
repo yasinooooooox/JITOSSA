@@ -1180,10 +1180,9 @@ export async function handler(chatUpdate) {
               const messageNumber = user.bannedMessageCount + 1;
 const messageText = `
 ╔═════════════════════╗
- ❰ ⚠️ ❱ *USER BANNED!* ❰ ⚠️ ❱
-—◉ *Notice ${messageNumber}/3 (Total: 3)*
-—◉ Reason ${user.bannedReason ? `\n*:* ${user.bannedReason}` : '*Reason:* Unspecified'}
-—◉ *إذا كنت تعتقد أن هذا خطأ ولديك دليل، فيمكنك الاتصال بمالك الروبوت لاستئناف التعليق.* —◉ *التواصل مع مالكه:* wa.me/212605784394
+ ❰ ⚠️ ❱ *ثم حظرك من البوت!* ❰ ⚠️ ❱
+
+—◉ *إذا كنت تعتقد أن هذا خطأ ولديك دليل، فيمكنك الاتصال بمالك الروبوت لاستئناف التعليق.* —◉ *التواصل مع مالكه:* wa.me/212670941551
 ╚═════════════════════╝
                `.trim();
               m.reply(messageText);
