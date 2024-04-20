@@ -41,7 +41,7 @@ handler.command = /^(toanime|jadianime)$/i
 handler.help = ['toanime']
 handler.tags = ['ai']
 handler.register = false
-handler.limit = true
+handler.limit = false
 
 export default handler
 
