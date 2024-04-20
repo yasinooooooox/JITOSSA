@@ -332,9 +332,7 @@ global.reloadHandler = async function(restatConn) {
   conn.welcome = '
             text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || '*مرحبا بك أيها العضو الجديد في المجموعة*, @user ! \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
   conn.bye = '*لقد غادر هاذا العضو قبل قليل*, @user \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
-  بالطبع، إليك النصوص بالترجمة مع الرموز والتنسيق:
 
-  الترجمة
 conn.spromote = '*[ ℹ️ ] @user ثم الترقية إلى مشرج للمجموعة.*';
   conn.sdemote = '*[ ℹ️ ] @user لم يعد هاذا الشخص مشرفا.*';
   conn.sDesc = '*[ ℹ️ ] ثم تعديل وصف المجموعة.*';
