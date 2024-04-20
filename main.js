@@ -332,14 +332,15 @@ global.reloadHandler = async function(restatConn) {
   conn.welcome = '
             text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || '*مرحبا بك أيها العضو الجديد في المجموعة*, @user ! \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
   conn.bye = '*لقد غادر هاذا العضو قبل قليل*, @user \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
-  Here are the translations:
+  بالطبع، إليك النصوص بالترجمة مع الرموز والتنسيق:
 
- conn.spromote`: "تم ترقية @user إلى مشرف."
- conn.sdemote`: "تم تنزيل @user من مشرف."
- conn.sDesc`: "تم تعديل وصف المجموعة."
- conn.sSubject`: "تم تغيير اسم المجموعة."
- conn.sIcon`: "تم تغيير صورة المجموعة الشخصية."
- conn.sRevoke`: "تم إعادة ضبط رابط دعوة المجموعة."
+  الترجمة
+conn.spromote = '*[ ℹ️ ] @user ثم الترقية إلى مشرج للمجموعة.*';
+  conn.sdemote = '*[ ℹ️ ] @user لم يعد هاذا الشخص مشرفا.*';
+  conn.sDesc = '*[ ℹ️ ] ثم تعديل وصف المجموعة.*';
+  conn.sSubject = '*[ ℹ️ ] ثم تغيير إسم المجموعة.*';
+  conn.sIcon = '*[ ℹ️ ] ثم تغيير صورة المجموعة.*';
+  conn.sRevoke = '*[ ℹ️ ] ثم إعادة ضبط رابط المجموعة.*';
 
   conn.handler = handler.handler.bind(global.conn);
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn);
