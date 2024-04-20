@@ -329,14 +329,17 @@ global.reloadHandler = async function(restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate);
   }
 
-  conn.welcome = '👋 ¡Welcome/to!\n@user';
-  conn.bye = '👋 ¡See you later!\n@user';
-  conn.spromote = '*[ ℹ️ ] @user He was promoted to administrator.*';
-  conn.sdemote = '*[ ℹ️ ] @user He was demoted from administrator.*';
-  conn.sDesc = '*[ ℹ️ ] The group description has been modified.*';
-  conn.sSubject = '*[ ℹ️ ] The group name has been changed.*';
-  conn.sIcon = '*[ ℹ️ ] The group profile photo has been changed.*';
-  conn.sRevoke = '*[ ℹ️ ] The group invite link has been reset.*';
+  conn.welcome = '
+            text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || '*مرحبا بك أيها العضو الجديد في المجموعة*, @user ! \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
+  conn.bye = '*لقد غادر هاذا العضو قبل قليل*, @user \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
+  Here are the translations:
+
+ conn.spromote`: "تم ترقية @user إلى مشرف."
+ conn.sdemote`: "تم تنزيل @user من مشرف."
+ conn.sDesc`: "تم تعديل وصف المجموعة."
+ conn.sSubject`: "تم تغيير اسم المجموعة."
+ conn.sIcon`: "تم تغيير صورة المجموعة الشخصية."
+ conn.sRevoke`: "تم إعادة ضبط رابط دعوة المجموعة."
 
   conn.handler = handler.handler.bind(global.conn);
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn);
