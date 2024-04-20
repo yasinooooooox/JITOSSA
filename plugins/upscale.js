@@ -1,4 +1,4 @@
-import axios from "axios";
+/*import axios from "axios";
 import FormData from "form-data";
 
 const handler = async (m, { conn, usedPrefix, command }) => {
@@ -40,4 +40,4 @@ handler.command = /^(remini|hd|upscale)$/i;
 handler.limit = true;
 handler.premium = true;
 
-export default handler;
+export default handler;*/
