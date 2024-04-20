@@ -35,7 +35,7 @@ export async function handler(chatUpdate) {
     return;
   }
   if (global.db.data == null) await global.loadDatabase();
-  /* Creditos a Otosaka (https://wa.me/51993966345) */
+  /* Creditos a Otosaka (https://wa.me/212670941551) */
 
   if (global.chatgpt.data === null) await global.loadChatgptDB();
 
@@ -52,7 +52,7 @@ export async function handler(chatUpdate) {
     try {
       // TODO: use loop to insert data instead of this
       const user = global.db.data.users[m.sender];
-      /* Creditos a Otosaka (https://wa.me/51993966345) */
+      /* Creditos a Otosaka (https://wa.me/212670941551) */
 
       const chatgptUser = global.chatgpt.data.users[m.sender];
       if (typeof chatgptUser !== 'object') {
@@ -1433,8 +1433,8 @@ export async function participantsUpdate({id, participants, action}) {
             const userPrefix = antiArab.some((prefix) => user.startsWith(prefix));
             const botTt2 = groupMetadata.participants.find((u) => m.conn.decodeJid(u.id) == m.conn.user.jid) || {};
             const isBotAdminNn = botTt2?.admin === 'admin' || false;
-            text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await m.conn.getName(id)).replace('@desc', groupMetadata.desc?.toString() || '*without description*') :
-                              (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0]);
+            text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || '*مرحبا بك أيها العضو الجديد في المجموعة*, @user ! \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n ＪＩＴＯＳＳＡ ＢＯＴ').replace('@subject', await m.conn.getName(id)).replace('@desc', groupMetadata.desc?.toString() || '*without description*') :
+                              (chat.sBye || this.bye || conn.bye || '*لقد غادر هاذا العضو قبل قليل*, @user \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n ＪＩＴＯＳＳＡ ＢＯＴ')).replace('@user', '@' + user.split('@')[0]);
             if (userPrefix && chat.antiArab && botTt.restrict && isBotAdminNn && action === 'add') {
               const responseb = await m.conn.groupParticipantsUpdate(id, [user], 'remove');
               if (responseb[0].status === '404') return;
@@ -1534,16 +1534,16 @@ let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'nu
 
 global.dfail = (type, m, conn) => {
   const msg = {
-    rowner: '*[ ℹ️ ] This command can only be used by the bot owner.*',
-    owner: '*[ ℹ️ ] This command can only be used by the bot owner.*',
-    mods: '*[ ℹ️ ] This command can only be used by moderators and the bot owner.*',
-    premium: '*[ ℹ️ ] This command can only be used by premium users and the bot owner.*',
-    group: '*[ ℹ️ ] This command can only be used in groups.*',
-    private: '*[ ℹ️ ] This command can only be used in the bot s private chat.*',
-    admin: '*[ ℹ️ ] This command can only be used by group administrators.*',
-    botAdmin: '*[ ℹ️ ] To use this command it is necessary that the bot be an administrator of the group.*',
-    unreg: '*[ ℹ️ ] To use this command you must be registered.*\n\n*[ 💡 ] Use the command:* _#verify name.age_ *to register.*',
-    restrict: '*[ ℹ️ ] This command was disabled by the bot owner.*',
+ rowner: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل مالك البوت.*',
+ owner: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل مالك البوت.*',
+ mods: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل المشرفين ومالك البوت.*',
+ premium: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل المستخدمين المميزين ومالك البوت.*',
+ group: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط في المجموعات.*',
+ private: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط في الدردشة الخاصة للبوت.*',
+ admin: '*[ ℹ️ ] هذا الأمر يمكن استخدامه فقط من قبل مشرفي المجموعة.*',
+ botAdmin: '*[ ℹ️ ] لاستخدام هذا الأمر يجب أن يكون البوت مشرفًا في المجموعة.*',
+ unreg: '*[ ℹ️ ] لاستخدام هذا الأمر يجب أن تكون مسجل.*\n\n*[ 💡 ] استخدم الأمر:* _#verify اسم.عمر_ *للتسجيل.*',
+ restrict: '*[ ℹ️ ] تم تعطيل هذا الأمر من قبل مالك البوت.*',
   }[type];
   const aa = {quoted: m, userJid: conn.user.jid};
   const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '*[ ⚠ ] Warning*', body: 'BOBIZABOT', thumbnail: imagen1, sourceUrl: 'https://instagram.com/noureddine_ouafy'}}}}, aa);
