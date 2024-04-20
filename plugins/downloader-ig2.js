@@ -1,57 +1,39 @@
-import { instagramdl } from '@bochilteam/scraper';
-import fetch from 'node-fetch';
+import axios from 'axios'
 
-var handler = async (m, { args, conn, usedPrefix, command }) => {
-    if (!args[0]) throw `Ex:\n${usedPrefix}${command} https://www.instagram.com/reel/C0EEgMNSSHw/?igshid=MzY1NDJmNzMyNQ==`;
-    try {
-        let res = await bochil.snapsave(args[0]);
-        let media = await res[0].url;
-      
-        const sender = m.sender.split(`@`)[0];
+let handler = async (m, { conn, text }) => {
+  if (!text) {
+    return conn.reply(m.chat, 'يرجى إدخال رابط إنستجرام بعد الأمر. \n .instagram2 https://www.instagram.com/reel/C50Bt8vIKNi/?igsh=bDN3eTgwbTBkY29w', m)
+  }
 
-        conn.reply(m.chat, 'Sedang mengunduh video...', m);
-
-        if (!res) throw 'Can\'t download the post';
-      
-        await conn.sendMessage(m.chat, { video: { url: media }, caption: `ini kak videonya @${sender}`, mentions: [m.sender]}, m);
-      
-      await conn.sendMessage(m.chat, { 
-        document: { url: media }, 
-        mimetype: 'video/mp4', 
-        fileName: `instagram.mp4`,
-        caption: `ini kak videonya @${sender} versi dokumen, agar jernih`, mentions: [m.sender]
-      }, {quoted: m})
-
-    } catch (e) {
-      try {
-          let response = await fetch(`https://tr.deployers.repl.co/instagramdl?url=${encodeURIComponent(args[0])}`);
-          let data = await response.json();
-
-          if (data.image && data.video) {
-              const sender = m.sender.split(`@`)[0];
-
-              conn.reply(m.chat, 'Sedang mengunduh video...', m);
-
-            await conn.sendMessage(m.chat, { video: data.video, caption: `ini kak videonya @${sender}`, mentions: [m.sender] }, m);
-
-            await conn.sendMessage(m.chat, { 
-              document: { url: data.video }, 
-              mimetype: 'video/mp4', 
-              fileName: `instagram.mp4`,
-              caption: `ini kak videonya @${sender} versi dokumen, agar jernih`, mentions: [m.sender]
-            }, {quoted: m})
-            
-          } else {
-              throw 'Gagal mengunduh video';
-          }
-      } catch (error) {
-          conn.reply(m.chat, 'Gagal mengunduh video', m);
-      }
+  let url = `https://vihangayt.me/download/instagram?url=${encodeURIComponent(text)}`
+  
+  try {
+    // جلب مقطع الفيديو من إنستجرام باستخدام Axios
+    const response = await axios.get(url)
+    if (!response.data.status) {
+      throw new Error(`حدث خطأ في جلب البيانات من ${url}`)
     }
-};
 
-handler.help = ['instagram2'];
-handler.tags = ['downloader'];
-handler.command = /^(ig(dl)?|instagram(dl)2)$/i;
+    const data = response.data.data
+    if (data && data.data && data.data.length > 0) {
+      const videoURL = data.data[0].url
+      const caption = data.data[0].type
 
-export default handler;
+      // إرسال الملف مع وضع نوعه كتسمية
+      await conn.sendFile(m.chat, videoURL, 'instagram_reel.mp4', '*الفيديو الخاص بك*\n _*instagram.com/ovmar_1*_, m)
+    } else {
+      conn.reply(m.chat, 'تعذر العثور على مقطع فيديو من إنستجرام.', m)
+    }
+  } catch (error) {
+    console.error(error)
+    conn.reply(m.chat, 'حدث خطأ أثناء جلب مقطع الفيديو من إنستجرام.', m)
+  }
+}
+
+handler.command = /^(igdl2|ig2|instagram2)$/i
+handler.tags = ['downloader']
+handler.help = ['instagram2'']
+handler.premium = false
+handler.limit = true
+
+export default handler
