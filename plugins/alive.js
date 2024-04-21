@@ -1,27 +1,41 @@
+
+
 let handler = async(m, { conn, text, usedPrefix, command }) => {
-let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let name = conn.getName(who)
-const pp = '../Menu2.jpg'
 
-let love = `
-JITOSSA MD 
+    // Sound
+    let name = m.pushName || conn.getName(m.sender)
+    var vn = "./src/ALIVE.mp3"
+    let url = "https://github.com/omarcharaf1"
+    let murl = "www.instagram.com/ovmar_1"
+    let img = "https://telegra.ph/file/e94d3e61da4c83e493c1e.png"
+    let con = { key: { fromMe: false, participant: `${m.sender.split`@`[0]}@s.whatsapp.net`, ...(m.chat ? { remoteJid: '16504228206@s.whatsapp.net' } : {}) }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
+    let doc = {
+        audio: {
+          url: vn
+        },
+        mimetype: 'audio/mp4',
+        ptt: true,
+        waveform:  [100, 0, 100, 0, 100, 0, 100],
+        fileName: "main",
+    
+        contextInfo: {
+          mentionedJid: [m.sender],
+          externalAdReply: {
+          title: "البوت يعمل الأن",
+          body: "JITOSSA  BOT",
+          thumbnailUrl: img,
+          sourceUrl: 'https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5',
+          mediaType: 1,
+          renderLargerThumbnail: true
+          }}
+      };
+    
+      await conn.sendMessage(m.chat, doc, { quoted: con });
+    
+    }
+    
+    handler.help = ['alive']
+    handler.tags = ['main']
+    handler.command = /^(alive)$/i 
 
-البوت يعمل جيدا %100 𖣐
-
-التواصل مع المطور على واتساب 𖣐
-
-+212670941551 𖣐
-`
-
-conn.sendMessage(m.chat, {text: love, mentions: [m.sender]}, {quoted: m})
-
-//conn.reply(m.chat, `*🚩 Ocurrió un fallo*`, m, fake, )
-
-}
-handler.help = ['alive']
-handler.tags = ['owner']
-handler.command = /^(alive)$/i
-
-handler.register = false
-
-export default handler
+    export default handler;
