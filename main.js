@@ -329,7 +329,7 @@ global.reloadHandler = async function(restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate);
   }
 
-  conn.welcome = '*مرحبا بك أيها العضو الجديد في المجموعة*, @user ! \n \n *معلومات البوت*\n\n group whatsapp https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
+  conn.welcome = '*مرحبا بك أيها العضو الجديد في المجموعة*, @user ! \n \n *معلومات البوت*\n\n group whatsapp\n https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5 \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
   conn.bye = '*لقد غادر ت يا @user المجموعة*\n \n *معلومات البوت*\n\n *group whatsapp*\n _https://chat.whatsapp.com/HcXWPVjjVkY5JIw88Xokg5_ \n\n *instagram* \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
 
 conn.spromote = '*[ ℹ️ ] @user ثم الترقية إلى مشرج للمجموعة.*';
