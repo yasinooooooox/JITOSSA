@@ -122,7 +122,7 @@ async function connectionUpdate(update) {
     if (connection == 'open') {
     conn.isInit = true
     global.conns.push(conn)
-    await parent.sendMessage(m.chat, {text : args[0] ? `🟢 تم الاتصال بنجاح\n\n التواصل مع المطور عبر \n\n instagram \n www.instagram/oar_1\n\n group whatsapp https://chat.whatsapp.com/I810ZdTwucY4gmLHL0TAY3 \n\n num whatsapp \n wa.me/212670941551` : `🟢 تم الاتصال بنجاح`}, { quoted: m })
+    await parent.sendMessage(m.chat, {text : args[0] ? `🟢 تم الاتصال بنجاح \n \n التواصل مع المطور من هنا \n\n instagram \n www.instagram.com/ovmar_1\n\n group WhatsApp \n https://chat.whatsapp.com/BY2k9MaTqMXE1cXhwD5dfk \n\n number wa.me/212670941551` : `🟢 تم الاتصال بنجاح`}, { quoted: m })
     await sleep(5000)
     if (args[0]) return
                 await parent.sendMessage(conn.user.jid, {text : `يتم تحميل البوت على هذا الجهاز... `}, { quoted: m })
@@ -196,7 +196,7 @@ bbts()
 }
 handler.help = ['botclone']
 handler.tags = ['jadibot']
-handler.command = ['code', 'codigo', 'sercode', 'jadibot', ]
+handler.command = ['code', 'codigo', 'sercode' 'jadibot', ]
 handler.rowner = false
 
 export default handler
