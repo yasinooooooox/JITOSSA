@@ -7,8 +7,8 @@ let handler = async (m, { conn }) => {
 }
 
 handler.help = ['gay @user']
-handler.tags = ['fun']
+handler.tags = ['image-edit']
 handler.command = ['gay'] 
-handler.diamond = true
+handler.diamond = false
 
 export default handler
