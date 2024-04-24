@@ -46,7 +46,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     }
   }
   handler.help = ['trash', 'rip', 'shit', 'spank', 'imgdel', 'beautiful']
-  handler.tags = ['fun']
+  handler.tags = ['maker']
   handler.command = /^(trash|basura|rip|shit|spank|azotar|imgdel|beautiful)$/i
   
   export default handler
