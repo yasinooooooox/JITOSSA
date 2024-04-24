@@ -7,7 +7,7 @@ let handler = async (m, { conn }) => {
 }
 
 handler.help = ['groups', 'grouplist'];
-handler.tags = ['info'];
+handler.tags = ['group'];
 handler.command = /^(listgc)$/i;
 
 export default handler;
