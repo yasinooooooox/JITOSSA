@@ -4,7 +4,7 @@ const handler = async (m, {text, conn, usedPrefix, command}) => {
   if (!who) conn.reply(m.chat, why, m, {mentions: [m.sender]});
   const res = [];
   switch (command) {
-    case 'blok': case 'block':
+    case 'blok': case 'b':
       if (who) {
         await conn.updateBlockStatus(who, 'block').then(() => {
           res.push(who);
@@ -21,6 +21,6 @@ const handler = async (m, {text, conn, usedPrefix, command}) => {
   }
   if (res[0]) conn.reply(m.chat, `*[❗] 𝚂𝙴 𝚄𝚂𝙾 𝙲𝙾𝙽 𝙴𝚇𝙸𝚃𝙾 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 ${command} 𝙿𝙰𝚁𝙰 𝙴𝙻 𝚄𝚂𝚄𝙰𝚁𝙸𝙾/𝙰 ${res ? `${res.map((v) => '@' + v.split('@')[0])}` : ''}*`, m, {mentions: res});
 };
-handler.command = /^(block|unblock)$/i;
+handler.command = /^(b|unblock)$/i;
 handler.rowner = true;
 export default handler;
