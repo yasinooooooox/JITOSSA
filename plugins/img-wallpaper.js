@@ -1,58 +1,23 @@
-import fetch from 'node-fetch';
 
+import fg from 'api-dylux';
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw `*تحميل الخلفيات الجميلة والرائعة إليك هاذا الأمر* \n مثال \n\n  _${usedPrefix + command} Naruto_`;
-
-  const apiUrl = `https://weeb-api.vercel.app/wallpaper?query=${encodeURIComponent(text)}`;
-
+  if (!text) throw ` ${mssg.notext}`
   try {
-    const response = await fetch(apiUrl);
-    
-    if (!response.ok) {
-      throw `Error fetching wallpaper: ${response.status} ${response.statusText}`;
-    }
-
-    const imageUrls = await response.json();
-
-    if (imageUrls.length === 0) {
-      throw `No wallpapers found for: ${text}`;
-    }
-
-    // Choose 2 random images from the array
-    const randomIndexes = getRandomIndexes(imageUrls.length, 2);
-    const randomImages = randomIndexes.map(index => imageUrls[index]);
-
-    for (const imageUrl of randomImages) {
-      const imageResponse = await fetch(imageUrl);
-
-      if (!imageResponse.ok) {
-        throw `خطأ في إيجاد الصورة: ${imageResponse.status} ${imageResponse.statusText}`;
-      }
-
-      // Use 'buffer()' to get the image data as a buffer
-      const buffer = await imageResponse.buffer();
-
-      conn.sendFile(m.chat, buffer, 'wallpaper.jpg', `*تابع صانع البوت فى إنستجرام ❤️* \n *_www.instagram.com/ovmar_1_*`, m);
-    }
-  } catch ('حدث خطأ..') {
-    throw `Error: ${erro}`;
+    let res = await fg.wallpaper(text);
+    let re = pickRandom(res);
+    await conn.sendMessage(m.chat, { image: { url: re.image[0] }, caption: `✅ ${mssg.result}` }, { quoted: m });
+  } catch (error) {
+   m.reply(` ${mssg.error}`)
   }
-};
-
-// Function to generate random indexes
-function getRandomIndexes(max, count) {
-  const indexes = [];
-  while (indexes.length < count) {
-    const randomIndex = Math.floor(Math.random() * max);
-    if (!indexes.includes(randomIndex)) {
-      indexes.push(randomIndex);
-    }
-  }
-  return indexes;
+  
 }
+handler.help = ['wallpaper']
+handler.tags = ['image-edit']
+handler.command = ['wallpaper', 'wallpapers', 'wp']
+handler.diamond = true
 
-handler.help = [''].map(v => 'wallpaper' + v + ' <query>');
-handler.tags = ['downloader'];
-handler.command = /^(wall|wallpaper)$/i
+export default handler
 
-export default handler;
+function pickRandom(list) {
+  return list[Math.floor(list.length * Math.random())]
+}
