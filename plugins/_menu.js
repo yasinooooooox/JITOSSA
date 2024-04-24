@@ -143,7 +143,7 @@ externalAdReply: {
 title: 'JITOSSA',
 body: "إضغط على الصورة للدخول للمجمعة",
 thumbnailUrl: 'https://telegra.ph/file/51a76af5ac51cc5bd73b2.jpg',
-sourceUrl: 'https://chat.whatsapp.com/I810ZdTwucY4gmLHL0TAY3',
+sourceUrl: 'https://chat.whatsapp.com/L283DFlWlgVKWH40TOrUnP',
 mediaType: 1,
 renderLargerThumbnail: true
 }}}, { quoted: m})
