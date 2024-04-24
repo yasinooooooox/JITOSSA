@@ -20,6 +20,7 @@ let tags = {
   'maker':'قسم اللوغو',
   'uploader':'‎‎رفع الملفات‎',
   'tools':'قسم الأداوات',
+  'game':'قسم الترفيه',
 }
 const defaultMenu = {
     before: `
