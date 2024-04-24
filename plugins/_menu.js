@@ -162,7 +162,7 @@ renderLargerThumbnail: true
   }
 }
 handler.help = ['menu']
-handler.tags = ['infobot']
+handler.tags = ['owner']
 handler.command = ['menu','j','list'] 
 handler.register = false
 
