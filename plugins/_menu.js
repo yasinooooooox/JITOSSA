@@ -25,7 +25,7 @@ const defaultMenu = {
     before: `
 *JITOSSA MD*
 
-┌  ➦ w9t lbot : *_%uptime_*
+┌  ➦ w9t lbot : *_%uptime !_*
 │  ➦ lyoum :  *_%week_*
 │  ➦ lw9t : *_%time_*
 │  ➦ tari5 : *_%date_*
@@ -162,7 +162,7 @@ renderLargerThumbnail: true
 }
 handler.help = ['menu']
 handler.tags = ['owner']
-handler.command = ['menu','j','list' 'allmenu', 'قائمة'] 
+handler.command = ['menu','j','list', 'allmenu', 'قائمة'] 
 handler.register = false
 
 
