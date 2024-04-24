@@ -1,8 +1,8 @@
 
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 	
-   let tee = ` ${mssg.notext}\n\n📌 ${mssg.example}: *${usedPrefix + command}* nansoffc`
-   let too = ` ${mssg.textSe} *+* \n\n📌 ${mssg.example}: \n*${usedPrefix + command}* lann *+* ${NSnama}`
+   let tee = `*أكتب النص الذي تريد تحويله الى لوغو*\n\n📌 Example : *${usedPrefix + command}* JITOSSA`
+   let too = `*أكتب النص الذي تريد تحويله الى لوغو*\n\n📌 Example : *${usedPrefix + command}* JITOSSA`
     m.react(rwait)
 
 switch (command) {
@@ -173,6 +173,6 @@ switch (command) {
 handler.help = ['logololi', 'graffiti2', '3dbox', 'future', 'ninja', 'marvel', 'paper', 'glitch', 'halloween', 'green', 'american', 'neon', 'devil', 'wolf', 'phlogo', 'transformer', 'thunder', 'graffiti', 'bpink', 'joker', 'matrix', 'glow', 'ballon', 'dmd', 'lightglow']
 handler.tags = ['maker']
 handler.command = /^(logololi|graffiti2|3dbox|future|ninja|marvel|paper|glitch|neon|green|halloween|american|devil|wolf|phlogo|transformer|thunder|graffiti|bpink|joker|matrix|glow|ballon|dmd|lightglow)$/i
-handler.diamond = true
+handler.diamond = false
 
 export default handler
