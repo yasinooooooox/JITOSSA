@@ -20,17 +20,16 @@ let tags = {
   'maker':'قسم اللوغو',
   'uploader':'‎‎رفع الملفات‎',
   'tools':'قسم الأداوات',
-  'game':'قسم الترفيه',
 }
 const defaultMenu = {
     before: `
 *JITOSSA MD*
 
-┌  ➦ _w9t lbot : %uptime_
-│  ➦ _lyoum :  %week_
-│  ➦ _lw9t : %time_
-│  ➦ _tari5 : %date_
-│  ➦ _total user : %totalreg_
+┌  ➦ w9t lbot : *_%uptime_*
+│  ➦ lyoum :  *_%week_*
+│  ➦ lw9t : *_%time_*
+│  ➦ tari5 : *_%date_*
+│  ➦ total user : _*%totalreg*_
 └  ➦ Prefix Used : *[ %p ]*
 
 %readmore
@@ -142,9 +141,9 @@ text: text,
 contextInfo: {
 externalAdReply: {
 title: 'JITOSSA',
-body: "WELCOME TO JITOSSA",
+body: "إضغط على الصورة للدخول للمجمعة",
 thumbnailUrl: 'https://telegra.ph/file/51a76af5ac51cc5bd73b2.jpg',
-sourceUrl: 'https://instagram.com/OVMAR_1',
+sourceUrl: 'https://chat.whatsapp.com/I810ZdTwucY4gmLHL0TAY3',
 mediaType: 1,
 renderLargerThumbnail: true
 }}}, { quoted: m})
@@ -163,7 +162,7 @@ renderLargerThumbnail: true
 }
 handler.help = ['menu']
 handler.tags = ['owner']
-handler.command = ['menu','j','list'] 
+handler.command = ['menu','j','list' 'allmenu', 'قائمة'] 
 handler.register = false
 
 
