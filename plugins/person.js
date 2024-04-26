@@ -3,7 +3,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     let res = await conn.getFile('https://thispersondoesnotexist.com');
     let img = res.data;
     await conn.sendFile(m.chat, img, 'img.jpg', `✅ هذا الشخص غير موجود، تم إنشاؤه باستخدام الذكاء الاصطناعي`, m);
-    m.react(done);
+    m.react('✅');
 }
 handler.help = ['person']
 handler.tags = ['image-edit']
