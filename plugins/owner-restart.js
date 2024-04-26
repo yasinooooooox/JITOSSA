@@ -11,6 +11,6 @@ handler.help = ['restart']
 handler.tags = ['owner']
 handler.command = ['restart'] 
 
-handler.rowner = false
+handler.rowner = true
 
 export default handler
