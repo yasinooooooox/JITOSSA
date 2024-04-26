@@ -23,7 +23,7 @@ global.wm = 'JITOSSA';
 global.titulowm = 'JITOSSA';
 global.titulowm2 = `OMAR`
 global.igfg = 'JITISSA';
-global.wait = '> _*جارى إرسال الطلب*_ _🏃🏻‍♀️..._\n\n---------\n*▢ تابعني على إنستجرام 🧚* \n www.instagram.com/ovmar_1';
+global.wait = "مرحبًا!\n\nيرجى الانتظار قليلاً حتى نقوم بمراجعة طلبك للانضمام إلى حسابنا على Instagram.\n\n[اضغط هنا](https://www.instagram.com/ovmar_1) لزيارة حسابنا على Instagram.";
 global.rwait = '🙋🏻‍♀️';
 
 global.mods = [];
