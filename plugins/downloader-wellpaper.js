@@ -35,7 +35,6 @@ handler.command = /^wallpapers$/i
 
 export default handler
 
-/* New Line */
 async function WallPapers(query) {
     let res = await fetch('https://wallpapers.com/' + query)
     let html = await res.text()
