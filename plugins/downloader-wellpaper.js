@@ -1,4 +1,4 @@
-import axios from "axios"
+/*import axios from "axios"
 import fetch from "node-fetch"
 import cheerio from "cheerio"
 import {
@@ -47,4 +47,4 @@ async function WallPapers(query) {
     }
     let newArr = img.filter(el => el != null);
     return newArr
-}
+}*/
