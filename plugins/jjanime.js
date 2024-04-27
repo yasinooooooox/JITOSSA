@@ -179,7 +179,7 @@ let anu2 = lol2[Math.floor(Math.random() * lol2.length)];
 	
 	let res = await mediafiredl(anu2);
 	let { url, url2, filename, ext, aploud, filesize, filesizeH } = res;
-	await conn.sendFile(m.chat, url, filename, '> 𝘑 𝘐 𝘛 𝘖 𝘚 𝘚 𝘈 \n *_تابعني على انستجرام_* *www.instagram.com/ovmar_1*', m, {
+	await conn.sendFile(m.chat, url, filename, '> 𝘑 𝘐 𝘛 𝘖 𝘚 𝘚 𝘈 \n *_تابعني على انستجرام_*\n *www.instagram.com/ovmar_1*', m, {
 		asDocument: false,
 	});
 };
