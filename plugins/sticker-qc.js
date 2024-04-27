@@ -15,7 +15,7 @@ let text
         text = m.quoted.text
     } else throw "Input teks atau reply teks yang ingin di jadikan quote!"
    if (!text) return m.reply('masukan text')
-   if (text.length > 30) return m.reply('إنشاء ملصق خلال ماتكتبه مثـال \n\n .qc JITOSSA')
+   if (text.length > 30) return m.reply('Maksimal 30 Teks!')
     let pp = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
 
    const obj = {
@@ -23,7 +23,7 @@ let text
       "format": "png",
       "backgroundColor": "#FFFFFF",
       "width": 512,
-      "height": 768,
+      "height": 670,
       "scale": 2,
       "messages": [{
          "entities": [],
@@ -61,7 +61,7 @@ m.reply(error)
 }}
 
 handler.help = ['qc']
-handler.tags = ['sticker']
+handler.tags = ['tools']
 handler.command = /^(qc)$/i
 
 export default handler
