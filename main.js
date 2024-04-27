@@ -332,7 +332,7 @@ global.reloadHandler = async function(restatConn) {
   conn.welcome = '*مرحبا بك أيها العضو الجديد في المجموعة*, @user ! \n \n *معلومات البوت*\n\n group whatsapp\n https://chat.whatsapp.com/L283DFlWlgVKWH40TOrUnP \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
   conn.bye = '*لقد غادرت المجموعة* \n @user \n \n *معلومات البوت*\n\n *group whatsapp*\n https://chat.whatsapp.com/L283DFlWlgVKWH40TOrUnP \n\n *instagram* \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
 
-conn.spromote = '*[ ℹ️ ] @user ثم الترقية إلى مشرج للمجموعة.*';
+conn.spromote = '*[ ℹ️ ] @user ثم الترقية إلى مشرف للمجموعة.*';
   conn.sdemote = '*[ ℹ️ ] @user لم يعد هاذا الشخص مشرفا.*';
   conn.sDesc = '*[ ℹ️ ] ثم تعديل وصف المجموعة.*';
   conn.sSubject = '*[ ℹ️ ] ثم تغيير إسم المجموعة.*';
