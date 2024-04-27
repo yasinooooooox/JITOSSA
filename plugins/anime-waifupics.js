@@ -60,7 +60,7 @@ let handler = async (m, {
     }
 }
 handler.help = ["animes"]
-handler.tags = ['internet']
+handler.tags = ['anime']
 handler.command = ["animes"]
 
 export default handler
