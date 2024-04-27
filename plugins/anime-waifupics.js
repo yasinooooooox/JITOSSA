@@ -67,4 +67,4 @@ export default handler
 
 function ArrClean(str) {
     return str.map((v, index) => ++index + ". " + v).join('\r\n')
-}
+}*/
