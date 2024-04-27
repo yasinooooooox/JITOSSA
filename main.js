@@ -491,7 +491,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `JITOSSA BOT [ ⏳ ] Uptime: ${uptime}`;
+  const bio = `ثم التطوير من طرف عمر / JITOSSA`;
   await conn.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
