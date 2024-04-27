@@ -23,8 +23,9 @@ global.wm = 'JITOSSA';
 global.titulowm = 'JITOSSA';
 global.titulowm2 = `OMAR`
 global.igfg = 'JITISSA';
-global.wait = '> _جاري معالجة طلبك حاول الإنتظار ..._\n\n لاتنسى دعم المطور بالمتابعة فى الإنستجرام \n*_instagram.com/ovmar_1_*';
-global.rwait = '🙋🏻‍♀️';
+global.wait = '> _جاري معالجة طلبك حاول الإنتظار ..._\n\n *متابعة للمطور في إنستجرام* \n*_instagram.com/ovmar_1_*';
+global.rwait = '⏳';
+global.done = '✅';
 
 global.mods = [];
 
