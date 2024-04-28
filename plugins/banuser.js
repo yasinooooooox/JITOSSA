@@ -12,7 +12,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 *ثم حظر المستخدم من البوت*
 
 ───────────
-@${who.split`@`[0]}  ♨*لايمكنك إستعمال البوت أو الأوامر* `, m, { mentions: [who] })
+@${who.split`@`[0]} \n  ♨*لايمكنك إستعمال البوت أو الأوامر* `, m, { mentions: [who] })
 }
 handler.help = ['ban @user']
 handler.tags = ['owner']
