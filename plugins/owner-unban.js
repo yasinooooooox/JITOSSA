@@ -12,7 +12,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 *ثم إزالة الحظر بنجاح ✔️*
  
  ───────────
- @${who.split`@`[0]} *الأن يمكنك إستخدام البوت أسف* `, m, { mentions: [who] })
+ @${who.split`@`[0]} \n *الأن يمكنك إستخدام البوت أسفة* `, m, { mentions: [who] })
  }
  handler.help = ['un @user']
  handler.tags = ['owner']
