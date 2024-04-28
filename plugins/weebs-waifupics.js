@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+/*import fetch from 'node-fetch'
 import axios from 'axios'
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
@@ -44,4 +44,4 @@ export default handler
 
 function pickRandom(list) {
   return list[Math.floor(list.length * Math.random())]
-}
+}*/
