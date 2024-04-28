@@ -38,7 +38,7 @@ let handler = async (m, {
                 }).filter(v => v).join("\n\n________________________\n\n")
                 await m.reply(teks)
             } catch (e) {
-                await m.reply(eror)
+               // await m.reply(eror)
             }
         }
 
