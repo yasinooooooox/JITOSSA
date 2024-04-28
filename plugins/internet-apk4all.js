@@ -28,7 +28,7 @@ const handler = async (m, { conn, usedPrefix, command, text }) => {
   }
 };
 
-handler.tags = ['application'];
+handler.tags = ['applications'];
 handler.help = ['apkmod'];
 handler.command = /^(apkmod|modapk|dapk2|aptoide|aptoidedl)$/i;
 
