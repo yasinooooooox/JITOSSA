@@ -1,39 +1,21 @@
-import axios from 'axios'
+import axios from "axios"
 
-let handler = async (m, { conn, text }) => {
-  if (!text) {
-    return conn.reply(m.chat, 'يرجى إدخال رابط إنستجرام بعد الأمر. \n .instagram2 https://www.instagram.com/reel/C50Bt8vIKNi/?igsh=bDN3eTgwbTBkY29w', m)
-  }
-
-  let url = `https://vihangayt.me/download/instagram?url=${encodeURIComponent(text)}`
-  
-  try {
-    // جلب مقطع الفيديو من إنستجرام باستخدام Axios
-    const response = await axios.get(url)
-    if (!response.data.status) {
-      throw new Error(`حدث خطأ في جلب البيانات من ${url}`)
-    }
-
-    const data = response.data.data
-    if (data && data.data && data.data.length > 0) {
-      const videoURL = data.data[0].url
-      const caption = data.data[0].type
-
-      // إرسال الملف مع وضع نوعه كتسمية
-      await conn.sendFile(m.chat, videoURL, 'instagram_reel.mp4', '*الفيديو الخاص بك*\n _*instagram.com/ovmar_1*_, m)
-    } else {
-      conn.reply(m.chat, 'تعذر العثور على مقطع فيديو من إنستجرام.', m)
-    }
-  } catch (error) {
-    console.error(error)
-    conn.reply(m.chat, 'حدث خطأ أثناء جلب مقطع الفيديو من إنستجرام.', m)
-  }
+let handler = async (m, {text, usedPrefix, command}) => {
+if (!text) return m.reply('تحتاج رابط الفيديو لتنزيله \n\n مثـال \n ${usedPrefix}${command} https://www.instagram.com/reel/C6LaJGLqADy/?igsh=YzRuM2k2dGoxM2Y3')
+try {
+await m.reply('> جاري تحميل الفيديو ياصديقي. ...')
+let { data } = await axios.post(`https://v3.igdownloader.app/api/ajaxSearch?recaptchaToken=null&q=${text}&t=media&lang=en`)
+let $ = cheerio.load(data.data)
+let result = $('div >  div > a').attr('href')
+await conn.sendFile(m.chat, result, '', 'Instagram: 'قم بوضع هنا أي شئ تريده أن يضهر نع الفيديو, m)
+await m.react('✔️')
+} catch (e) {
+throw eror
 }
-
-handler.command = /^(igdl2|ig2|instagram2)$/i
+}
+handler.help = ['instagram2']
 handler.tags = ['downloader']
-handler.help = ['instagram2'']
-handler.premium = false
-handler.limit = true
+handler.limit = false
+handler.command = /^(ig2|insta2|instagram2)$/i
 
 export default handler
