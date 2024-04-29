@@ -1,1 +1,47 @@
-const _0x362e4e=_0x440d;(function(_0x3c35a9,_0x2d13d4){const _0x3c0ec9=_0x440d,_0x21e485=_0x3c35a9();while(!![]){try{const _0x5cce46=parseInt(_0x3c0ec9(0x1a3))/0x1*(parseInt(_0x3c0ec9(0x19f))/0x2)+parseInt(_0x3c0ec9(0x19b))/0x3*(parseInt(_0x3c0ec9(0x1b1))/0x4)+parseInt(_0x3c0ec9(0x19d))/0x5*(parseInt(_0x3c0ec9(0x1a2))/0x6)+parseInt(_0x3c0ec9(0x1ab))/0x7*(parseInt(_0x3c0ec9(0x1ba))/0x8)+-parseInt(_0x3c0ec9(0x19c))/0x9*(-parseInt(_0x3c0ec9(0x1a8))/0xa)+parseInt(_0x3c0ec9(0x1ae))/0xb+-parseInt(_0x3c0ec9(0x1a4))/0xc*(parseInt(_0x3c0ec9(0x19a))/0xd);if(_0x5cce46===_0x2d13d4)break;else _0x21e485['push'](_0x21e485['shift']());}catch(_0x4c4000){_0x21e485['push'](_0x21e485['shift']());}}}(_0x104c,0x71960));import{BingImageCreator}from'../lib/bingimg.js';function _0x440d(_0xba3b7c,_0x5c99f7){const _0x104c5f=_0x104c();return _0x440d=function(_0x440d1f,_0x1b15c3){_0x440d1f=_0x440d1f-0x198;let _0x531203=_0x104c5f[_0x440d1f];return _0x531203;},_0x440d(_0xba3b7c,_0x5c99f7);}export const handler=async(_0x4edb25,{conn:_0x5abd36,args:_0x729936,usedPrefix:_0x1c0279,command:_0x14b8c2})=>{const _0x536376=_0x440d;let _0x57e6a8;if(_0x729936[_0x536376(0x1a0)]>=0x1)_0x57e6a8=_0x729936[_0x536376(0x1b6)](0x0)[_0x536376(0x1af)]('\x20');else{if(_0x4edb25[_0x536376(0x1a9)]&&_0x4edb25[_0x536376(0x1a9)][_0x536376(0x1a5)])_0x57e6a8=_0x4edb25[_0x536376(0x1a9)]['text'];else throw _0x536376(0x1a7);}await _0x4edb25['reply'](_0x536376(0x1aa));try{const _0xd80a70=new BingImageCreator({'cookie':_0x536376(0x1bd)}),_0x47ce30=await _0xd80a70[_0x536376(0x1b8)](_0x57e6a8);if(_0x47ce30[_0x536376(0x1a0)]>0x0)for(let _0xf0a81=0x0;_0xf0a81<_0x47ce30[_0x536376(0x1a0)];_0xf0a81++){try{!_0x47ce30[_0xf0a81][_0x536376(0x1b3)](_0x536376(0x1a1))&&await _0x5abd36['sendFile'](_0x4edb25[_0x536376(0x1b9)],_0x47ce30[_0xf0a81],'',_0x536376(0x19e)+(_0xf0a81+0x1)+'/'+_0x47ce30[_0x536376(0x1a0)]+_0x536376(0x1a6)+_0x57e6a8,_0x4edb25,![],{'mentions':[_0x4edb25[_0x536376(0x1b2)]]});}catch(_0x320cbc){console[_0x536376(0x198)](_0x536376(0x1ad)+_0x320cbc[_0x536376(0x1ac)]),await _0x4edb25[_0x536376(0x1b7)](_0x536376(0x1b0)+(_0xf0a81+0x1)+'/'+_0x47ce30[_0x536376(0x1a0)]+')*');}}else await _0x4edb25[_0x536376(0x1b7)](_0x536376(0x1b5));}catch(_0xafb5e2){console['error'](_0x536376(0x1bc)+_0xafb5e2[_0x536376(0x1ac)]),await _0x4edb25[_0x536376(0x1b7)](_0xafb5e2+'\x0a\x0a'+_0xafb5e2['message']);}};handler['help']=['bingimg'],handler['tags']=[_0x362e4e(0x1bb)],handler[_0x362e4e(0x1b4)]=[_0x362e4e(0x199)];export default handler;function _0x104c(){const _0x4717eb=['bingimg','104XBqDlQ','87FnKpRD','90AGJWJL','215xqHVcp','😎\x20*(','3318dnFkkO','length','.svg','56454SaFPgz','339oEGqLk','4031004UaPshl','text',')*\x0a\x0a*Prompt*:\x20','*قم\x20بتخيل\x20شئ\x20للبوت\x20وسوف\x20يرسمه\x20\x20مثال\x20😉:*\x0a\x20.bingimg\x20cat\x20play\x20with\x20man','810130ugtXdi','quoted','*سوف\x20يتم\x20توليد\x20صورتك\x20بعد\x20قليل*\x20\x0a\x0a\x20*تابعني\x20على\x20انستجرام*\x0a\x20_*www.instagram.com/ovmar_1*_','511xNIHwU','message','Error\x20sending\x20file:\x20','2480478pmMZKH','join','Failed\x20to\x20send\x20image\x20*(','77108EhIaJI','sender','endsWith','command','لم\x20يتم\x20العثور\x20على\x20أي\x20صورة.','slice','reply','createImage','chat','64760uxHMKm','drawing','Error\x20in\x20handler:\x20','1DoexrRqQj7yANx89Dsqb3MV0failVdB4ZMGzhkQ5uhaG1jE-UKTQwuZvkETgWa0i8IuQot_PGeQjSow-sP8jfDh4NZ5hUFyW7cwSNS24X9JnEon0YR6p-nylIcqb-t2q6zG-OqnAhHE4clh_SchwYspzpHbijgUT-80lEgXF5MCqmagtS2zpjNvN-2m74q33FfkFvL8gog8aYoXGHv2hIQ','error'];_0x104c=function(){return _0x4717eb;};return _0x104c();}
+import { BingImageCreator } from "../lib/bingimg.js";
+export const handler = async (m, { conn, args, usedPrefix, command }) => {
+ let text;
+ if (args.length >= 1) {
+ text = args.slice(0).join(" ");
+ } else if (m.quoted && m.quoted.text) {
+ text = m.quoted.text;
+ } else {
+ throw "*قم بتخيل شئ للبوت وسوف يرسمه  مثال :*\n .bingimg cat play with man";
+ }
+ await m.reply("*سوف يتم توليد صورتك بعد قليل* \n\n *تابعني على انستجرام*\n _*www.instagram.com/ovmar_1*_");
+ try {
+ const res = new BingImageCreator({
+ cookie: "قم بإضافة ال (cookies) الخاص بك هنا",
+ });
+ const data = await res.createImage(text);
+ if (data.length > 0) {
+ for (let i = 0; i < data.length; i++) {
+ try {
+ if (!data[i].endsWith(".svg")) {
+ await conn.sendFile(
+ m.chat,
+ data[i],
+ "",
+ ` *(${i + 1}/${data.length})*\n\n www.instagram.com/ovmar_1`,
+ m,
+ false,
+ { mentions: [m.sender] },
+ );
+ }
+ } catch (error) {
+ console.error(`Error sending file: ${error.message}`);
+ await m.reply(`Failed to send image *(${i + 1}/${data.length})*`);
+ }
+ }
+ } else {
+ await m.reply("لم يتم العثور على أي صورة.");
+ }
+ } catch (error) {
+ console.error(`Error in handler: ${error.message}`);
+ await m.reply(`${error}\n\n${error.message}`);
+ }
+};
+handler.help = ["bingimg"]
+handler.tags = ["drawing"];
+handler.command = ["bingimg"];
+export default handler
