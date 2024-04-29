@@ -5,7 +5,7 @@ import axios from 'axios'
 let handler = async (m, { 
 conn, text, command, usedPrefix
 }) => {
-if (!text) return m.reply(`البخث عن حسابات gihtub ${usedPrefix + command} <url>\n مثـال :* ${usedPrefix + command} https://github.com/omarcharaf1`)
+if (!text) return m.reply(`البحث عن حسابات gihtub ${usedPrefix + command} <url>\n مثـال :* ${usedPrefix + command} https://github.com/omarcharaf1`)
 m.reply(global.wait)
 var phone = await ssweb(text, 'phone')
 var desktop = await ssweb(text, 'desktop')
