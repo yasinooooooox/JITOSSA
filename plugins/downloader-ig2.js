@@ -7,7 +7,7 @@ await m.reply('> جاري تحميل الفيديو ياصديقي. ...')
 let { data } = await axios.post(`https://v3.igdownloader.app/api/ajaxSearch?recaptchaToken=null&q=${text}&t=media&lang=en`)
 let $ = cheerio.load(data.data)
 let result = $('div >  div > a').attr('href')
-await conn.sendFile(m.chat, result, '', 'Instagram: 'قم بوضع هنا أي شئ تريده أن يضهر نع الفيديو, m)
+await conn.sendFile(m.chat, result, '', 'Instagram: 'instagram.com/ovmar_1', m)
 await m.react('✔️')
 } catch (e) {
 throw eror
