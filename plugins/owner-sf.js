@@ -1,4 +1,4 @@
-import fs from 'fs'
+/*import fs from 'fs'
 let handler = async (m, { text, usedPrefix, command }) => {
     if (!text) throw `uhm.. where is the text?\n\nusage:\n${usedPrefix + command} <text>\n\nexample:\n${usedPrefix + command} plugins/melcanz.js`
     if (!m.quoted.text) throw `reply to the message!`
@@ -11,4 +11,4 @@ handler.tags = ['owner']
 handler.command = /^sf$/i
 
 handler.rowner = true
-export default handler
+export default handler*/
