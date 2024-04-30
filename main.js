@@ -175,7 +175,7 @@ global.conn = makeWASocket(connectionOptions);
 
 conn.isInit = false;
 conn.well = false;
-conn.logger.info(`[ 😁 ] Charging...\n`);
+conn.logger.info(`BOT KHDAM \n`);
 
 if (!opts['test']) {
   if (global.db) {
@@ -228,7 +228,7 @@ unlinkSync(`./jadibts/${directorio}/${fileInDir}`)
 })
 if (SBprekey.length === 0) return; 
 } catch (err) {
-console.log(chalk.bold.red(`[😔] Something went wrong during deletion, files not deleted`))
+console.log(chalk.bold.red(`W93 CHI MOCKIL MS7TY CHI FILE DARORYIN`))
 }}
 
 function purgeOldFiles() {
@@ -263,10 +263,10 @@ async function connectionUpdate(update) {
   }
   if (global.db.data == null) loadDatabase();
   if (update.qr != 0 && update.qr != undefined) {
-    console.log(chalk.yellow('[😉] Scan the QR code or enter the pairing code in WhatsApp.'));
+    console.log(chalk.yellow('CREDS.JSON VERIFY WX KAIN AND LBOT GAY5DM.'));
   }
   if (connection == 'open') {
-    console.log(chalk.yellow('[🌟] Connected successfully.'));
+    console.log(chalk.yellow('L BOT KHDAM DBA S7TEEK'));
   }
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode;
 if (connection === 'close') {
@@ -491,7 +491,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `👩🏻‍🔧 ${uptime} \n \n ᴘᴏᴡᴇʀᴇᴅ ᴏᴍᴀʀ ᴄʜᴀʀᴀғ | 𝐉𝐈𝐓𝐎𝐒𝐒𝐀 `;
+  const bio = `👩🏻‍🔧 ${uptime} \n \n ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴏᴍᴀʀ ᴄʜᴀʀᴀғ | 𝐉𝐈𝐓𝐎𝐒𝐒𝐀 `;
   await conn.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
