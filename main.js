@@ -332,12 +332,12 @@ global.reloadHandler = async function(restatConn) {
   conn.welcome = '*مرحبا بك أيها العضو الجديد في المجموعة*, @user ! \n \n *معلومات البوت*\n\n group whatsapp\n https://chat.whatsapp.com/L283DFlWlgVKWH40TOrUnP \n\n instagram \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
   conn.bye = '*لقد غادرت المجموعة* \n @user \n \n *معلومات البوت*\n\n *group whatsapp*\n https://chat.whatsapp.com/L283DFlWlgVKWH40TOrUnP \n\n *instagram* \n www.instagram.com/ovmar_1\n\n> ＪＩＴＯＳＳＡ ＢＯＴ';
 
-conn.spromote = '*[ ℹ️ ] @user ثم الترقية إلى مشرف للمجموعة.*';
-  conn.sdemote = '*[ ℹ️ ] @user لم يعد هاذا الشخص مشرفا.*';
-  conn.sDesc = '*[ ℹ️ ] ثم تعديل وصف المجموعة.*';
-  conn.sSubject = '*[ ℹ️ ] ثم تغيير إسم المجموعة.*';
-  conn.sIcon = '*[ ℹ️ ] ثم تغيير صورة المجموعة.*';
-  conn.sRevoke = '*[ ℹ️ ] ثم إعادة ضبط رابط المجموعة.*';
+conn.spromote = '*@user ثم الترقية إلى مشرف للمجموعة.*';
+  conn.sdemote = '*@user لم يعد هاذا الشخص مشرفا.*';
+  conn.sDesc = '*ثم تعديل وصف المجموعة.*';
+  conn.sSubject = '*ثم تغيير إسم المجموعة.*';
+  conn.sIcon = '*ثم تغيير صورة المجموعة.*';
+  conn.sRevoke = '*ثم إعادة ضبط رابط المجموعة.*';
 
   conn.handler = handler.handler.bind(global.conn);
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn);
@@ -491,7 +491,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `👩🏻‍🔧 ${uptime} \n \n ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴏᴍᴀʀ ᴄʜᴀʀᴀғ | 𝐉𝐈𝐓𝐎𝐒𝐒𝐀 `;
+  const bio = `👩🏻‍🔧 ${uptime} \n \n ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴏᴍᴀʀ ᴄʜᴀʀᴀғ |\n\n 𝐉𝐈𝐓𝐎𝐒𝐒𝐀 @user `;
   await conn.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
