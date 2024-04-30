@@ -1182,7 +1182,7 @@ const messageText = `
 ╔═════════════════════╗
  ❰ ⚠️ ❱ *ثم حظرك من البوت!* ❰ ⚠️ ❱
 
-—◉ *إذا كنت تعتقد أن هاذا خطأ ولديك دليل، فيمكنك الاتصال بمالك الروبوت لاستئناف التعليق.* —◉ *التواصل مع مالكه:* wa.me/212670941551
+—◉ *إذا كنت تعتقد أن هذا خطأ ولديك دليل، فيمكنك الاتصال بمالك الروبوت لاستئناف التعليق.* —◉ *التواصل مع مالكه:* wa.me/212670941551
 ╚═════════════════════╝
                `.trim();
               m.reply(messageText);
@@ -1199,7 +1199,7 @@ const messageText = `
             if (user.commandCount === 2) {
               const remainingTime = Math.ceil((user.lastCommandTime + 5000 - Date.now()) / 1000);
               if (remainingTime > 0) {
-                const messageText = `*إنتظر ${remainingTime} ثواني قبل استخدام أمر آخر*`;
+                const messageText = `*انتظر ${remainingTime} ثواني قبل استخدام أمر آخر*`;
                 m.reply(messageText);
                 return;
               } else {
@@ -1265,11 +1265,11 @@ const messageText = `
           m.exp += xp;
         }
         if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-          mconn.conn.reply(m.chat, `*[ ℹ️ ] لقد نفد الماس الخاص بك، يمكنك شراء المزيد باستخدام الأمر: ${usedPrefix}buyall*`, m);
+          mconn.conn.reply(m.chat, `*لقد نفد الماس الخاص بك، يمكنك شراء المزيد باستخدام الأمر: ${usedPrefix}buyall*`, m);
           continue; 
         }
         if (plugin.level > _user.level) {
-          mconn.conn.reply(m.chat, `*[ ℹ️ ] It is required to have the level ${plugin.level}  to be able to use the command. Your current level is${_user.level},use the command  ${usedPrefix}lvl to raise your level with XP.*`, m);
+          mconn.conn.reply(m.chat, `*It is required to have the level ${plugin.level}  to be able to use the command. Your current level is${_user.level},use the command  ${usedPrefix}lvl to raise your level with XP.*`, m);
           continue; 
         }
         const extra = {
@@ -1338,7 +1338,7 @@ const messageText = `
             }
           }
           if (m.limit) {
-            m.reply('*لقد إكتمل رصيدك من الجواهر قك بمتابعة المطور لكي تحصل على المزيد' + +m.limit + 'www.ibstagram.com/ovmar_1*');
+            m.reply('*[ 💎 ] Will be used' + +m.limit + ' diamond(s) (limits).*');
           }
         }
         break;
@@ -1450,12 +1450,12 @@ export async function participantsUpdate({id, participants, action}) {
     case 'promote':
     case 'daradmin':
     case 'darpoder':
-      text = (chat.sPromote || this.spromote || conn.spromote || '@user ```لقد أصبح هاذا الشخص مسؤلا```');
+      text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```');
     case 'demote':
     case 'quitarpoder':
     case 'quitaradmin':
       if (!text) {
-        text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```لم يعد هاذا الشخص مسؤلا```');
+        text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```');
       }
       text = text.replace('@user', '@' + participants[0].split('@')[0]);
       if (chat.detect && !chat?.isBanned) {
@@ -1480,7 +1480,10 @@ export async function groupsUpdate(groupsUpdate) {
     if (groupUpdate.subjectTime) continue;
     const chats = global.db.data.chats[id]; let text = '';
     if (!chats?.detect) continue;
-    if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```تم تغيير الوصف إلى \n@desc').replace('@desc', groupUpdate.desc); إذا تم تحديث الموضوع، سيتم تغيير النص إلى 'تم تغيير الموضوع إلى \n@subject'.replace('@subject', groupUpdate.subject); إذا تم تغيير الأيقونة، سيتم تغيير النص إلى 'تم تغيير الأيقونة إلى'.replace('@icon', groupUpdate.icon); إذا تم إلغاء الرابط، سيتم تغيير النص إلى 'تم تغيير رابط المجموعة إلى \n@revoke'.replace('@revoke', groupUpdate.revoke);
+    if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```Description has been changed to```\n@desc').replace('@desc', groupUpdate.desc);
+    if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '```Subject has been changed to```\n@subject').replace('@subject', groupUpdate.subject);
+    if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '```Icon has been changed to```').replace('@icon', groupUpdate.icon);
+    if (groupUpdate.revoke) text = (chats.sRevoke || this.sRevoke || conn.sRevoke || '```Group link has been changed to```\n@revoke').replace('@revoke', groupUpdate.revoke);
     if (!text) continue;
     await mconn.conn.sendMessage(id, {text, mentions: mconn.conn.parseMention(text)});
   }
@@ -1492,7 +1495,7 @@ export async function callUpdate(callUpdate) {
   for (const nk of callUpdate) {
     if (nk.isGroup == false) {
       if (nk.status == 'offer') {
-        const callmsg = await mconn.conn.reply(nk.from, `مرحبًا @${nk.from.split('@')[0]}، لا يُسمح ب${nk.isVideo ? 'مكالمات فيديو' : 'المكالمات'}، سيتم حظرك.\n-\nإذا قمت بالاتصال عن طريق الخطأ، يرجى الاتصال بمُبتكري التطبيق لفتح الحظر!`, false, {mentions: [nk.from]});
+        const callmsg = await mconn.conn.reply(nk.from, `Hello *@${nk.from.split('@')[0]}*, las ${nk.isVideo ? 'video calls' : 'calls'} are not allowed, you will be blocked.\n-\n If you accidentally called contact my creator to unblock you!`, false, {mentions: [nk.from]});
         // let data = global.owner.filter(([id, isCreator]) => id && isCreator)
         // await this.sendContact(nk.from, data.map(([id, name]) => [id, name]), false, { quoted: callmsg })
         const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:;JITOSSA;;;\nFN:BOT\nORG:Omar Charaf\nTITLE:\nitem1.TEL;waid=212605784394:212605784394\nitem1.X-ABLabel:Omar Charaf\nX-WA-BIZ-DESCRIPTION:[❗] contact Omar Charaf\nEND:VCARD`;
@@ -1531,19 +1534,19 @@ let date = d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'nu
 
 global.dfail = (type, m, conn) => {
   const msg = {
- rowner: '*هاذا الأمر يمكن استخدامه فقط من قبل مالك البوت.*',
- owner: '*هاذا الأمر يمكن استخدامه فقط من قبل مالك البوت.*',
- mods: '*هاذا الأمر يمكن استخدامه فقط من قبل المشرفين ومالك البوت.*',
- premium: '*هاذا الأمر يمكن استخدامه فقط من قبل المستخدمين المميزين ومالك البوت.*',
- group: '*هاذا الأمر يمكن استخدامه فقط في المجموعات.*',
- private: '*هاذا الأمر يمكن استخدامه فقط في الدردشة الخاصة للبوت.*',
- admin: '*هاذا الأمر يمكن استخدامه فقط من قبل مشرفي المجموعة.*',
- botAdmin: '*لاستخدام هاذا الأمر يجب أن يكون البوت مشرفًا في المجموعة.*',
- unreg: '*لاستخدام هاذا الأمر يجب أن تكون مسجل.*\n\n*استخدم الأمر:* _#verify اسم.عمر_ *للتسجيل.*',
- restrict: '*تم تعطيل هاذا الأمر من قبل مالك البوت.*',
+ rowner: '*فقط يمكن للمالك إستخدام هاذا الأمر.*',
+ owner: '*هذا الأمر يمكن استخدامه فقط من قبل مالك البوت.*',
+ mods: '*هذا الأمر يمكن استخدامه فقط من قبل المشرفين ومالك البوت.*',
+ premium: '*هذا الأمر يمكن استخدامه فقط من قبل المستخدمين المميزين ومالك البوت.*',
+ group: '*هذا الأمر يمكن استخدامه فقط في المجموعات.*',
+ private: '*هذا الأمر يمكن استخدامه فقط في الدردشة الخاصة للبوت.*',
+ admin: '*هذا الأمر يمكن استخدامه فقط من قبل مشرفي المجموعة.*',
+ botAdmin: '*لاستخدام هذا الأمر يجب أن يكون البوت مشرفًا في المجموعة.*',
+ unreg: '*لاستخدام هذا الأمر يجب أن تكون مسجل.*\n\n*[ 💡 ] استخدم الأمر:* _#verify اسم.عمر_ *للتسجيل.*',
+ restrict: '*تم تعطيل هذا الأمر من قبل مالك البوت.*',
   }[type];
   const aa = {quoted: m, userJid: conn.user.jid};
-  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: 'تحذير لايمكنك إستخدام هاذا', body: 'JITOSSA', thumbnail: imagen1, sourceUrl: 'https://whatsapp.com/channel/0029VadAOFcL2ATzSf46sI0r'}}}}, aa);
+  const prep = generateWAMessageFromContent(m.chat, {extendedTextMessage: {text: msg, contextInfo: {externalAdReply: {title: '*تحذير هاذا الأمر لايمكن إستخدامه*', body: 'JITOSSA', thumbnail: imagen1, sourceUrl: 'https://whatsapp.com/channel/0029VadAOFcL2ATzSf46sI0r'}}}}, aa);
   if (msg) return conn.relayMessage(m.chat, prep.message, {messageId: prep.key.id});
 };
 
